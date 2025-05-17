@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<title>
+		Analyze - Thunders
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%- include('components/styles.ejs'); -%>
+		<link rel="stylesheet" type="text/css" href="css/analyze.css">
+
+</head>
+
+<body>
+
+	<%- include('components/header.ejs'); -%>
+		<%- include('components/sidebar.ejs'); -%>
+
+			<div class="wrapper flex mt-18 ml-25 mr-5 pb-15">
+
+
+				<div class="container flex-1 mx-auto">
+					<!-- Content goes here-->
+
+					<div class="card card-border w-full bg-base-100 shadow-lg">
+						<div class="card-body">
+							<div class="flex gap-4 items-end">
+								<fieldset class="fieldset">
+									<legend class="fieldset-legend">Week From</legend>
+									<select id="inputWeekFrom" class="select select-sm" onchange="fromWeekChanged()">
+
+									</select>
+
+								</fieldset>
+								<fieldset class="fieldset">
+									<legend class="fieldset-legend">Week To</legend>
+									<select id="inputWeekTo" class="select select-sm">
+
+									</select>
+
+								</fieldset>
+								<fieldset class="fieldset">
+									<legend class="fieldset-legend">Year</legend>
+									<select id="inputYear" class="select select-sm">
+										<option>2025</option>
+										<option>2026</option>
+									</select>
+
+								</fieldset>
+								<fieldset class="fieldset">
+									<legend class="fieldset-legend">Group</legend>
+									<select id="groupSelect" class="select select-sm" onchange="generateNameDropDown()">
+										<option>SKB</option>
+										<option>Sapphire</option>
+									</select>
+
+								</fieldset>
+								<fieldset class="fieldset">
+									<legend class="fieldset-legend">Name</legend>
+									<select id="name" class="select select-sm">
+
+									</select>
+
+								</fieldset>
+
+								<button id="searchBtn" class="btn btn-sm btn-primary btn-square mb-1">
+									<i class="h-5 w-5" data-lucide="search"></i>
+								</button>
+							</div>
+
+						</div>
+					</div>
+
+					<div id="dataTable" class="card card-border bg-base-100 shadow-md mt-5 hidden">
+						<div class="card-body">
+							<div class="flex items-center w-full justify-between">
+								<div class="flex-none">
+									<div class="flex items-center">
+										<div class="flex-none">
+											<strong>Data :</strong>
+										</div>
+										<div class="flex-none ml-2 mr-1">
+											<span id="searchNameSKB"></span>
+										</div>
+										<div class="flex-none">
+											<span id="searchGroupSKB"
+												class="badge badge-neutral text-neutral-content ml-2 zain-bold pt-1 items-center">
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="flex-none">
+									<button id="screenshot_SKB" class="btn btn-square btn-warning size-9">
+										<i class="size-5" data-lucide="image-plus"></i>
+									</button>
+								</div>
+							</div>
+
+
+							<table class="skb_dataTable table table-xs table-zebra" data-theme="light">
+								<thead class="thead-dark">
+									<tr class="header">
+
+									</tr>
+									<tr class="sub_heading">
+
+									</tr>
+								</thead>
+								<tbody class="skbData table-striped">
+
+								</tbody>
+							</table>
+							<div class="card card-body">
+								<ul class="list-unstyled">
+									<li><span class="lead"><b><u>Per week data :</u></b></span>
+										<ul>
+											<li>Networking : <span id="networkingPerWeek"></span></li>
+											<li>Info : <span id="infoPerWeek"></span></li>
+											<li>Reinfo : <span id="reinfoPerWeek"></span></li>
+											<li>Invi : <span id="inviPerWeek"></span></li>
+											<li>Plan : <span id="planPerWeek"></span></li>
+										</ul>
+									</li>
+									<li><span class="lead"><b><u>Other ratios :</u></b></span>
+										<ul>
+											<!-- <li><span id="networkingToInfo"></span> Networking for 1 Info. </li> -->
+											<li><span id="networkingToPlan"></span> Networking for 1 Plan. </li>
+											<li><span id="infoToPlan"></span> Info for 1 Plan.</li>
+											<li><span id="inviToPlan"></span> Invi or 1 Plan. </li>
+										</ul>
+									</li>
+									<li><span class="lead"><b><u>Loss :</u></b></span>
+										<ul>
+											<li>Networking to Info : <span id="networkingToInfo"></span></li>
+											<li>Info to Reinfo : <span id="infoToReinfo"></span></li>
+											<li>Reinfo to Invi : <span id="reinfoToInvi"></span></li>
+										</ul>
+									</li>
+								</ul>
+
+							</div>
+						</div>
+					</div>
+
+					<div id="dataTableSapphire" class="card card-border bg-base-100 shadow-md mt-5 hidden">
+						<div class="card-body">
+							<div class="flex items-center w-full justify-between">
+								<div class="flex-none">
+									<div class="flex items-center">
+										<div class="flex-none">
+											<strong>Data :</strong>
+										</div>
+										<div class="flex-none ml-2 mr-1">
+											<span id="searchNameSapphire"></span>
+										</div>
+										<div class="flex-none">
+											<span id="searchGroupSapphire"
+												class="badge badge-neutral text-neutral-content ml-2 zain-bold pt-1 items-center">
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="flex-none">
+									<button id="screenshot_Sapphire" class="btn btn-square btn-warning size-9">
+										<i class="size-5" data-lucide="image-plus"></i>
+									</button>
+								</div>
+							</div>
+							<table class="Sapphire_table table table-xs table-zebra" data-theme="light">
+								<thead class="thead-dark">
+									<tr class="header">
+
+									</tr>
+									<tr class="sub_heading">
+
+									</tr>
+								</thead>
+								<tbody class="sapphireData table-striped">
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Content ends here-->
+				</div>
+			</div>
+
+			<%- include('components/scripts.ejs'); -%>
+				<script src="/js/html2canvas-pro.min.js"></script>
+				<script src="/js/analyze.js"></script>
+
+</body>
+
+</html>

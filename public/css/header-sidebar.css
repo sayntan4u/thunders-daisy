@@ -1,0 +1,56 @@
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+/* body{
+    font-family: Poppins-Regular;
+} */
+
+.sidebar .active a {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.sidebar .active a .lucide{
+  stroke-width: 2px;
+  /* color:purple; */
+}
+
+.zain-regular {
+  font-family: "Zain", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+
+.zain-bold {
+  font-family: "Zain", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  /* font-size: 20px; */
+}
+
+.navbar-end .btn-theme{
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.navbar-end .dropdown-content .lucide{
+  width: 16px !important;
+  height: 16px !important;
+}
+
+input[type=password]:focus, input[type=text]:focus, input[type=email]:focus {
+ border: none !important;
+}
+
+.select{
+  outline: none !important;
+}
+
+/* .sidebar .lucide{
+  stroke-width: 1px;
+} */
+
+

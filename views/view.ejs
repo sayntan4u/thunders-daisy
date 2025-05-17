@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<title>
+		Activities - Thunders
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%- include('components/styles.ejs'); -%>
+		<link rel="stylesheet" type="text/css" href="css/view.css">
+
+</head>
+
+<body>
+
+	<%- include('components/header.ejs'); -%>
+		<%- include('components/sidebar.ejs'); -%>
+
+			<div class="wrapper flex mt-18 ml-25 mr-5 pb-15">
+
+
+				<div class="container flex-1 mx-auto">
+					<!-- Content goes here-->
+
+					<div class="card card-border w-full bg-base-100 shadow-lg">
+						<div class="card-body">
+							<div class="flex gap-4 items-end">
+								<fieldset class="fieldset">
+									<legend class="fieldset-legend">Week</legend>
+									<select id="inputWeek" class="select select-sm">
+
+									</select>
+
+								</fieldset>
+								<fieldset class="fieldset">
+									<legend class="fieldset-legend">Year</legend>
+									<select id="inputYear" class="select select-sm">
+										<option>2025</option>
+										<option>2026</option>
+									</select>
+
+								</fieldset>
+								<fieldset class="fieldset">
+									<legend class="fieldset-legend">Group</legend>
+									<select id="groupSelect" class="select select-sm">
+										<option>SKB</option>
+										<option>Sapphire</option>
+									</select>
+
+								</fieldset>
+
+								<button id="searchActivity" class="btn btn-sm btn-primary btn-square mb-1">
+									<i class="h-5 w-5" data-lucide="search"></i>
+								</button>
+							</div>
+
+						</div>
+					</div>
+					<div id="tabs_skb" class="tabs tabs-lift mt-4 hidden">
+
+						<label class="tab">
+							<input type="radio" name="tabs_skb" disabled />
+							<span class="currGroup badge badge-neutral text-neutral-content ml-2 zain-bold pt-1 items-center">
+							</span>
+						</label>
+
+						<label class="tab prev hidden">
+							<input type="radio" name="tabs_skb" />
+							<i class="size-4 me-2" data-lucide="calendar-search"></i>
+							<span class="prevWeek"></span>
+						</label>
+						<div class="tab-content bg-base-100 border-base-300 p-6 prev hidden">
+							<div class="overflow-x-auto">
+								<table id="prevWeekTable" class="table table-xs table-zebra" data-theme="light">
+									<thead>
+										<tr class="header">
+
+										</tr>
+										<tr class="sub_heading">
+
+										</tr>
+									</thead>
+									<tbody class="skbPrevData">
+
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+
+
+						<label class="tab">
+							<input type="radio" name="tabs_skb" checked />
+							<i class="size-4 me-2" data-lucide="calendar-search"></i>
+							<span class="currWeek"></span>
+						</label>
+						<div class="tab-content bg-base-100 border-base-300 p-6">
+							<div class="overflow-x-auto">
+								<table class="skb_dataTable table table-xs table-zebra" data-theme="light">
+									<thead>
+										<tr class="header">
+
+										</tr>
+										<tr class="sub_heading">
+
+										</tr>
+									</thead>
+									<tbody class="skbData">
+
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+					<div id="tabs_sapphire" class="tabs tabs-lift mt-4 hidden">
+
+						<label class="tab">
+							<input type="radio" name="tabs_sapphire" disabled />
+							<span class="currGroup badge badge-neutral text-neutral-content ml-2 zain-bold pt-1 items-center">
+							</span>
+						</label>
+
+						<label class="tab prev hidden">
+							<input type="radio" name="tabs_sapphire" />
+							<i class="size-4 me-2" data-lucide="calendar-search"></i>
+							<span class="prevWeek"></span>
+						</label>
+						<div class="tab-content bg-base-100 border-base-300 p-6 prev hidden">
+							<div class="overflow-x-auto">
+								<table id="prevWeekTableSapphire" class="table table-xs table-zebra" data-theme="light">
+									<thead>
+										<tr class="header">
+
+										</tr>
+										<tr class="sub_heading">
+
+										</tr>
+									</thead>
+									<tbody class="sapphirePrevData">
+
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+
+
+						<label class="tab">
+							<input type="radio" name="tabs_sapphire" checked />
+							<i class="size-4 me-2" data-lucide="calendar-search"></i>
+							<span class="currWeek"></span>
+						</label>
+						<div class="tab-content bg-base-100 border-base-300 p-6">
+							<div class="overflow-x-auto">
+								<table class="Sapphire_table table table-xs table-zebra" data-theme="light">
+									<thead>
+										<tr class="header">
+
+										</tr>
+										<tr class="sub_heading">
+
+										</tr>
+									</thead>
+									<tbody class="sapphireData">
+
+									</tbody>
+
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<!-- Content ends here-->
+				</div>
+			</div>
+
+			<%- include('components/scripts.ejs'); -%>
+				<script src="/js/view.js"></script>
+
+</body>
+
+</html>

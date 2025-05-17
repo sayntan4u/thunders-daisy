@@ -1,0 +1,59 @@
+.container .select{
+    width:120px;
+}
+
+.container thead tr{
+    border:none !important;
+    background-color: var(--color-accent);
+    color: var(--color-accent-content);
+}
+
+.bt{
+    border-top: 1px solid var(--color-accent-content);
+}
+
+.bb{
+    border-bottom: 1px solid var(--color-accent-content);
+}
+
+.bl{
+    border-left: 1px solid var(--color-accent-content);
+}
+
+.br{
+    border-right: 1px solid var(--color-accent-content);
+}
+
+.container tbody .input{
+    margin: 0px;
+    /* border: none;
+    background-color: transparent;
+    text-align: center; */
+}
+
+.remarks,  .remarks-Sapphire{
+    min-width: 200px !important;
+    text-align: left !important;
+}
+
+.bg-warning, .bg-success, .bg-info, .bg-danger-subtle{
+    font-weight:bold;
+}
+
+.target_data{
+    font-weight: bold;
+}
+
+.bg-plan{
+    background-color: #ebd7fa !important;
+}
+
+.done_data{
+    background-color: #f8fad7 !important;
+}
+
+
+.list{
+    display: table-cell;
+    font-size: .6875rem;
+}

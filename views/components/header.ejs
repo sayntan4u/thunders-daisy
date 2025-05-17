@@ -1,0 +1,64 @@
+<div class="navbar bg-base-100 px-5 fixed top-0 z-50">
+    <div class="navbar-start items-center">
+        <i data-lucide="zap" class=""></i>
+        <span class=" zain-regular">Thunders</span>
+        <span class="badge badge-primary text-primary-content ml-2 zain-bold pt-1">
+            <%= title %>
+        </span>
+    </div>
+    <div class="navbar-end">
+        <button class="btn btn-square btn-ghost h-8 w-8 mr-4" onclick="rosterModal.showModal()">
+            <i class="h-5 w-5" data-lucide="calendar-clock"></i>
+        </button>
+        <label class="swap swap-rotate mr-4 btn btn-ghost btn-square btn-theme h-8 w-8">
+            <!-- this hidden checkbox controls the state -->
+            <input type="checkbox" onchange="changeTheme()" />
+            <!-- sun icon -->
+            <i class="sun h-5 w-5 fill-current" data-lucide="sun"></i>
+            <!-- moon icon -->
+            <i class="moon h-5 w-5 fill-current" data-lucide="moon"></i>
+        </label>
+        <button class="btn btn-square btn-error h-8 w-8 btn-ghost logout-btn" onclick="logoutModal.showModal()">
+            <i class="h-5 w-5" data-lucide="power"></i>
+        </button>
+
+    </div>
+</div>
+
+<!--Logout Modal-->
+<dialog id="logoutModal" class="modal">
+    <div class="modal-box w-100">
+        <h3 class="text-lg font-bold">Logout</h3>
+        <p class="py-4">Are you sure ?</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <!-- if there is a button, it will close the modal -->
+                <button class="btn btn-soft me-1">Cancel</button>
+                <button class="btn btn-error" onclick="location.href='/login/logout'">Logout</button>
+            </form>
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
+
+<!--Roster Modal-->
+<dialog id="rosterModal" class="modal">
+    <div class="modal-box w-6xl max-w-6xl">
+        <h3 class="text-lg font-bold">Plans</h3>
+        <table class="roster table table-xs text-center my-4">
+            <thead class="roster-header">
+                <tr></tr>
+
+            </thead>
+            <tbody class="roster-body">
+
+            </tbody>
+        </table>
+
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>

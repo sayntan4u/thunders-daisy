@@ -1,0 +1,57 @@
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+
+
+.zain-regular {
+  font-family: "Zain", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 25px;
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ CONTENT ]*/
+
+body{
+    font-family: Poppins-Regular;
+}
+
+.container-login {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #9053c7;
+  background: -webkit-linear-gradient(-135deg, #fddb92, #c2e9fb);
+  background: -o-linear-gradient(-135deg, #fddb92, #c2e9fb);
+  background: -moz-linear-gradient(-135deg, #fddb92, #c2e9fb);
+  background: linear-gradient(-135deg, #fddb92, #c2e9fb);
+}
+
+.card{
+    border-radius: 20px;
+}
+
+.input{
+    outline : none;
+}
+
+

@@ -1,0 +1,39 @@
+<div class="flex-none fixed left-5 z-50">
+    <ul class="sidebar menu bg-base-200 rounded-box py-25" data-theme="dark">
+        <li class="mb-2 mask mask-squircle <%= (title == 'Dashboard')? 'active' :'' %> ">
+            <a class="tooltip tooltip-right " data-tip="Home" href="/dashboard">
+                <i class="h-5 w-5" data-lucide="layout-dashboard"></i>
+            </a>
+        </li>
+        <li class="mb-2 mask mask-squircle <%= (title == 'Activity')? 'active' :'' %>">
+            <a class="tooltip tooltip-right" data-tip="Activity" href="/view">
+                <i class="h-5 w-5" data-lucide="activity"></i>
+            </a>
+        </li>
+        <li class="mb-2 mask mask-squircle <%= (title == 'Team')? 'active' :'' %>">
+            <a class="tooltip tooltip-right" data-tip="Team" href="/add">
+                <i class="h-5 w-5" data-lucide="users"></i>
+            </a>
+        </li>
+        <li class="mb-2 mask mask-squircle <%= (title == 'Analyze')? 'active' :'' %>">
+            <a class="tooltip tooltip-right" data-tip="Analyze" href="/analyze">
+                <i class="h-5 w-5" data-lucide="chart-no-axes-combined"></i>
+            </a>
+        </li>
+        <!-- <li class="mb-2 mask mask-squircle <%= (title == 'Closings')? 'active' :'' %>">
+            <a class="tooltip tooltip-right" data-tip="Closings" href="/closings">
+                <i class="h-5 w-5" data-lucide="indian-rupee"></i>
+            </a>
+        </li> -->
+        <li class="mb-2 mask mask-squircle <%= (title == 'Utilities')? 'active' :'' %>">
+            <a class="tooltip tooltip-right" data-tip="Utilities" href="/util">
+                <i class="h-5 w-5" data-lucide="blocks"></i>
+            </a>
+        </li>
+        <li class="mb-2 mask mask-squircle <%= (title == 'Settings')? 'active' :'' %>">
+            <a class="tooltip tooltip-right" data-tip="Settings" href="/settings">
+                <i class="h-5 w-5" data-lucide="settings"></i>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<title>
+		Team - Thunders
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%- include('components/styles.ejs'); -%>
+		<link rel="stylesheet" type="text/css" href="css/add.css">
+
+</head>
+
+<body>
+
+	<%- include('components/header.ejs'); -%>
+		<%- include('components/sidebar.ejs'); -%>
+
+			<div class="wrapper flex mt-18 ml-25 mr-5 mb-15">
+
+
+				<div class="container flex-1 mx-auto">
+					<!-- Content goes here-->
+
+					<div class="card card-border w-full bg-base-100 shadow-xl">
+						<div class="card-body">
+							<div class="flex w-full justify-between mb-2 items-center">
+								<div class="flex-none w-30">
+									<select id="groupSelect" class="select select-primary" onchange="changeGroup()">
+										<option>SKB</option>
+										<option>Sapphire</option>
+									</select>
+								</div>
+								<div id="loader_main" class="flex-1 mx-5 hidden">
+									<div role="alert" class="alert alert-info alert-soft">
+										<span class="loading loading-spinner loading-md"></span>
+										<span id="loader_main_content">Loading</span>
+									</div>
+								</div>
+								<div class="flex-none">
+									<button class="btn btn-primary" onclick="addMemberModal()">
+										<i class="size-4" data-lucide="plus"></i>Add Member
+									</button>
+								</div>
+							</div>
+							<div class="overflow-x-auto">
+								<table class="table">
+									<!-- head -->
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Name</th>
+											<th>Thunderbolt ID</th>
+											<th class="text-center">Namelist</th>
+											<th class="text-center">Group</th>
+											<th class="text-center"></th>
+										</tr>
+									</thead>
+									<tbody class="names">
+
+									</tbody>
+									<!-- foot -->
+
+								</table>
+							</div>
+							<div id="pagination" class="flex items-center  mt-5 hidden">
+								<div class="flex-none">
+									<div class="join">
+										<button class="join-item btn btn-sm btn-primary p-0 w-8 h-8"
+											onclick="goBack()"><i data-lucide="chevron-left"></i></button>
+										<button id="pageNumber" class="join-item btn btn-sm text-base-content px-5"
+											disabled>1</button>
+										<button class="join-item btn btn-sm btn-primary p-0 w-8 h-8"
+											onclick="goForward()"><i data-lucide="chevron-right"></i></button>
+									</div>
+								</div>
+								<div class="flex-none ml-5">
+									<p><span id="fromProspect"></span>-<span id="toProspect"></span> of <b><span
+												id="nlCount">37</span></b> members</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+					<!-- Content ends here-->
+				</div>
+			</div>
+			<dialog id="addPersonModal" class="modal">
+				<div class="modal-box">
+					<h3 class="text-lg font-bold">Add new member</h3>
+					<div class="flex w-full gap-2 my-4">
+						
+						<div class="flex-none">
+							<label class="select">
+								<span class="label">Group</span>
+								<select id="memberGroup" onchange="checkValidName()">
+									<option>SKB</option>
+									<option>Sapphire</option>
+								</select>
+							</label>
+						</div>
+						<div class="flex-1">
+							<label class="input">
+								<span class="label">Name</span>
+								<input type="text" id="memberName" onchange="checkValidName()"/>
+								<span id="loader_isValidName" class="loading loading-spinner loading-md hidden"></span>
+								<span id="status_isValidName"></span>
+							</label>
+						</div>
+
+					</div>
+					<div class="modal-action">
+						<form method="dialog">
+							<!-- if there is a button in form, it will close the modal -->
+							<button class="btn mr-1">Cancel</button>
+							<button class="btn btn-primary" id="saveMember">Add Member</button>
+						</form>
+					</div>
+				</div>
+				<form method="dialog" class="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
+			<dialog id="deletePersonModal" class="modal">
+				<div class="modal-box">
+					<h3 class="text-lg font-bold">Delete member</h3>
+					<p> Are you sure you want to delete <strong><span id="deleteMemberName"></span></strong> from
+						<strong><span id="deleteMemberGroup"></span></strong>?</p>
+					<div class="modal-action">
+						<form method="dialog">
+							<!-- if there is a button in form, it will close the modal -->
+							<button class="btn mr-1">Cancel</button>
+							<button class="btn btn-error" onclick="deleteUser()">Delete Member</button>
+						</form>
+					</div>
+				</div>
+				<form method="dialog" class="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
+			<dialog id="editPersonModal" class="modal">
+				<div class="modal-box">
+					<h3 class="text-lg font-bold">Edit member</h3>
+					<label class="input mt-4 w-full">
+						<span class="label">Name</span>
+						<input type="text" id="editUserName" value="" disabled />
+					</label>
+					<label class="input mt-2 mb-4 w-full">
+						<span class="label">Thunderbolt ID</span>
+						<input type="text" id="editUserID" placeholder="enter ID" onchange="checkIsValid(this)" />
+						<span id="loader_isValidID" class="loading loading-spinner loading-md hidden"></span>
+					</label>
+					<div id="alertValidThunderboltID" role="alert" class="alert alert-soft alert-success hidden">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+							viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<div>
+							Name - <strong><span id="thndrName"></span></strong>,
+							Email - <strong><span id="thndrEmail"></span></strong>,
+						</div>
+					</div>
+					<div id="alertInvalidThunderboltID" role="alert" class="alert alert-soft alert-error hidden">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+							viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+						<span>Invalid ID!</span>
+					</div>
+					<div class="modal-action">
+						<form method="dialog">
+							<!-- if there is a button in form, it will close the modal -->
+							<button class="btn mr-1">Cancel</button>
+							<button id="updateUserBtn" class="btn btn-info">Update</button>
+						</form>
+					</div>
+				</div>
+				<form method="dialog" class="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
+
+			<%- include('components/scripts.ejs'); -%>
+				<script src="/js/add.js"></script>
+
+</body>
+
+</html>

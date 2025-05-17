@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+	<title>
+		Settings - Thunders
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%- include('components/styles.ejs'); -%>
+	<link rel="stylesheet" type="text/css" href="css/settings.css">
+
+</head>
+
+<body>
+
+	<%- include('components/header.ejs'); -%>
+		<%- include('components/sidebar.ejs'); -%>
+
+			<div class="wrapper flex mt-18 ml-25 mr-5">
+
+
+				<div class="container flex-1 mx-auto">
+					<!-- Content goes here-->
+
+					<div class="card card-border w-full bg-base-100 shadow-xl">
+						<div class="card-body">
+							<p class="card-title">Welcome back, Admin
+							</p>
+							<p>Here is your Settings overview.</p>
+
+						</div>
+					</div>
+
+
+					<!-- Content ends here-->
+				</div>
+			</div>
+
+			<%- include('components/scripts.ejs'); -%>
+			<script src="/js/settings.js"></script>
+
+</body>
+
+</html>

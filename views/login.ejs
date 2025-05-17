@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Login - Thunderbolt
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+	<link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+	<!-- <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+
+</head>
+
+<body>
+
+
+	<div class="container-login">
+		<div class="card card-border bg-base-100 w-200 mx-auto shadow-xl" data-theme="light">
+			<div class="card-body pb-15 pt-10">
+
+				<div class="flex w-full mt-8 items-center px-15 gap-10">
+					<div class="flex-none">
+						<img class="h-80" src="images/deer.png" alt="IMG">
+					</div>
+					<div class="flex-none w-80 h-80">
+						<div class="flex items-center justify-center">
+							<div class="flex-none">
+								<i data-lucide="zap" class=""></i>
+							</div>
+							<div class="flex-none">
+								<span class="text-2xl">Thunders</span>
+							</div>
+						</div>
+						<div class="">
+							<fieldset class="fieldset mt-2">
+								<legend class="fieldset-legend">User ID</legend>
+								<label class="input">
+									<i class="" data-lucide="user"></i>
+									<input id="loginUserID" class="input" type="text" placeholder="enter userid"
+										onkeyup="checkValidUserIDLogin(this)" />
+									<span id="userIDEmailValidator">
+
+									</span>
+								</label>
+							</fieldset>
+							<fieldset class="fieldset">
+								<legend class="fieldset-legend">Password</legend>
+								<label class="input">
+									<i data-lucide="lock"></i>
+									<input id="loginPass" class="input" type="password" placeholder="enter password"
+										onkeyup="checkValidPasswordLogin(this)" onchange="login()" />
+									<span id="loginPassValidator">
+
+									</span>
+								</label>
+							</fieldset>
+
+							<div class="mt-4 ">
+								<button id="btnLogin" class="btn btn-block btn-primary py-5">Login</button>
+							</div>
+							<div id="loginAlert" role="alert" class="alert  alert-error mt-4 w-full hidden">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current"
+									fill="none" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+										d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								<span id="loginAlertContent"></span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script src="js/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	<script src="https://unpkg.com/lucide@latest"></script>
+
+
+	<script src="js/login.js"></script>
+	<script>
+		lucide.createIcons();
+	</script>
+
+</body>
+
+</html>
