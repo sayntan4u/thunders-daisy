@@ -357,30 +357,30 @@ function generateRowNamelistUI(sl, prospect) {
 							<td class="weekAdded">${prospect.week}</td>
 							<td class="zone">${prospect.zone}</td>
 							<td class="city">${prospect.city}</td>
-							<td class="chatting bl"> <input type="checkbox" class="checkbox" ${prospect.chatting == true ? "checked" : ""} disabled/></td>
-							<td class="br socialMedia"> <input type="checkbox" class="checkbox" ${prospect.socialMedia == true ? "checked" : ""} disabled/></td>
-              <td class="bl stage1"> <input type="checkbox" class="checkbox" ${prospect.stage1 == true ? "checked" : ""} disabled/></td>
+							<td class="chatting bl"> ${prospect.chatting == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
+							<td class="br socialMedia"> ${prospect.socialMedia == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
+              <td class="bl stage1">${prospect.stage1 == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
               <td class="br weekStage1 stage1">${prospect.stage1Week}</td>
-              <td class="bl stage2"> <input type="checkbox" class="checkbox" ${prospect.stage2 == true ? "checked" : ""} disabled/></td>
+              <td class="bl stage2">${prospect.stage2 == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
               <td class="br weekStage2 stage2">${prospect.stage2Week}</td>
 
-							<td class="bl info"> <input type="checkbox" class="checkbox" ${prospect.info == true ? "checked" : ""} disabled/></td>
+							<td class="bl info"> ${prospect.info == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
 							<td class="weekInfo info">${prospect.infoWeek}</td>
 							<td class="br info">
 								${prospect.infoResponse}
 							</td>
-							<td class="bl reinfo"> <input type="checkbox" class="checkbox" ${prospect.reinfo == true ? "checked" : ""} disabled/></td>
+							<td class="bl reinfo"> ${prospect.reinfo == true ? '<i class="size-5" data-lucide="check"></i>' : ""}</td>
 							<td class="weekReinfo reinfo">${prospect.reinfoWeek}</td>
 							<td class="br reinfo">
 								${prospect.reinfoResponse}
 							</td>
-							<td class="meetup"> <input type="checkbox" class="checkbox" ${prospect.meetup == true ? "checked" : ""} disabled/></td>
-							<td class="bl invi"> <input type="checkbox" class="checkbox" ${prospect.invi == true ? "checked" : ""} disabled/></td>
+							<td class="meetup">${prospect.meetup == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
+							<td class="bl invi"> ${prospect.invi == true ? '<i class="size-5" data-lucide="check"></i>' : ""}</td>
 							<td class="weekInvite invi">${prospect.inviWeek}</td>
 							<td class="br invi">
 								${prospect.inviResponse}
 							</td>
-							<td class="bl plan"> <input type="checkbox" class="checkbox" ${prospect.plan == true ? "checked" : ""} disabled/></td>
+							<td class="bl plan"> ${prospect.plan == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
 							<td class="weekPlan plan">${prospect.planWeek}</td>
 							<td class="br plan">
 								${prospect.planStatus}
