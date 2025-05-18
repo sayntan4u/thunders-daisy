@@ -92,7 +92,7 @@
 				<div class="modal-box">
 					<h3 class="text-lg font-bold">Add new member</h3>
 					<div class="flex w-full gap-2 my-4">
-						
+
 						<div class="flex-none">
 							<label class="select">
 								<span class="label">Group</span>
@@ -105,7 +105,7 @@
 						<div class="flex-1">
 							<label class="input">
 								<span class="label">Name</span>
-								<input type="text" id="memberName" onchange="checkValidName()"/>
+								<input type="text" id="memberName" onchange="checkValidName()" />
 								<span id="loader_isValidName" class="loading loading-spinner loading-md hidden"></span>
 								<span id="status_isValidName"></span>
 							</label>
@@ -128,7 +128,8 @@
 				<div class="modal-box">
 					<h3 class="text-lg font-bold">Delete member</h3>
 					<p> Are you sure you want to delete <strong><span id="deleteMemberName"></span></strong> from
-						<strong><span id="deleteMemberGroup"></span></strong>?</p>
+						<strong><span id="deleteMemberGroup"></span></strong>?
+					</p>
 					<div class="modal-action">
 						<form method="dialog">
 							<!-- if there is a button in form, it will close the modal -->
@@ -185,9 +186,213 @@
 				</form>
 			</dialog>
 			<dialog id="thunderboltNLModal" class="modal">
-				<div class="modal-box">
-					<h3 class="text-lg font-bold">Thunderbolt Namelist</h3>
-					
+				<div class="modal-box w-11/12 max-w-7xl">
+					<h3 class="text-lg font-bold">Thunderbolt Namelist : <span id="namelistModalTitle" class="text-primary opacity-60"></span></h3>
+					<div class="container mx-auto mt-3">
+						<!-- Content goes here-->
+
+						<div class="control_card card card-border w-full bg-base-100 shadow-xl">
+							<div class="card-body relative flex flex-wrap overflow-x-hidden">
+								<div class="flex w-full justify-between">
+									<div class="flex items-center">
+										<div class="flex-none">
+											<label class="select select-sm w-44">
+												<span class="label"><i class="h-5 w-5"
+														data-lucide="list-filter"></i></span>
+												<select id="fliterDropDown" onchange="filterValueChanged(this)"
+													disabled>
+													<option></option>
+													<option>Name</option>
+													<option>Week Added</option>
+													<option>Zone</option>
+													<option>City</option>
+													<option>Chatting</option>
+													<option>Social Media</option>
+													<option>Stage 1</option>
+													<option>Stage 2</option>
+													<option>Info</option>
+													<option>Reinfo</option>
+													<option>Meetup</option>
+													<option>Invi</option>
+													<option>Plan</option>
+												</select>
+											</label>
+										</div>
+										<div class="option flex-none ml-1 hidden">
+											<label id="sortName" class="input input-sm">
+												<input type="text" placeholder="search a name.."
+													onkeyup="searchByName(this)" />
+											</label>
+										</div>
+										<div class="option flex-none ml-1 hidden">
+											<label id="sortWeek" class="select select-sm">
+												<span class="label">Week</span>
+												<select onchange="searchByWeekAdded(this)">
+													<option></option>
+												</select>
+											</label>
+										</div>
+										<div class="option flex-none ml-1 hidden">
+											<label id="sortZone" class="select select-sm">
+												<select onchange="searchByZone(this)">
+													<option></option>
+													<option>Office</option>
+													<option>PG</option>
+													<option>School</option>
+													<option>College</option>
+													<option>Others</option>
+												</select>
+											</label>
+										</div>
+										<div class="option flex-none ml-1 hidden">
+											<label id="sortCity" class="input input-sm">
+												<input type="text" placeholder="search a city.."
+													onkeyup="searchByCity(this)" />
+											</label>
+										</div>
+										<div class="option flex-none ml-1 hidden">
+											<label id="sortDonePending" class="select select-sm">
+												<select onchange="searchByDonePending(this)">
+													<option></option>
+													<option>Done</option>
+													<option>Pending</option>
+												</select>
+											</label>
+										</div>
+										<!--Close button goes here-->
+										<div class="flex-none ml-1">
+											<button id="cancelFilterBtn"
+												class="btn btn-sm btn-error p-0 w-8 h-8 hidden">
+												<i class="h-5 w-5 " data-lucide="x"></i>
+											</button>
+										</div>
+										<div class="flex-none ml-3">
+											<span id="loadingNL" class="loading loading-bars loading-md text-accent"></span>
+
+										</div>
+
+									</div>
+									<div class="flex justify-self-end">
+										<!-- <button id="addProspectModalBtn" class="btn btn-sm btn-primary p-0 h-8 w-8"
+											onclick="addPersonModal.showModal()" disabled><i class="h-5 w-5"
+												data-lucide="plus"></i></button> -->
+
+									</div>
+								</div>
+
+
+								<div class="overflow-x-auto w-full mt-2 pb-2">
+									<table id="NLTable" class="table table-xs table-pin-cols table-zebra">
+										<thead data-theme="light">
+											<tr>
+												<td></td>
+												<th class="text-center pt-3 bg-primary name">Name</th>
+												<td class="text-center pt-3 weekAdded">Week added</td>
+												<td class="text-center pt-3 zone">Zone</td>
+												<td class="text-center pt-3 city">City</td>
+												<td class="text-center pt-3 bl chatting">Chatting</td>
+												<td class="text-center pt-3 br socialMedia">Social Media</td>
+												<td class="text-center pt-3 bl stage1">Stage 1</td>
+												<td class="text-center pt-3 br stage1">Week</td>
+												<td class="text-center pt-3 bl stage2">Stage 2</td>
+												<td class="text-center pt-3 br stage2">Week</td>
+												<td colspan="3" class="text-center pt-3 bl br bb info">Info</td>
+												<!-- <td>Info week</td>
+									  <td>Response</td> -->
+												<td colspan="3" class="text-center pt-3 bl br bb reinfo">Reinfo</td>
+												<!-- <td>Reinfo week</td>
+									  <td>Response</td> -->
+												<td class="text-center pt-3 meetup">Meetup</td>
+												<td colspan="3" class="text-center pt-3 bl br bb invi">Invite</td>
+												<!-- <td>Invite week</td>
+									  <td>Invite status</td> -->
+												<td colspan="3" class="text-center pt-3 bl br bb plan">Plan</td>
+												<!-- <td>Plan week</td>
+									  <td>Plan status</td> -->
+												<td class="text-center pt-3">Remarks</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td class="bb"></td>
+												<th class="bg-primary bb name"></th>
+												<td class="bb weekAdded"></td>
+												<td class="bb zone"></td>
+												<td class="bb city"></td>
+												<td class="bl bb chatting"></td>
+												<td class="bb socialMedia"></td>
+												<td class="bb bl stage1"></td>
+												<td class="bb br stage1"></td>
+												<td class="bb bl stage2"></td>
+												<td class="bb br stage2"></td>
+												<td class="text-center pb-2 bl bb info">Done</td>
+												<td class="text-center pb-2 bb info">Week</td>
+												<td class="text-center pb-2 bb br info">Response</td>
+												<!-- <td>Info week</td>
+										<td>Response</td> -->
+												<td class="text-center pb-2 bb bl reinfo">Done</td>
+												<td class="text-center pb-2 bb reinfo">Week</td>
+												<td class="text-center pb-2 bb br reinfo">Response</td>
+												<!-- <td>Reinfo week</td>
+										<td>Response</td> -->
+												<td class="bb meetup"></td>
+												<td class="text-center pb-2 bb bl invi">Done</td>
+												<td class="text-center pb-2 bb invi">Week</td>
+												<td class="text-center pb-2 bb br invi">Response</td>
+												<!-- <td>Invite week</td>
+										<td>Invite status</td> -->
+												<td class="text-center pb-2 bb bl plan">Done</td>
+												<td class="text-center pb-2 bb plan">Week</td>
+												<td class="text-center pb-2 bb br plan">Status</td>
+												<!-- <td>Plan week</td>
+										<td>Plan status</td> -->
+												<td class="bb"></td>
+												<td class="bb"></td>
+											</tr>
+										</thead>
+										<tbody id="namelistTable">
+
+										</tbody>
+
+									</table>
+
+								</div>
+								<div id="paginationNL" class="flex items-center  mt-5 hidden">
+									<div class="flex-none">
+										<div class="join">
+											<button class="join-item btn btn-sm btn-accent p-0 w-8 h-8"
+												onclick="goBackNL()"><i data-lucide="chevron-left"></i></button>
+											<button id="pageNumberNL" class="join-item btn btn-sm text-base-content px-5"
+												disabled>1</button>
+											<button class="join-item btn btn-sm btn-accent p-0 w-8 h-8"
+												onclick="goForwardNL()"><i data-lucide="chevron-right"></i></button>
+										</div>
+									</div>
+									<div class="flex-none ml-5">
+										<p><span id="fromProspectNL"></span>-<span id="toProspectNL"></span> of <b><span
+													id="nlCountNL">37</span></b> namelist</p>
+									</div>
+									<div class="flex-1 ml-10">
+										<!-- <div role="alert" id="alertNL"
+											class="alert alert-success alert-soft w-90 justify-self-end hidden">
+											<svg xmlns="http://www.w3.org/2000/svg"
+												class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+													d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+											</svg>
+											<span id="alertContent"></span>
+										</div> -->
+									</div>
+
+								</div>
+
+
+
+							</div>
+						</div>
+
+
+						<!-- Content ends here-->
+					</div>
 				</div>
 				<form method="dialog" class="modal-backdrop">
 					<button>close</button>
@@ -196,6 +401,7 @@
 
 			<%- include('components/scripts.ejs'); -%>
 				<script src="/js/add.js"></script>
+				<script src="/js/thunderbolt/namelist.js"></script>
 
 </body>
 

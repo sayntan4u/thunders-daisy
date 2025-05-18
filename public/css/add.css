@@ -1,8 +1,157 @@
-.input{
-    outline:none !important;
+.input {
+  outline: none !important;
 }
 
-.bolt{
-    fill: var(--color-primary);
-    color: var(--color-primary);
+.bolt {
+  fill: var(--color-primary);
+  color: var(--color-primary);
+}
+
+#NLTable {
+  thead tr,
+  thead th,
+  thead td {
+    border: none;
+    background-color: var(--color-accent);
+  }
+
+  /* tbody tr{
+    border: none !important;
+} */
+
+  tbody th {
+    font-size: 10px;
+    width: 100px !important;
+    /* background-color: var(--color-primary-content); */
+    border: none !important;
+    /* border-top: 2px solid whitesmoke !important; 
+  border-bottom: 2px solid whitesmoke !important;  */
+  }
+
+  tbody td {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .sl {
+    font-weight: bold;
+  }
+
+  .name_col {
+    padding: 7px !important;
+    font-size: 11px;
+    min-width: 170px;
+    border: none !important;
+    /* color: #000; */
+    /* background-color: beige !important; */
+    /* opacity: 1 !important; */
+  }
+
+  tbody input[type="text"]:focus {
+    outline: none !important;
+    /* background-color: beige !important; */
+  }
+
+  .remarks {
+    min-width: 300px !important;
+    background-color: transparent !important;
+    /* text-align: center !important; */
+    font-size: 12px !important;
+    padding: 7px !important;
+    border: none !important;
+  }
+
+  .city{
+    min-width: 100px !important;
+    background-color: transparent !important;
+    text-align: center !important;
+    font-size: 12px !important;
+    padding: 7px !important;
+    border: none !important;
+  }
+
+  .weekStage1 ,
+  .weekStage2 ,
+  .weekInfo ,
+  .weekReinfo ,
+  .weekInvite ,
+  .weekPlan ,
+  .weekAdded  {
+    min-width: 50px !important;
+    /* background-color: transparent !important; */
+    /* text-align: center !important;
+    font-size: 12px !important;
+    padding: 7px !important;
+    border: none !important; */
+  }
+
+  tbody select {
+    width: 75px;
+    cursor: pointer;
+    /* background-color: transparent !important; */
+    font-size: 12px !important;
+    padding: 7px !important;
+    border: none !important;
+  }
+
+  tbody select option {
+    background: #fff;
+    color: #000;
+  }
+
+  .responseInvite,
+  .response {
+    width: 50px !important;
+  }
+
+  .planStatus {
+    width: 95px !important;
+    /* text-align: center !important; */
+  }
+
+  .input,
+  .select {
+    outline: none;
+  }
+  input[type="checkbox"] {
+   color: var(--color-primary);
+  }
+}
+
+[data-theme="light"] {
+  .bl {
+    border-left: 1px solid var(--color-accent-content) !important;
+  }
+
+  .br {
+    border-right: 1px solid var(--color-accent-content) !important;
+  }
+
+  .bb {
+    border-bottom: 1px solid var(--color-accent-content) !important;
+  }
+
+  .searchedField {
+    background-color: var(--color-primary-content) !important;
+    color: var(--color-neutral) !important;
+  }
+}
+
+[data-theme="dark"] {
+  .bl {
+    border-left: 1px solid var(--color-accent-content) !important;
+  }
+
+  .br {
+    border-right: 1px solid var(--color-accent-content) !important;
+  }
+
+  .bb {
+    border-bottom: 1px solid var(--color-accent-content) !important;
+  }
+
+  .searchedField {
+    background-color: var(--color-neutral) !important;
+    color: var(--color-neutral-content) !important;
+  }
 }
