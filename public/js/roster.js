@@ -96,7 +96,7 @@ function generateRosterTable(data) {
 
     const headerRow = $('.roster-header tr');
     // headerRow.append('<tr></tr>');
-    headerRow.append('<th scope="col" class="bg-dark text-light"><i class="size-4 mx-auto" data-lucide="clock-arrow-down"></i></th>');
+    headerRow.append('<th scope="col" class="bg-dark text-light"><i class="size-5 mx-auto" data-lucide="clock-arrow-down"></i></th>');
     weekArray.forEach(function (day) {
         headerRow.append(`<th scope="col" class="${dayArray[today] == day ? 'bg-success text-success-content' : ''}">` + day + '</th>');
     });
@@ -285,6 +285,44 @@ function changePlanStatus(elem, day, time) {
     updateLocalRosterData(day, time, value);
 }
 
+function defaultRosterLoader(){
+    const weekArray = getWeekArray();
+    const timeArray = ['11AM', '1PM', '3PM', '5PM', '7PM'];
 
+    //get today
+    const d = new Date();
+    const today = d.getDay();// 0-6 (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    const dayArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    $('.roster-header tr').empty(); // Clear existing header rows
+    $('.roster-body').empty(); // Clear existing body rows
+
+    const headerRow = $('.roster-header tr');
+    // headerRow.append('<tr></tr>');
+    headerRow.append('<th scope="col" class="bg-dark text-light"><i class="size-5 mx-auto" data-lucide="clock-arrow-down"></i></th>');
+    weekArray.forEach(function (day) {
+        headerRow.append(`<th scope="col" class="${dayArray[today] == day ? 'bg-success text-success-content' : ''}">` + day + '</th>');
+    });
+    // headerRow.append('');
+
+    // <input type="text" class="form-control ${item.data[time] == '' ? '' : 'has_data'} ${item.day}-${time}" value="${item.data[time]}" onchange='valueChangedRoster(this,"${item.day}","${time}")'>
+    var i = 1;
+    timeArray.forEach(function (time) {
+        const bodyRow = $('<tr></tr>');
+        bodyRow.append(`<th scope="row" class="time align-middle ">${time}</th>`);
+        $.each(weekArray, function (index, item) {
+            bodyRow.append(`
+                <td class="skeleton">
+                        
+                        
+                </td>`);
+            i++;
+        });
+        $('.roster-body').append(bodyRow);
+        loadIcons();
+    });
+}
+
+defaultRosterLoader();
 loadRoster();
 
