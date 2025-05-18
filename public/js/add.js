@@ -180,6 +180,7 @@ function addMemberModal(){
 function thunderboltModal(thunderbolID, name){
     namelistTable.innerHTML = "";
     namelistModalTitle.innerHTML = name;
+    resetFilter();
     getNLData(thunderbolID);
     thunderboltNLModal.showModal();
 }

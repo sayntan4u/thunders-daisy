@@ -7,9 +7,9 @@ class Prospect {
     city = "",
     chatting = false,
     socialMedia = false,
-    stage1=false,
+    stage1 = false,
     stage1Week = "",
-    stage2=false,
+    stage2 = false,
     stage2Week = "",
     info = false,
     infoWeek = "",
@@ -104,10 +104,10 @@ function enableSelectionUI(value) {
   if (value == "Social Media") {
     $(".socialMedia").addClass("searchedField");
   }
-   if (value == "Stage 1") {
+  if (value == "Stage 1") {
     $(".stage1").addClass("searchedField");
   }
-   if (value == "Stage 2") {
+  if (value == "Stage 2") {
     $(".stage2").addClass("searchedField");
   }
   if (value == "Info") {
@@ -161,7 +161,6 @@ function filterValueChanged(elem) {
   } else if ($(elem).val() == "City") {
     $("#sortCity").parent().removeClass("hidden");
   } else if (
-    
     $(elem).val() == "Chatting" ||
     $(elem).val() == "Social Media" ||
     $(elem).val() == "Stage 1" ||
@@ -178,6 +177,16 @@ function filterValueChanged(elem) {
     });
     $("#sortDonePending").parent().removeClass("hidden");
   }
+}
+
+function resetFilter() {
+  isFilter = false;
+  clearSelectionUI();
+  $(".option").each(function () {
+    $(this).addClass("hidden");
+  });
+  $("#fliterDropDown").val("");
+  $("#cancelFilterBtn").addClass("hidden");
 }
 
 $("#cancelFilterBtn").click(function () {
@@ -357,30 +366,66 @@ function generateRowNamelistUI(sl, prospect) {
 							<td class="weekAdded">${prospect.week}</td>
 							<td class="zone">${prospect.zone}</td>
 							<td class="city">${prospect.city}</td>
-							<td class="chatting bl"> ${prospect.chatting == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
-							<td class="br socialMedia"> ${prospect.socialMedia == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
-              <td class="bl stage1">${prospect.stage1 == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
+							<td class="chatting bl"> ${
+                prospect.chatting == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              } </td>
+							<td class="br socialMedia"> ${
+                prospect.socialMedia == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              } </td>
+              <td class="bl stage1">${
+                prospect.stage1 == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              } </td>
               <td class="br weekStage1 stage1">${prospect.stage1Week}</td>
-              <td class="bl stage2">${prospect.stage2 == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
+              <td class="bl stage2">${
+                prospect.stage2 == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              } </td>
               <td class="br weekStage2 stage2">${prospect.stage2Week}</td>
 
-							<td class="bl info"> ${prospect.info == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
+							<td class="bl info"> ${
+                prospect.info == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              } </td>
 							<td class="weekInfo info">${prospect.infoWeek}</td>
 							<td class="br info">
 								${prospect.infoResponse}
 							</td>
-							<td class="bl reinfo"> ${prospect.reinfo == true ? '<i class="size-5" data-lucide="check"></i>' : ""}</td>
+							<td class="bl reinfo"> ${
+                prospect.reinfo == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              }</td>
 							<td class="weekReinfo reinfo">${prospect.reinfoWeek}</td>
 							<td class="br reinfo">
 								${prospect.reinfoResponse}
 							</td>
-							<td class="meetup">${prospect.meetup == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
-							<td class="bl invi"> ${prospect.invi == true ? '<i class="size-5" data-lucide="check"></i>' : ""}</td>
+							<td class="meetup">${
+                prospect.meetup == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              } </td>
+							<td class="bl invi"> ${
+                prospect.invi == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              }</td>
 							<td class="weekInvite invi">${prospect.inviWeek}</td>
 							<td class="br invi">
 								${prospect.inviResponse}
 							</td>
-							<td class="bl plan"> ${prospect.plan == true ? '<i class="size-5" data-lucide="check"></i>' : ""} </td>
+							<td class="bl plan"> ${
+                prospect.plan == true
+                  ? '<i class="size-5" data-lucide="check"></i>'
+                  : ""
+              } </td>
 							<td class="weekPlan plan">${prospect.planWeek}</td>
 							<td class="br plan">
 								${prospect.planStatus}
@@ -390,7 +435,6 @@ function generateRowNamelistUI(sl, prospect) {
         `);
   lucide.createIcons();
 }
-
 
 function setnlCountNL(count) {
   if (count > 0) {
@@ -411,9 +455,9 @@ function goBackNL() {
   if (parseInt(pageNumberNL.innerHTML) > 1) {
     pageNumberNL.innerHTML = parseInt(pageNumberNL.innerHTML) - 1;
   }
-  if(isFilter){
+  if (isFilter) {
     generateNL(searchedNL);
-  }else{
+  } else {
     generateNL(namelist);
   }
 }
@@ -422,12 +466,11 @@ function goForwardNL() {
   if (parseInt(pageNumberNL.innerHTML) < namelist.length / 10) {
     pageNumberNL.innerHTML = parseInt(pageNumberNL.innerHTML) + 1;
   }
-  if(isFilter){
+  if (isFilter) {
     generateNL(searchedNL);
-  }else{
+  } else {
     generateNL(namelist);
   }
- 
 }
 
 function showAlert(content, type = "success") {
@@ -441,9 +484,9 @@ function showAlert(content, type = "success") {
   alertContent.innerHTML = content;
 }
 
-function getNLData( uid ) {
+function getNLData(uid) {
   $("#loadingNL").removeClass("hidden");
-  const data = { uid : uid};
+  const data = { uid: uid };
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", "/add/getNLData");
   xhttp.onload = function () {
@@ -456,7 +499,6 @@ function getNLData( uid ) {
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));
 }
-
 
 function getName(id) {
   for (let i = 0; i < namelist.length; i++) {
@@ -496,7 +538,7 @@ function generateNL(namelist) {
     );
   }
 
-  if(isFilter){
+  if (isFilter) {
     enableSelectionUI($("#fliterDropDown").val());
   }
 }
