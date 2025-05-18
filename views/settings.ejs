@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<%- include('components/styles.ejs'); -%>
-	<link rel="stylesheet" type="text/css" href="css/settings.css">
+		<link rel="stylesheet" type="text/css" href="css/settings.css">
 
 </head>
 
@@ -23,12 +23,78 @@
 				<div class="container flex-1 mx-auto">
 					<!-- Content goes here-->
 
-					<div class="card card-border w-full bg-base-100 shadow-xl">
+					<div class="card card-border w-full bg-base-100 shadow-md">
 						<div class="card-body">
-							<p class="card-title">Welcome back, Admin
+							<p class="card-title">
+								Data table settings
 							</p>
-							<p>Here is your Settings overview.</p>
+						</div>
+					</div>
+					<div class="card card-border w-full bg-base-100 shadow-md mt-4">
+						<div class="card-body">
+							<p class="card-title">
+								Import/Export data
+							</p>
+							<div class="flex mt-4 gap-2">
+								<div>
+									<select class="select select-primary" onchange="importExportDropDownOnChanged(this)"
+										id="reqType">
+										<option>Export Data</option>
+										<option>Import Data</option>
+									</select>
+								</div>
+								<div class="browse_container hidden">
+									<input type="file" class="file-input file-input-md" id="importFile">
+								</div>
+								<div class="selectCollection_container">
+									<div class="flex gap-2">
+										<div class="">
+											<select class="select" id="selectCollection"
+												onchange="generateNameDropDown()">
+												<option>SKB</option>
+												<option>Sapphire</option>
+											</select>
+										</div>
+										<div class="">
+											<select class="select" id="name">
 
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="">
+									<button type="button" id="processBtn" class="btn btn-primary"
+										onclick="processRequest()">Process</button>
+								</div>
+							</div>
+							<div
+								class="card card-border bg-success text-success-content loading_import w-120 mt-5 hidden">
+								<div class="card-body ">
+									<h5 class="card-title">
+										Status :
+										<span class="">in progress </span>
+										<span class="loading loading-dots loading-sm"></span>
+
+									</h5>
+
+									<div class="w-full align-items-center status-content">
+									</div>
+									<p class="card-text progress_percentage"></p>
+									<progress class="progress progress-neutral w-full" value="0" max="100"></progress>
+
+								</div>
+							</div>
+							<div class="alert alert_import alert-success align-items-center hidden mt-3" role="alert">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+									class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16"
+									role="img" aria-label="Warning:">
+									<path
+										d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+								</svg>
+								<div>
+									<strong>Congratulations !</strong> your request is processed.
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -38,7 +104,7 @@
 			</div>
 
 			<%- include('components/scripts.ejs'); -%>
-			<script src="/js/settings.js"></script>
+				<script src="/js/settings.js"></script>
 
 </body>
 
