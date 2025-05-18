@@ -28,6 +28,7 @@ router.post("/getSettings", requireAuth, async (req, res) => {
 
 router.post("/saveSettings", requireAuth, async (req, res) => {
     const config = req.body.config;
+    console.log(config);
 
     await dbm.saveSettings(config);
 

@@ -35,8 +35,131 @@
 									<div class="collapse-title font-semibold">
 										SKB Data Fields
 									</div>
-									<div class="collapse-content text-sm">Click the "Sign Up" button in the top right
-										corner and follow the registration process.</div>
+									<div class="collapse-content text-sm">
+										<div class="flex justify-content-evenly">
+											<div class="basis-3/12">
+												<div>
+													<button type="button" class="btn btn-primary btn-sm"
+														id="addFieldBtn"><i class="size-4" data-lucide="plus"></i> Add
+														Field</button>
+													<span id="drag_drop"></span>
+													<br><br>
+													<ul class="list-unstyled mb-35" id="table_header">
+													</ul>
+												</div>
+											</div>
+											<div class="basis-9/12">
+												<table class="skb_table table table-bordered table-hover table-sm">
+
+												</table>
+												<fieldset class="fieldset mt-2">
+													<!-- <legend class="fieldset-legend">settingsJson.SKB_table</legend> -->
+													<textarea class="textarea w-full" id="settingsJsonTextSKB"
+														style="height: 250px; max-height:250px;" disabled></textarea>
+													<div class="label">settingsJson.SKB_table</div>
+												</fieldset>
+
+												<br>
+												<div class="mb-2">
+													<div class="col-auto">
+														<div class="flex items-center gap-1 mb-3">
+															<span class="input-group-text"><b>View page col
+																	span</b></span>
+															<input type="text" id="viewColSpanSKB" class="input"
+																style="width: 100px;  font-weight: bold;" disabled>
+															<button type="button" class="btn btn-square btn-ghost"
+																onclick="editColSpan(this)"><i class="size-5"
+																	data-lucide="square-pen"></i></button>
+															<div class="btn_controls hidden">
+																<button type="button" class="btn btn-square btn-ghost"
+																	onclick="cancelColSpan(this)"><i class="size-5"
+																		data-lucide="x"></i></button>
+																<button type="button" class="btn btn-square btn-ghost"
+																	onclick="saveColSpan(this, 'View', 'SKB')"><i
+																		class="size-5" data-lucide="save"></i></button>
+															</div>
+
+														</div>
+													</div>
+													<div class="col-auto">
+														<div class="flex items-center gap-1 mb-3">
+															<span class="input-group-text"><b>Analyze page col
+																	span</b></span>
+															<input type="text" id="analyzeColSpanSKB" class="input"
+																style="width: 100px; font-weight: bold;" disabled>
+															<button type="button" class="btn btn-square btn-ghost"
+																onclick="editColSpan(this)"><i class="size-5"
+																	data-lucide="square-pen"></i></button>
+															<div class="btn_controls hidden">
+																<button type="button" class="btn btn-square btn-ghost"
+																	onclick="cancelColSpan(this)"><i class="size-5"
+																		data-lucide="x"></i></button>
+																<button type="button" class="btn btn-square btn-ghost"
+																	onclick="saveColSpan(this, 'Analyze', 'SKB')"><i
+																		class="size-5" data-lucide="save"></i></button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+												<code
+													class="text-error">Warning : changing the configuration may break the application and existing data might be lost</code>
+												<br><br>
+												<button type="button" class="btn btn-error" id="saveConfigSKB"><i
+														class="size-5" data-lucide="save"></i> Save
+													Configuration</button>
+												<br><br>
+												<!-- <div class="card bg-success-subtle text-success-emphasis loading_change hide"
+													style="width: 38rem;">
+													<div class="card-body ">
+														<h5 class="card-title">
+															Status :
+															<span class="">in progress... </span>
+															<div class="spinner-border spinner-border-sm" role="status">
+															</div>
+														</h5>
+														<p class="d-flex align-items-center card-text status"></p>
+														<p class="card-text progress_percentage"></p>
+														<div class="progress" role="progressbar" style="height: 2px">
+															<div class="progress-bar bg-dark" style="width: 0%"></div>
+														</div>
+													</div>
+												</div> -->
+												<div class="card card-border bg-success text-success-content loading_config_skb w-120 mt-5 hidden">
+													<div class="card-body ">
+														<h5 class="card-title">
+															Status :
+															<span class="">in progress </span>
+															<span class="loading loading-dots loading-sm"></span>
+
+														</h5>
+
+														<div class="w-full align-items-center status-content">
+														</div>
+														<p class="card-text progress_percentage"></p>
+														<progress class="progress progress-neutral w-full" value="0"
+															max="100"></progress>
+
+													</div>
+												</div>
+												<div class="alert alert_skb alert-success align-items-center hidden"
+													role="alert">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+														fill="currentColor"
+														class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
+														viewBox="0 0 16 16" role="img" aria-label="Warning:">
+														<path
+															d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+													</svg>
+													<div>
+														Congratulations ! your configuaration is saved.
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
 								</div>
 								<div class="collapse collapse-arrow join-item border-base-300 border">
 									<input type="checkbox" name="my-accordion-4" />
@@ -73,7 +196,8 @@
 																<span class="text-primary">Saving
 																	connections...</span>
 																&nbsp;
-																<span class="loading loading-spinner text-primary loading-sm"></span>
+																<span
+																	class="loading loading-spinner text-primary loading-sm"></span>
 															</div>
 														</div>
 														<div class="alert alert_connection alert-success mt-2 align-items-center hidden"

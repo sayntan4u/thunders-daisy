@@ -482,15 +482,15 @@ $("#addFieldBtn").click(function () {
     $("#addFieldBtn").prop("disabled", true);
     $("#table_header").append(`
         <li id="add_li">
-        <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Add Field Name" id="textFieldName">
+        <div class="flex gap-2 me-3">
+                                <input type="text" class="input input-primary" placeholder="Add Field Name" id="textFieldName">
                                 
-                                <button type="button" class="btn btn-danger" onclick="cancelAddField()"><i class="fa-solid fa-xmark"></i></button>
-                                &nbsp;
-                                <button type="button" class="btn btn-success" onclick="addField()"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" class="btn btn-error btn-square btn-ghost" onclick="cancelAddField()"><i class="size-5" data-lucide="x"></i></button>
+                                <button type="button" class="btn btn-success btn-square btn-ghost" onclick="addField()"><i class="size-5" data-lucide="check"></i></button>
                               </div>
         </li>
         `);
+    loadIcons();
     document.getElementById("textFieldName").focus();
 });
 
@@ -515,40 +515,40 @@ function addField(fieldName = "") {
     }
     $("#table_header").append(`
         <li draggable="true" id="` + fieldName.replaceAll(/\s/g, '') + `" ondragstart="dragstartHandlerSKB(event)" ondrop="dropHandlerSKB(event)" ondragover="dragoverHandlerSKB(event)" class="th">
-                                  <span class="badge rounded-pill bg-secondary">` + fieldName + `</span>
-                                    <div class="edit_heading input-group hide">
-                                        <input type="text" class="form-control" placeholder="Add Field Name">
+                    <div class="flex items-center">                
+                                <span class="badge badge-sm badge-accent">` + fieldName + `</span>
+                                <div class="edit_heading flex gap-2 hidden me-3">
+                                    <input type="text" class="input input-primary" placeholder="Add Field Name">
                                 
-                                        <button type="button" class="btn btn-danger" onclick="cancelEditField(this)"><i class="fa-solid fa-xmark"></i></button>
-                                        &nbsp;
-                                        <button type="button" class="btn btn-success" onclick="updateField(this)"><i class="fa-solid fa-check"></i></button>
+                                    <button type="button" class="btn btn-error btn-square btn-ghost" onclick="cancelEditField(this)"><i class="size-5" data-lucide="x"></i></button>
+                                    <button type="button" class="btn btn-success btn-square btn-ghost" onclick="updateField(this)"><i class="size-5" data-lucide="check"></i></button>
+                                </div>
+                                <div class="dropdown dropdown-start">
+                                    <div tabindex="0" role="button" class="btn dropdown-toggle btn-sm btn-ghost btn-square">
+                                        <i class="size-5" data-lucide="ellipsis-vertical"></i>
                                     </div>
-                                  <div class="btn-group">
-                                    <button type="button" class="btn dropdown-toggle btn-sm"
-                                      data-bs-toggle="dropdown" aria-expanded="false">
-                                      <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                      <li><button class="btn dropdown-item" onclick="add_sub_heading(this)" >Add Sub-heading</button></li>
-                                      <li><button class="btn dropdown-item" onclick="edit_heading(this)" >Edit</button></li>
-                                      <li><button class="btn dropdown-item" onclick="delete_heading(this)">Delete</button></li>
+                                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-36 p-2 shadow-sm">
+                                      <li><button class="btn dropdown-item btn-ghost btn-xs" onclick="add_sub_heading(this)" >Add Sub-heading</button></li>
+                                      <li><button class="btn dropdown-item btn-ghost btn-xs" onclick="edit_heading(this)" >Edit</button></li>
+                                      <li><button class="btn dropdown-item btn-ghost btn-xs" onclick="delete_heading(this)">Delete</button></li>
                                     </ul>
-                                  </div>
-                                  <ul class="sub_heading sub_heading_` + fieldName.replaceAll(/\s/g, '') + `">
-                                  </ul>
-                                </li>
+                                </div>
+                    </div>
+                    <ul class="sub_heading sub_heading_` + fieldName.replaceAll(/\s/g, '') + `">
+                    </ul>
+        </li>
         
         `);
-
+    loadIcons();
     $("#addFieldBtn").prop("disabled", false);
     $('#add_li').remove();
 
 }
 
 function edit_heading(elem) {
-    $(elem).parent().parent().parent().parent().children(".edit_heading").toggleClass("hide");
-    $(elem).parent().parent().parent().parent().children("span").toggleClass("hide");
-    $(elem).parent().parent().parent().parent().children(".btn-group").toggleClass("hide");
+    $(elem).parent().parent().parent().parent().children(".edit_heading").toggleClass("hidden");
+    $(elem).parent().parent().parent().parent().children("span").toggleClass("hidden");
+    $(elem).parent().parent().parent().parent().children(".dropdown").toggleClass("hidden");
     $(elem).parent().parent().parent().parent().prop("draggable", false);
 
     const headingVal = $(elem).parent().parent().parent().parent().children("span").html();
@@ -557,9 +557,9 @@ function edit_heading(elem) {
 }
 
 function cancelEditField(elem) {
-    $(elem).parent().toggleClass("hide");
-    $(elem).parent().parent().children("span").toggleClass("hide");
-    $(elem).parent().parent().children(".btn-group").toggleClass("hide");
+    $(elem).parent().toggleClass("hidden");
+    $(elem).parent().parent().children("span").toggleClass("hidden");
+    $(elem).parent().parent().children(".dropdown").toggleClass("hidden");
     $(elem).parent().parent().prop("draggable", true);
 }
 
@@ -583,9 +583,9 @@ function updateField(elem) {
     generateSKBTable(settingsJson.SKB_table);
 
 
-    $(elem).parent().toggleClass("hide");
-    $(elem).parent().parent().children("span").toggleClass("hide");
-    $(elem).parent().parent().children(".btn-group").toggleClass("hide");
+    $(elem).parent().toggleClass("hidden");
+    $(elem).parent().parent().children("span").toggleClass("hidden");
+    $(elem).parent().parent().children(".btn-group").toggleClass("hidden");
     $(elem).parent().parent().prop("draggable", true);
 }
 
@@ -606,19 +606,17 @@ function delete_heading(elem) {
 }
 
 function add_sub_heading(elem) {
-    // const sub_heading_ul = elem.parentNode.parentNode.parentNode.parentNode.children[2];
-    // alert($(elem).parent().parent().parent().parent());
-    $(elem).parent().parent().parent().parent().children(".sub_heading").append(`
+    $(elem).parent().parent().parent().parent().siblings(".sub_heading").append(`
         <li class="add_li">
-       <div class="input-group">
-                               <input type="text" class="form-control" placeholder="Add Sub Field Name" id="textSubFieldName">
+       <div class="flex gap-2 me-3">
+                               <input type="text" class="input input-primary" placeholder="Add Sub Field Name" id="textSubFieldName">
                                
-                               <button type="button" class="btn btn-danger" onclick="cancelAddSubField()"><i class="fa-solid fa-xmark"></i></button>
-                               &nbsp;
-                               <button type="button" class="btn btn-success" onclick="addSubField()"><i class="fa-solid fa-check"></i></button>
+                               <button type="button" class="btn btn-error btn-square btn-ghost" onclick="cancelAddSubField()"><i class="size-5" data-lucide="x"></i></button>
+                               <button type="button" class="btn btn-success btn-square btn-ghost" onclick="addSubField()"><i class="size-5" data-lucide="check"></i></button>
                              </div>
        </li>
        `);
+    loadIcons();
     document.getElementById("textSubFieldName").focus();
 
 }
@@ -647,20 +645,20 @@ function addSubField(sub_field_name = "", heading = "") {
 
         $('.add_li').parent().append(`
             <li>
-                                          <span class="badge rounded-pill bg-warning">` + sub_field_name + `</span>
-                                          <button type="button" class="btn btn-sm" onclick="delete_sub_heading(this)"><i class="fa-solid fa-xmark text-danger"></i></button>
+                                          <span class="badge badge-sm badge-warning ml-5">` + sub_field_name + `</span>
+                                          <button type="button" class="btn btn-sm btn-ghost btn-square" onclick="delete_sub_heading(this)"><i class="size-4 text-danger" data-lucide="x"></i></button>
             </li>
             `);
         $('.add_li').remove();
     } else {
         $('.sub_heading_' + heading.replaceAll(/\s/g, '')).append(`
             <li>
-                                          <span class="badge rounded-pill bg-warning">` + sub_field_name + `</span>
-                                          <button type="button" class="btn btn-sm" onclick="delete_sub_heading(this)"><i class="fa-solid fa-xmark text-danger"></i></button>
+                                          <span class="badge badge-sm badge-warning ml-5">` + sub_field_name + `</span>
+                                          <button type="button" class="btn btn-sm btn-ghost btn-square" onclick="delete_sub_heading(this)"><i class="size-4 text-danger" data-lucide="x"></i></button>
             </li>
             `);
     }
-
+    loadIcons();
 
 }
 
@@ -752,12 +750,12 @@ function generateSKBTable(SKB_table) {
 $("#saveConfigSKB").click(function () {
     var idInterval = null;
     $("#saveConfigSKB").prop("disabled", true);
-    $(".loading").removeClass("hide");
-    $(".alert_skb").addClass("hide");
+    $(".loading_config_skb").removeClass("hidden");
+    $(".alert_skb").addClass("hidden");
 
-    $(".status").html();
-    $(".progress_percentage").html();
-    $(".progress-bar").css("width", "0%");
+    $(".status-content").html("");
+    $(".progress_percentage").html("");
+    $(".progress").val(0);
 
     const data = { config: settingsJson };
     const xhttp = new XMLHttpRequest();
@@ -766,10 +764,9 @@ $("#saveConfigSKB").click(function () {
         clearInterval(idInterval);
         loadSettings();
         $("#saveConfigSKB").prop("disabled", false);
-        $(".loading").addClass("hide");
-
-        $(".alert_skb").removeClass("hide");
-        setTimeout(function () { $(".alert_skb").addClass("hide"); }, 10000);
+        $(".loading_config_skb").addClass("hidden");
+        $(".alert_skb").removeClass("hidden");
+        setTimeout(function () { $(".alert_skb").addClass("hidden"); }, 10000);
 
     }
     xhttp.setRequestHeader('Content-Type', 'application/json');
@@ -838,7 +835,7 @@ function addFieldSapphire(fieldName = "") {
     $("#table_header_sapphire").append(`
         <li draggable="true" id="` + fieldName.replaceAll(/\s/g, '') + `_Sapphire" ondragstart="dragstartHandlerSapphire(event)" ondrop="dropHandlerSapphire(event)" ondragover="dragoverHandlerSapphire(event)" class="th">
                                   <span class="badge rounded-pill bg-secondary">` + fieldName + `</span>
-                                   <div class="edit_heading input-group hide">
+                                   <div class="edit_heading input-group hidden">
                                         <input type="text" class="form-control" placeholder="Add Field Name">
                                 
                                         <button type="button" class="btn btn-danger" onclick="cancelEditFieldSapphire(this)"><i class="fa-solid fa-xmark"></i></button>
@@ -868,9 +865,9 @@ function addFieldSapphire(fieldName = "") {
 }
 
 function edit_heading_sapphire(elem) {
-    $(elem).parent().parent().parent().parent().children(".edit_heading").toggleClass("hide");
-    $(elem).parent().parent().parent().parent().children("span").toggleClass("hide");
-    $(elem).parent().parent().parent().parent().children(".btn-group").toggleClass("hide");
+    $(elem).parent().parent().parent().parent().children(".edit_heading").toggleClass("hidden");
+    $(elem).parent().parent().parent().parent().children("span").toggleClass("hidden");
+    $(elem).parent().parent().parent().parent().children(".btn-group").toggleClass("hidden");
     $(elem).parent().parent().parent().parent().prop("draggable", false);
 
     const headingVal = $(elem).parent().parent().parent().parent().children("span").html();
@@ -879,9 +876,9 @@ function edit_heading_sapphire(elem) {
 }
 
 function cancelEditFieldSapphire(elem) {
-    $(elem).parent().toggleClass("hide");
-    $(elem).parent().parent().children("span").toggleClass("hide");
-    $(elem).parent().parent().children(".btn-group").toggleClass("hide");
+    $(elem).parent().toggleClass("hidden");
+    $(elem).parent().parent().children("span").toggleClass("hidden");
+    $(elem).parent().parent().children(".btn-group").toggleClass("hidden");
     $(elem).parent().parent().prop("draggable", true);
 }
 
@@ -906,9 +903,9 @@ function updateFieldSapphire(elem) {
     generateSapphireTable(settingsJson.Sapphire_table);
 
 
-    $(elem).parent().toggleClass("hide");
-    $(elem).parent().parent().children("span").toggleClass("hide");
-    $(elem).parent().parent().children(".btn-group").toggleClass("hide");
+    $(elem).parent().toggleClass("hidden");
+    $(elem).parent().parent().children("span").toggleClass("hidden");
+    $(elem).parent().parent().children(".btn-group").toggleClass("hidden");
     $(elem).parent().parent().prop("draggable", true);
 }
 
@@ -1075,8 +1072,8 @@ function generateSapphireTable(Sapphire_table) {
 $("#saveConfigSapphire").click(function () {
     var idInterval = null;
     $("#saveConfigSapphire").prop("disabled", true);
-    $(".loading_sapphire").removeClass("hide");
-    $(".alert_sapphire").addClass("hide");
+    $(".loading_sapphire").removeClass("hidden");
+    $(".alert_sapphire").addClass("hidden");
 
     $(".status").html();
     $(".progress_percentage").html();
@@ -1091,10 +1088,10 @@ $("#saveConfigSapphire").click(function () {
         loadSettings();
 
         $("#saveConfigSapphire").prop("disabled", false);
-        $(".loading_sapphire").addClass("hide");
+        $(".loading_sapphire").addClass("hidden");
 
-        $(".alert_sapphire").removeClass("hide");
-        setTimeout(function () { $(".alert_sapphire").addClass("hide"); }, 10000);
+        $(".alert_sapphire").removeClass("hidden");
+        setTimeout(function () { $(".alert_sapphire").addClass("hidden"); }, 10000);
     }
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(data));
@@ -1124,21 +1121,21 @@ function dragoverHandlerSapphire(ev) {
 //Common Methods
 
 function editColSpan(elem) {
-    $(elem).toggleClass("hide");
-    $(elem).parent().children(".btn_controls").toggleClass("hide");
+    $(elem).toggleClass("hidden");
+    $(elem).parent().children(".btn_controls").toggleClass("hidden");
     $(elem).parent().children("input").prop("disabled", false);
 
 }
 
 function cancelColSpan(elem) {
-    $(elem).parent().toggleClass("hide");
-    $(elem).parent().parent().children("button").toggleClass("hide");
+    $(elem).parent().toggleClass("hidden");
+    $(elem).parent().parent().children("button").toggleClass("hidden");
     $(elem).parent().parent().children("input").prop("disabled", true);
 }
 
 function saveColSpan(elem, page, group) {
-    $(elem).parent().toggleClass("hide");
-    $(elem).parent().parent().children("button").toggleClass("hide");
+    $(elem).parent().toggleClass("hidden");
+    $(elem).parent().parent().children("button").toggleClass("hidden");
     $(elem).parent().parent().children("input").prop("disabled", true);
 
     settingsJson["total" + page + group + "ColSpan"] = parseInt($(elem).parent().parent().children("input").val());
@@ -1318,9 +1315,9 @@ function getStatus() {
     xhttp.onload = function () {
         const response = JSON.parse(this.responseText);
         console.log(response);
-        $(".status").html("<span class='badge rounded-pill text-bg-success'>" + response.procName + "</span> &nbsp; <b>" + response.docName + "</b> => " + response.status);
+        $(".status-content").html("<span class='badge badge-neutral badge-sm text-bg-success'>" + response.procName + "</span> &nbsp; <b>" + response.docName + "</b> => " + response.status);
         $(".progress_percentage").html(parseInt(response.progress).toString() + "%");
-        $(".progress-bar").css("width", parseInt(response.progress).toString() + "%");
+        $(".progress").val(parseInt(response.progress).toString());
     }
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send();
