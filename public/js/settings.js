@@ -585,7 +585,7 @@ function updateField(elem) {
 
     $(elem).parent().toggleClass("hidden");
     $(elem).parent().parent().children("span").toggleClass("hidden");
-    $(elem).parent().parent().children(".btn-group").toggleClass("hidden");
+    $(elem).parent().parent().children(".dropdown").toggleClass("hidden");
     $(elem).parent().parent().prop("draggable", true);
 }
 
@@ -801,15 +801,15 @@ $("#addFieldBtnSapphire").click(function () {
     $("#addFieldBtnSapphire").prop("disabled", true);
     $("#table_header_sapphire").append(`
         <li id="add_li_sapphire">
-        <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Add Field Name" id="textFieldNameSapphire">
+        <div class="flex gap-2 me-3">
+                                <input type="text" class="input input-primary" placeholder="Add Field Name" id="textFieldNameSapphire">
                                 
-                                <button type="button" class="btn btn-danger" onclick="cancelAddFieldSapphire()"><i class="fa-solid fa-xmark"></i></button>
-                                &nbsp;
-                                <button type="button" class="btn btn-success" onclick="addFieldSapphire()"><i class="fa-solid fa-check"></i></button>
+                                <button type="button" class="btn btn-error btn-square btn-ghost" onclick="cancelAddFieldSapphire()"><i class="size-5" data-lucide="x"></i></button>
+                                <button type="button" class="btn btn-success btn-square btn-ghost" onclick="addFieldSapphire()"><i class="size-5" data-lucide="check"></i></button>
                               </div>
         </li>
         `);
+    loadIcons();
     document.getElementById("textFieldNameSapphire").focus();
 });
 
@@ -819,7 +819,7 @@ function cancelAddFieldSapphire() {
 }
 
 function addFieldSapphire(fieldName = "") {
-    if (fieldName == "") {
+     if (fieldName == "") {
         fieldName = $("#textFieldNameSapphire").val();
         settingsJson.Sapphire_table.push({
             header: fieldName,
@@ -834,31 +834,31 @@ function addFieldSapphire(fieldName = "") {
     }
     $("#table_header_sapphire").append(`
         <li draggable="true" id="` + fieldName.replaceAll(/\s/g, '') + `_Sapphire" ondragstart="dragstartHandlerSapphire(event)" ondrop="dropHandlerSapphire(event)" ondragover="dragoverHandlerSapphire(event)" class="th">
-                                  <span class="badge rounded-pill bg-secondary">` + fieldName + `</span>
-                                   <div class="edit_heading input-group hidden">
-                                        <input type="text" class="form-control" placeholder="Add Field Name">
+                    <div class="flex items-center">                
+                                <span class="badge badge-sm badge-accent">` + fieldName + `</span>
+                                <div class="edit_heading flex gap-2 hidden me-3">
+                                    <input type="text" class="input input-primary" placeholder="Add Field Name">
                                 
-                                        <button type="button" class="btn btn-danger" onclick="cancelEditFieldSapphire(this)"><i class="fa-solid fa-xmark"></i></button>
-                                        &nbsp;
-                                        <button type="button" class="btn btn-success" onclick="updateFieldSapphire(this)"><i class="fa-solid fa-check"></i></button>
+                                    <button type="button" class="btn btn-error btn-square btn-ghost" onclick="cancelEditFieldSapphire(this)"><i class="size-5" data-lucide="x"></i></button>
+                                    <button type="button" class="btn btn-success btn-square btn-ghost" onclick="updateFieldSapphire(this)"><i class="size-5" data-lucide="check"></i></button>
+                                </div>
+                                <div class="dropdown dropdown-start">
+                                    <div tabindex="0" role="button" class="btn dropdown-toggle btn-sm btn-ghost btn-square">
+                                        <i class="size-5" data-lucide="ellipsis-vertical"></i>
                                     </div>
-                                  <div class="btn-group">
-                                    <button type="button" class="btn dropdown-toggle btn-sm"
-                                      data-bs-toggle="dropdown" aria-expanded="false">
-                                      <i class="fa-solid fa-ellipsis-vertical"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                      <li><button class="btn dropdown-item" onclick="add_sub_heading_sapphire(this)" >Add Sub-heading</button></li>
-                                      <li><button class="btn dropdown-item" onclick="edit_heading_sapphire(this)" >Edit</button></li>
-                                      <li><button class="btn dropdown-item" onclick="delete_heading_sapphire(this)">Delete</button></li>
+                                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-36 p-2 shadow-sm">
+                                      <li><button class="btn dropdown-item btn-ghost btn-xs" onclick="add_sub_heading_sapphire(this)" >Add Sub-heading</button></li>
+                                      <li><button class="btn dropdown-item btn-ghost btn-xs" onclick="edit_heading_sapphire(this)" >Edit</button></li>
+                                      <li><button class="btn dropdown-item btn-ghost btn-xs" onclick="delete_heading_sapphire(this)">Delete</button></li>
                                     </ul>
-                                  </div>
-                                  <ul class="sub_heading sub_heading_sapphire_` + fieldName.replaceAll(/\s/g, '') + `">
-                                  </ul>
-                                </li>
+                                </div>
+                    </div>
+                    <ul class="sub_heading sub_heading_sapphire_` + fieldName.replaceAll(/\s/g, '') + `">
+                    </ul>
+        </li>
         
         `);
-
+    loadIcons();
     $("#addFieldBtnSapphire").prop("disabled", false);
     $('#add_li_sapphire').remove();
 
@@ -867,7 +867,7 @@ function addFieldSapphire(fieldName = "") {
 function edit_heading_sapphire(elem) {
     $(elem).parent().parent().parent().parent().children(".edit_heading").toggleClass("hidden");
     $(elem).parent().parent().parent().parent().children("span").toggleClass("hidden");
-    $(elem).parent().parent().parent().parent().children(".btn-group").toggleClass("hidden");
+    $(elem).parent().parent().parent().parent().children(".dropdown").toggleClass("hidden");
     $(elem).parent().parent().parent().parent().prop("draggable", false);
 
     const headingVal = $(elem).parent().parent().parent().parent().children("span").html();
@@ -878,7 +878,7 @@ function edit_heading_sapphire(elem) {
 function cancelEditFieldSapphire(elem) {
     $(elem).parent().toggleClass("hidden");
     $(elem).parent().parent().children("span").toggleClass("hidden");
-    $(elem).parent().parent().children(".btn-group").toggleClass("hidden");
+    $(elem).parent().parent().children(".dropdown").toggleClass("hidden");
     $(elem).parent().parent().prop("draggable", true);
 }
 
@@ -905,7 +905,7 @@ function updateFieldSapphire(elem) {
 
     $(elem).parent().toggleClass("hidden");
     $(elem).parent().parent().children("span").toggleClass("hidden");
-    $(elem).parent().parent().children(".btn-group").toggleClass("hidden");
+    $(elem).parent().parent().children(".dropdown").toggleClass("hidden");
     $(elem).parent().parent().prop("draggable", true);
 }
 
@@ -926,19 +926,17 @@ function delete_heading_sapphire(elem) {
 }
 
 function add_sub_heading_sapphire(elem) {
-    // const sub_heading_ul = elem.parentNode.parentNode.parentNode.parentNode.children[2];
-    // alert($(elem).parent().parent().parent().parent());
-    $(elem).parent().parent().parent().parent().children(".sub_heading").append(`
+    $(elem).parent().parent().parent().parent().siblings(".sub_heading").append(`
         <li class="add_li_sapphire">
-       <div class="input-group">
-                               <input type="text" class="form-control" placeholder="Add Sub Field Name" id="textSubFieldNameSapphire">
+       <div class="flex gap-2 me-3">
+                               <input type="text" class="input input-primary" placeholder="Add Sub Field Name" id="textSubFieldNameSapphire">
                                
-                               <button type="button" class="btn btn-danger" onclick="cancelAddSubFieldSapphire()"><i class="fa-solid fa-xmark"></i></button>
-                               &nbsp;
-                               <button type="button" class="btn btn-success" onclick="addSubFieldSapphire()"><i class="fa-solid fa-check"></i></button>
+                               <button type="button" class="btn btn-error btn-square btn-ghost" onclick="cancelAddSubFieldSapphire()"><i class="size-5" data-lucide="x"></i></button>
+                               <button type="button" class="btn btn-success btn-square btn-ghost" onclick="addSubFieldSapphire()"><i class="size-5" data-lucide="check"></i></button>
                              </div>
        </li>
        `);
+    loadIcons();
     document.getElementById("textSubFieldNameSapphire").focus();
 
 }
@@ -948,7 +946,6 @@ function cancelAddSubFieldSapphire() {
 }
 
 function addSubFieldSapphire(sub_field_name = "", heading = "") {
-
     if (heading == "") {
         sub_field_name = $("#textSubFieldNameSapphire").val();
 
@@ -963,23 +960,24 @@ function addSubFieldSapphire(sub_field_name = "", heading = "") {
         }
         // console.log(settingsJson.SKB_table);
         $("#settingsJsonTextSapphire").val(JSON.stringify(settingsJson.Sapphire_table, null, 2));
-        generateSapphireTable(settingsJson.Sapphire_table);
+        generateSKBTable(settingsJson.Sapphire_table);
 
         $('.add_li_sapphire').parent().append(`
             <li>
-                                          <span class="badge rounded-pill bg-warning">` + sub_field_name + `</span>
-                                          <button type="button" class="btn btn-sm" onclick="delete_sub_heading_sapphire(this)"><i class="fa-solid fa-xmark text-danger"></i></button>
+                                          <span class="badge badge-sm badge-warning ml-5">` + sub_field_name + `</span>
+                                          <button type="button" class="btn btn-sm btn-ghost btn-square" onclick="delete_sub_heading_sapphire(this)"><i class="size-4 text-danger" data-lucide="x"></i></button>
             </li>
             `);
-        $('.add_li').remove();
+        $('.add_li_sapphire').remove();
     } else {
         $('.sub_heading_sapphire_' + heading.replaceAll(/\s/g, '')).append(`
             <li>
-                                          <span class="badge rounded-pill bg-warning">` + sub_field_name + `</span>
-                                          <button type="button" class="btn btn-sm" onclick="delete_sub_heading_sapphire(this)"><i class="fa-solid fa-xmark text-danger"></i></button>
+                                          <span class="badge badge-sm badge-warning ml-5">` + sub_field_name + `</span>
+                                          <button type="button" class="btn btn-sm btn-ghost btn-square" onclick="delete_sub_heading_sapphire(this)"><i class="size-4 text-danger" data-lucide="x"></i></button>
             </li>
             `);
     }
+    loadIcons();
 
 
 }
@@ -1075,9 +1073,9 @@ $("#saveConfigSapphire").click(function () {
     $(".loading_sapphire").removeClass("hidden");
     $(".alert_sapphire").addClass("hidden");
 
-    $(".status").html();
-    $(".progress_percentage").html();
-    $(".progress-bar").css("width", "0%");
+    $(".status-content").html("");
+    $(".progress_percentage").html("");
+    $(".progress").val(0);
 
     const data = { config: settingsJson };
     const xhttp = new XMLHttpRequest();
