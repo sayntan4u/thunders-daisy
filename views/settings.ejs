@@ -17,19 +17,91 @@
 	<%- include('components/header.ejs'); -%>
 		<%- include('components/sidebar.ejs'); -%>
 
-			<div class="wrapper flex mt-18 ml-25 mr-5">
+			<div class="wrapper flex mt-18 ml-25 mr-5 mb-15">
 
 
 				<div class="container flex-1 mx-auto">
 					<!-- Content goes here-->
 
+					<!--DATATABLE SETTINGS-->
 					<div class="card card-border w-full bg-base-100 shadow-md">
 						<div class="card-body">
 							<p class="card-title">
 								Data table settings
 							</p>
+							<div class="join join-vertical bg-base-100">
+								<div class="collapse collapse-arrow join-item border-base-300 border">
+									<input type="checkbox" name="my-accordion-4" />
+									<div class="collapse-title font-semibold">
+										SKB Data Fields
+									</div>
+									<div class="collapse-content text-sm">Click the "Sign Up" button in the top right
+										corner and follow the registration process.</div>
+								</div>
+								<div class="collapse collapse-arrow join-item border-base-300 border">
+									<input type="checkbox" name="my-accordion-4" />
+									<div class="collapse-title font-semibold">
+										SAPPHIRE Data Fields
+									</div>
+									<div class="collapse-content text-sm">Click on "Forgot Password" on the login page
+										and follow the instructions sent to your email.</div>
+								</div>
+								<div class="collapse collapse-arrow join-item border-base-300 border">
+									<input type="checkbox" name="my-accordion-4" />
+									<div class="collapse-title font-semibold">
+										SKB - SAPPHIRE Connections (for auto data update)
+									</div>
+									<div class="collapse-content text-sm">
+										<div class="flex gap-3">
+											<div class="editor-container">
+												<canvas id="nodeCanvas"></canvas>
+											</div>
+											<div class="flex-1">
+												<div class="card">
+													<div class="card-body">
+
+														<code
+															class="text-error">Warning : changing the connections may break the application</code>
+														<br><br>
+														<button type="button" class="btn btn-error"
+															id="saveConnections"><i class="size-5"
+																data-lucide="save"></i>
+															Save Connections</button>
+
+														<div class="loading_connection form-group hidden mt-2">
+															<div class="d-flex align-items-center">
+																<span class="text-primary">Saving
+																	connections...</span>
+																&nbsp;
+																<span class="loading loading-spinner text-primary loading-sm"></span>
+															</div>
+														</div>
+														<div class="alert alert_connection alert-success mt-2 align-items-center hidden"
+															role="alert">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24"
+																height="24" fill="currentColor"
+																class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"
+																viewBox="0 0 16 16" role="img" aria-label="Warning:">
+																<path
+																	d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+															</svg>
+															<div>
+																Congratulations ! your connections are saved.
+															</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
+
+					<!--IMPORT/EXPORT DATA-->
 					<div class="card card-border w-full bg-base-100 shadow-md mt-4">
 						<div class="card-body">
 							<p class="card-title">

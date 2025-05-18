@@ -49,8 +49,8 @@ function removeConnection(startNode) {
 
 $("#saveConnections").click(function () {
     $("#saveConnections").prop("disabled", true);
-    $(".loading_connection").removeClass("hide");
-    $(".alert_connection").addClass("hide");
+    $(".loading_connection").removeClass("hidden");
+    $(".alert_connection").addClass("hidden");
 
     const data = { config: settingsJson };
     const xhttp = new XMLHttpRequest();
@@ -61,9 +61,9 @@ $("#saveConnections").click(function () {
         // loadSettings();
 
         $("#saveConnections").prop("disabled", false);
-        $(".loading_connection").addClass("hide");
-        $(".alert_connection").removeClass("hide");
-        setTimeout(function () { $(".alert_connection").addClass("hide"); }, 10000);
+        $(".loading_connection").addClass("hidden");
+        $(".alert_connection").removeClass("hidden");
+        setTimeout(function () { $(".alert_connection").addClass("hidden"); }, 10000);
     }
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(JSON.stringify(data));

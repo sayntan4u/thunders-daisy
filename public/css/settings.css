@@ -31,3 +31,7 @@
 .file-input{
     outline:none;
 }
+
+#saveConnections{
+    max-width: 200px !important;
+}
