@@ -101,8 +101,8 @@ function generateNamesTable(response, group = "SKB") {
 												<span class="badge badge-soft badge-primary">${group}</span>
 											</td>
 											<th class="text-center">
-												<button class="btn btn-ghost btn-sm btn-square" onclick="" ${(response[i].namelist == '') ? 'disabled' : ''}>
-													<i class="size-5" data-lucide="book-user"></i>
+												<button class="btn btn-ghost btn-sm btn-square" onclick="thunderboltModal('${response[i].namelist}')" ${(response[i].namelist == '') ? 'disabled' : ''}>
+													<i class="size-5 ${(response[i].namelist == '') ? '' : 'bolt'}" data-lucide="zap"></i>
 												</button>
 												<button class="btn btn-ghost btn-sm btn-square" onclick="editUserModal('${response[i].name}','${response[i].namelist}')">
 													<i class="size-5" data-lucide="square-pen"></i>
@@ -175,6 +175,11 @@ function addMemberModal(){
     $("#memberName").val("");
     $("#memberName").parent().removeClass("input-error").removeClass("input-success");
     addPersonModal.showModal();
+}
+
+function thunderboltModal(thunderbolID){
+    console.log(thunderbolID);
+    thunderboltNLModal.showModal();
 }
 
 function checkIsValid(elem) {
