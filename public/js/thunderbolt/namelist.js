@@ -368,30 +368,30 @@ function generateRowNamelistUI(sl, prospect) {
 							<td class="city">${prospect.city}</td>
 							<td class="chatting bl"> ${
                 prospect.chatting == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               } </td>
 							<td class="br socialMedia"> ${
                 prospect.socialMedia == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               } </td>
               <td class="bl stage1">${
                 prospect.stage1 == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               } </td>
               <td class="br weekStage1 stage1">${prospect.stage1Week}</td>
               <td class="bl stage2">${
                 prospect.stage2 == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               } </td>
               <td class="br weekStage2 stage2">${prospect.stage2Week}</td>
 
 							<td class="bl info"> ${
                 prospect.info == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               } </td>
 							<td class="weekInfo info">${prospect.infoWeek}</td>
@@ -400,7 +400,7 @@ function generateRowNamelistUI(sl, prospect) {
 							</td>
 							<td class="bl reinfo"> ${
                 prospect.reinfo == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               }</td>
 							<td class="weekReinfo reinfo">${prospect.reinfoWeek}</td>
@@ -409,12 +409,12 @@ function generateRowNamelistUI(sl, prospect) {
 							</td>
 							<td class="meetup">${
                 prospect.meetup == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               } </td>
 							<td class="bl invi"> ${
                 prospect.invi == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               }</td>
 							<td class="weekInvite invi">${prospect.inviWeek}</td>
@@ -423,7 +423,7 @@ function generateRowNamelistUI(sl, prospect) {
 							</td>
 							<td class="bl plan"> ${
                 prospect.plan == true
-                  ? '<i class="size-5" data-lucide="check"></i>'
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
                   : ""
               } </td>
 							<td class="weekPlan plan">${prospect.planWeek}</td>
