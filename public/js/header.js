@@ -52,22 +52,36 @@ function getDateWeek(date) {
         (typeof date === 'object') ? date : new Date();
     const januaryFirst = 
         new Date(currentDate.getFullYear(), 0, 1);
-    const daysToNextMonday = 
-        (januaryFirst.getDay() === 1) ? 0 : 
-        (7 - januaryFirst.getDay()) % 7;
-    const nextMonday = 
-        new Date(currentDate.getFullYear(), 0, 
-        januaryFirst.getDate() + daysToNextMonday);
 
-    return (currentDate < nextMonday) ? 52 : 
-    (currentDate > nextMonday ? Math.ceil(
-    (currentDate - nextMonday) / (24 * 3600 * 1000) / 7) : 1);
+    // const daysToNextMonday = 
+    //     (januaryFirst.getDay() === 1) ? 0 : 
+    //     (7 - januaryFirst.getDay()) % 7;
+    // const nextMonday = 
+    //     new Date(currentDate.getFullYear(), 0, 
+    //     januaryFirst.getDate() + daysToNextMonday);
+
+    const daysToNextFriday = 
+        (januaryFirst.getDay() === 5) ? 0 : 
+        (7 - januaryFirst.getDay()) % 7;
+    const nextFriday =
+        new Date(currentDate.getFullYear(), 0, 
+        januaryFirst.getDate() + daysToNextFriday);
+
+    return (currentDate < nextFriday) ? 52 : 
+    (currentDate > nextFriday ? Math.ceil(
+    (currentDate - nextFriday) / (24 * 3600 * 1000) / 7) : 1);
 }
 
 function setCurrWeek() {
     const currentDate = new Date();
     const weekNumber = getDateWeek(currentDate);
     headerWeekNumber.innerHTML = "Week " + weekNumber;
+}
+
+function getCurrWeek() {
+    const currentDate = new Date();
+    const weekNumber = getDateWeek(currentDate);
+    return weekNumber;
 }
 
 setCurrWeek();

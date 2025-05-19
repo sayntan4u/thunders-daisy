@@ -83,14 +83,17 @@ function generateNamesTable(response, group = "SKB") {
 													</div>
 													<div>
 														<div class="font-bold">${response[i].name}</div>
-														<div class="text-xs opacity-50">
+														<div class="text-xs opacity-50 items-center">
                                                             ${response[i].email}
-                                                           ${(response[i].email == '')? '' : `<button class="btn btn-ghost btn-xs btn-square" onclick="copyToClipboard(this,'${
-                                                              response[i].email
-                                                            }')">
+                                                           ${
+                                                             response[i]
+                                                               .email == ""
+                                                               ? ""
+                                                               : `<button class="btn btn-ghost btn-xs btn-square" onclick="copyToClipboard(this,'${response[i].email}')">
                                                                 <i class="size-4" data-lucide="copy"></i> 
                                                             </button>
-                                                            <span class="badge badge-neutral badge-xs badge-primary hidden">copied</span>`} 
+                                                            <span class="badge badge-neutral badge-xs badge-primary hidden">copied</span>`
+                                                           } 
                                                         </div>
 													</div>
 												</div>
@@ -255,11 +258,11 @@ function goBack() {
   if (currPage > 1) {
     currPage = currPage - 1;
     pageNumber.innerHTML = currPage;
-  }
-  if ($("#groupSelect").val() == "SKB") {
-    generateNamesTable(userJson);
-  } else {
-    generateNamesTable(sapphireJson, "Sapphire");
+    if ($("#groupSelect").val() == "SKB") {
+      generateNamesTable(userJson);
+    } else {
+      generateNamesTable(sapphireJson, "Sapphire");
+    }
   }
 }
 
@@ -268,14 +271,14 @@ function goForward() {
     if (currPage < userJson.length / 5) {
       currPage = currPage + 1;
       pageNumber.innerHTML = currPage;
+      generateNamesTable(userJson);
     }
-    generateNamesTable(userJson);
   } else {
     if (currPage < sapphireJson.length / 5) {
       currPage = currPage + 1;
       pageNumber.innerHTML = currPage;
+      generateNamesTable(sapphireJson, "Sapphire");
     }
-    generateNamesTable(sapphireJson, "Sapphire");
   }
 }
 
