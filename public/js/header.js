@@ -34,7 +34,7 @@ function getAvatarId() {
 }
 
 function changeTheme() {
-  console.log(localStorage.getItem("darkMode"));
+  // console.log(localStorage.getItem("darkMode"));
   if (localStorage.getItem("darkMode") === "false") {
     localStorage.setItem("darkMode", "true");
     document.documentElement.setAttribute("data-theme", "dark");
@@ -44,7 +44,7 @@ function changeTheme() {
     document.documentElement.setAttribute("data-theme", "light");
     $(".header-menu").attr("data-theme", "dark");
   }
-  console.log(localStorage.getItem("darkMode"));
+  // console.log(localStorage.getItem("darkMode"));
 }
 
 function getDateWeek(date) {

@@ -1,0 +1,13 @@
+[data-theme="light"] {
+  .bg-team {
+    background: var(--color-primary-content);
+    color: var(--color-neutral);
+  }
+}
+
+[data-theme="dark"] {
+  .bg-team {
+    background: var(--color-primary);
+    color: var(--color-neutral-content);
+  }
+}

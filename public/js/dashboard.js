@@ -1,36 +1,40 @@
-
 function updateDashboardUI(data) {
-    // Update the dashboard with the received data
-    // Example: Update a div with the data
-    dashNetworking.innerHTML = data.networking;
-    dashInfos.innerHTML = data.infos;
-    dashInvis.innerHTML = data.invis;
-    dashPlans.innerHTML = data.plans;
+  // Update the dashboard with the received data
+  // Example: Update a div with the data
+  dashNetworking.innerHTML = data.networking;
+  dashInfos.innerHTML = data.infos;
+  dashInvis.innerHTML = data.invis;
+  dashPlans.innerHTML = data.plans;
+  if (data.plans < 10) {
+    $("#dashPlans").addClass("text-error");
+  } else {
+    $("#dashPlans").addClass("text-success");
+  }
+  dashCount.innerHTML = data.count;
 }
-
 
 //============================
 // AJAX methods
 //============================
 
 function getDashboardData() {
-    $.ajax({
-        url: '/dashboard/getData',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            week: getCurrWeek()
-        },
-        success: function(data) {
-            // Update the dashboard with the received data
-            // console.log('Dashboard data received:', data);
-            // Call the updateDashboard function to update the UI
-            updateDashboardUI(data);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error fetching dashboard data:', error);
-        }
-    });
+  $.ajax({
+    url: "/dashboard/getData",
+    type: "POST",
+    dataType: "json",
+    data: {
+      week: getCurrWeek(),
+    },
+    success: function (data) {
+      // Update the dashboard with the received data
+      // console.log('Dashboard data received:', data);
+      // Call the updateDashboard function to update the UI
+      updateDashboardUI(data);
+    },
+    error: function (xhr, status, error) {
+      console.error("Error fetching dashboard data:", error);
+    },
+  });
 }
 
 //============================
@@ -38,4 +42,4 @@ function getDashboardData() {
 //============================
 
 getDashboardData();
-dashCurrWeek.innerHTML = "Week " + getCurrWeek();
+// dashCurrWeek.innerHTML = "Week " + getCurrWeek();

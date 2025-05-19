@@ -25,12 +25,30 @@
 
 					<div class="card card-border w-full bg-base-100 shadow-xl">
 						<div class="card-body">
-							<p class="card-title">Welcome back, Admin
-							</p>
-							<p>Here is your dashboard overview for <span id="dashCurrWeek" class="text-primary font-bold"></span></p>
-							<div class="stats shadow mt-5 w-full h-40">
+							<div class="flex justify-between">
+								<div class="flex-1 basis-8/12">
+									<p class="card-title">Welcome back, Admin
+									</p>
+									<p>Here is your dashboard overview</p>
+								</div>
+								<div class="flex-none basis-4/12">
+									<div class="stats shadow w-full bg-team h-30">
+										<div class="stat">
+											<div class="stat-figure  opacity-60">
+												<i data-lucide="users"></i>
+											</div>
+											<div class="stat-title font-semibold">Team Count</div>
+											<div id="dashCount" class="stat-value text-4xl"></div>
+											<div class="stat-desc"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="stats shadow mt-3 w-full h-40">
 								<div class="stat">
-									<div class="stat-figure ">
+									<div class="stat-figure  opacity-60">
 										<i data-lucide="network"></i>
 									</div>
 									<div class="stat-title font-bold">Networking</div>
@@ -38,7 +56,7 @@
 									<div class="stat-desc"></div>
 								</div>
 								<div class="stat">
-									<div class="stat-figure">
+									<div class="stat-figure  opacity-60">
 										<i data-lucide="phone-call"></i>
 									</div>
 									<div class="stat-title font-bold">Infos</div>
@@ -46,7 +64,7 @@
 									<div class="stat-desc"></div>
 								</div>
 								<div class="stat">
-									<div class="stat-figure">
+									<div class="stat-figure  opacity-60">
 										<i data-lucide="phone-outgoing"></i>
 									</div>
 									<div class="stat-title font-bold">Invis</div>
@@ -54,11 +72,11 @@
 									<div class="stat-desc"></div>
 								</div>
 								<div class="stat">
-									<div class="stat-figure">
+									<div class="stat-figure  opacity-60">
 										<i data-lucide="indian-rupee"></i>
 									</div>
 									<div class="stat-title font-bold">Plans</div>
-									<div id="dashPlans" class="stat-value text-success text-5xl"></div>
+									<div id="dashPlans" class="stat-value text-5xl"></div>
 									<div class="stat-desc"></div>
 								</div>
 
