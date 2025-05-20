@@ -106,39 +106,39 @@ function sumSapphireData(week, year, group) {
 }
 
 function getTDClass(field) {
-  var ret = "done-data";
+  var ret = "bg-done";
   if (field.toLowerCase().includes("target")) {
-    ret = "bg-warning";
+    ret = "bg-target";
   } else if (field.toLowerCase().includes("list")) {
-    ret = "bg-info";
+    ret = "bg-list";
   } else if (field == "plans") {
-    ret = "bg-success";
+    ret = "bg-plan";
   } else if (field == "remarks") {
     ret = "";
   } else if (field.toLowerCase().includes("done")) {
-    ret = "done_data";
+    ret = "bg-done";
   } else if (field.toLowerCase().includes("pending")) {
-    ret = "bg-plan";
+    ret = "bg-pending";
   }
 
   return ret;
 }
 
 function getTDClassSapphire(field) {
-  var ret = "done_data";
+  var ret = "bg-done";
 
   if (field.toLowerCase().includes("meeting")) {
-    ret = "bg-warning";
+    ret = "bg-secondMeeting";
   } else if (field.toLowerCase().includes("uv")) {
-    ret = "bg-secondary-content";
+    ret = "bg-uv";
   } else if (field.toLowerCase().includes("node")) {
-    ret = "bg-info";
+    ret = "bg-node";
   } else if (field == "plans") {
-    ret = "bg-success";
+    ret = "bg-plan";
   } else if (field == "remarks") {
     ret = "";
   } else if (field.toLowerCase().includes("pending")) {
-    ret = "bg-plan";
+    ret = "bg-pending";
   }
 
   return ret;
@@ -343,7 +343,7 @@ function generateTabContent(week, year, group, jsonData) {
           rowTable += `<th class="bb bl">${jsonData[i].sl}</th>`;
         } else if (j == 1) {
           rowTable +=
-            '<td class="bl br bb">' + jsonData[i][fields[j]] + "</td>";
+            '<td class="bl br bb text-sm font-semibold">' + jsonData[i][fields[j]] + "</td>";
         } else if (j == fields.length - 1) {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClass(
             fields[j]
@@ -383,7 +383,7 @@ function generateTabContent(week, year, group, jsonData) {
           rowTable += '<th class="bb bl">' + jsonData[i].sl + "</th>";
         } else if (j == 1) {
           rowTable +=
-            '<td class="bl br bb">' +
+            '<td class="bl br bb text-sm font-semibold">' +
             jsonData[i][fieldsSapphire[j]] +
             "</td>";
         } else if (j == fieldsSapphire.length - 1) {
@@ -442,7 +442,7 @@ function generateTabContent(week, year, group, jsonData) {
                         </label>
                         <div class="tab-content bg-base-100 border-base-300 p-6">
 							<div class="overflow-x-auto">
-								<table id="table_week${week}_${group}" class="table table-xs table-zebra" data-theme="light">
+								<table id="table_week${week}_${group}" class="table table-xs table-zebra">
 									<thead>
 										${group == "SKB"
       ? generateSKBTable(
@@ -582,6 +582,10 @@ function loadSettings() {
     fieldsSapphire = getFields(headerDataSapphire);
 
     getAllDataSession();
+
+    $("#searchActivity").html('<i class="h-5 w-5" data-lucide="search"></i>');
+    loadIcons();
+    $("#searchActivity").attr("disabled", false);
 
   };
   xhttp.setRequestHeader("Content-Type", "application/json");

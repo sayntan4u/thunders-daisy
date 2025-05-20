@@ -44,6 +44,10 @@ body{
   background: -o-linear-gradient(-135deg, #fddb92, #c2e9fb);
   background: -moz-linear-gradient(-135deg, #fddb92, #c2e9fb);
   background: linear-gradient(-135deg, #fddb92, #c2e9fb);
+  /* background: -webkit-linear-gradient(-135deg, #ffa17f, #00223e);
+  background: -o-linear-gradient(-135deg, #ffa17f, #00223e);
+  background: -moz-linear-gradient(-135deg, #ffa17f, #00223e);
+  background: linear-gradient(-135deg, #ffa17f, #00223e); */
 }
 
 .card{
@@ -52,6 +56,15 @@ body{
 
 .input{
     outline : none;
+}
+
+[data-theme="dark"]{
+  .container-login {
+  background: -webkit-linear-gradient(-135deg, #ffa17f, #00223e);
+  background: -o-linear-gradient(-135deg, #ffa17f, #00223e);
+  background: -moz-linear-gradient(-135deg, #ffa17f, #00223e);
+  background: linear-gradient(-135deg, #ffa17f, #00223e);
+}
 }
 
 

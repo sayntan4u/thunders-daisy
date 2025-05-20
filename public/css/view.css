@@ -1,55 +1,123 @@
-.container .select{
-    width:120px;
+.container .select {
+    width: 120px;
 }
 
-.container thead tr{
-    border:none !important;
+.container thead tr {
+    border: none !important;
     background-color: var(--color-accent);
     color: var(--color-accent-content);
 }
 
-.bt{
+.bt {
     border-top: 1px solid var(--color-accent-content);
 }
 
-.bb{
+.bb {
     border-bottom: 1px solid var(--color-accent-content);
 }
 
-.bl{
+.bl {
     border-left: 1px solid var(--color-accent-content);
 }
 
-.br{
+.br {
     border-right: 1px solid var(--color-accent-content);
 }
 
-.container tbody .input{
+.container tbody .input {
     margin: 0px;
     /* border: none;
     background-color: transparent;
     text-align: center; */
 }
 
-.remarks,  .remarks-Sapphire{
+.remarks,
+.remarks-Sapphire {
     min-width: 200px !important;
     text-align: left !important;
 }
 
-.bg-warning, .bg-success, .bg-info, .bg-danger-subtle{
-    font-weight:bold;
-}
-
-.target_data{
+.bg-target,
+.bg-list,
+.bg-plan, 
+.bg-node ,
+.bg-uv,
+.bg-secondMeeting{
     font-weight: bold;
 }
 
-.bg-plan{
-    background-color: #ebd7fa !important;
+[data-theme="light"] {
+    .bg-list, .bg-node {
+        background-color: var(--color-info);
+    }
+
+    .bg-pending {
+        background-color: #ebd7fa !important;
+    }
+
+    .bg-target, .bg-secondMeeting {
+        background-color: var(--color-warning);
+    }
+
+    .bg-plan {
+        background-color: var(--color-success);
+    }
+
+    .bg-done {
+        background-color: #f8fad7 !important;
+        /* color: var(--color-neutral); */
+    }
+
+    .bg-uv{
+        background-color: var(--color-secondary-content);
+    }
 }
 
-.done_data{
-    background-color: #f8fad7 !important;
+[data-theme="dark"] {
+    .bg-list, .bg-node {
+        background-color: var(--color-info-content);
+    }
+
+    .bg-pending {
+        background-color: #4b4376 !important;
+    }
+
+    .bg-target, .bg-secondMeeting {
+        background-color: #161618;
+        /* background-color: var(--color-warning-content); */
+    }
+
+    .bg-plan {
+        background-color: var(--color-success-content);
+    }
+
+    .bg-done {
+        /* background-color: #f8fad7 !important; */
+        /* color: var(--color-neutral); */
+    }
+
+    .bg-uv{
+        background-color: var(--color-error);
+    }
+
+    .container thead tr {
+        background-color: var(--color-accent-content);
+        color: var(--color-accent);
+    }
+
+    .bt {
+        border-top: 1px solid var(--color-accent);
+    }
+
+    .bb {
+        border-bottom: 1px solid var(--color-accent);
+    }
+
+    .bl {
+        border-left: 1px solid var(--color-accent);
+    }
+
+    .br {
+        border-right: 1px solid var(--color-accent);
+    }
 }
-
-
