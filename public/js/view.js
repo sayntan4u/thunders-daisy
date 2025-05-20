@@ -64,14 +64,19 @@ function updateTotalToSapphire(week, year) {
   var data = "{";
   // data += `"nodeCount" : ` + nodeCount + ", ";
   for (let i = 0; i < settingsJson.connections.length; i++) {
-    // console.log(".total" + settingsJson.connections[i].startNode + `_week${week}_${year}_SKB`);
-    data +=
-      `"${settingsJson.connections[i].endNode}" : ` +
-      $(".total" + settingsJson.connections[i].startNode + `_week${week}_${year}_SKB`).html();
+    const val = $(".total" + settingsJson.connections[i].startNode + `_week${week}_${year}_SKB`).html();
+    data += `"${settingsJson.connections[i].endNode}" : ` + val
     if (i != settingsJson.connections.length - 1) {
       data += ", ";
     }
+    $(`.${settingsJson.connections[i].endNode}-Sapphire_week${week}_${year}_Sapphire`).each(function () {
+      if ($(this).hasClass(`Sayantan-${settingsJson.connections[i].endNode}-Sapphire`)) {
+        $(this).val(val);
+      }
+    });
+    updateDataSession(week, year, "Sapphire", "Sayantan", settingsJson.connections[i].endNode, val);
   }
+  sumSapphireData(week, year, "Sapphire");
   data += "}";
   // console.log(data);
 
@@ -386,7 +391,7 @@ function generateTabContent(week, year, group, jsonData) {
             fieldsSapphire[j]
           )} ${fieldsSapphire[j]}-Sapphire ${jsonData[i].name + "-" + fieldsSapphire[j]
             }-Sapphire" value="${jsonData[i][fieldsSapphire[j]]
-            }" onchange="valueChanged('${jsonData[i].name}', '${fieldsSapphire[j]
+            }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fieldsSapphire[j]
             }', 'Sapphire')"></td>`;
         } else {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClassSapphire(
@@ -395,7 +400,7 @@ function generateTabContent(week, year, group, jsonData) {
             }-Sapphire" value="${jsonData[i][fieldsSapphire[j]] > 0
               ? jsonData[i][fieldsSapphire[j]]
               : ""
-            }" onchange="valueChanged('${jsonData[i].name}', '${fieldsSapphire[j]
+            }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fieldsSapphire[j]
             }', 'Sapphire')"></td>`;
         }
       }
@@ -522,15 +527,18 @@ function getAllDataSession() {
 function updateDataSession(week, year, group, name, field, value) {
   const dataID = `data_${week}_${year}_${group}`;
   const data = sessionStorage.getItem(dataID);
-  var jsondata = JSON.parse(data);
+  if (data) {
+    var jsondata = JSON.parse(data);
 
-  for(i=0; i<jsondata.length; i++){
-    if(jsondata[i].name == name){
-      jsondata[i][field]=value;
+    for (i = 0; i < jsondata.length; i++) {
+      if (jsondata[i].name == name) {
+        jsondata[i][field] = value;
+      }
     }
+
+    sessionStorage.setItem(dataID, JSON.stringify(jsondata));
   }
 
-  sessionStorage.setItem(dataID, JSON.stringify(jsondata));
 
 }
 
