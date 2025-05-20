@@ -84,4 +84,12 @@ function getCurrWeek() {
     return weekNumber;
 }
 
+function logout(){
+  if (sessionStorage.getItem(`dataArray`)) {
+    sessionStorage.setItem(`dataArray`, '');
+    console.log("session destroyed");
+  }
+  location.href='/login/logout';
+}
+
 setCurrWeek();
