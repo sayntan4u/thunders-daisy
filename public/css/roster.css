@@ -6,17 +6,15 @@
     width: 100px !important;
 }
 
-.roster .has_data {
-    background-color: #e5e5fa !important;
+.roster .has_data .btn-roster-data {
+    background-color: #e5e5fa;
 }
 
-.roster .has_data:focus {
-    background-color: #d0d0f6 !important;
+.roster .has_data .btn-roster-data:focus,
+.roster .has_data .btn-roster-data:hover {
+    background-color: #d0d0f6;
 }
 
-.roster .has_data:hover {
-    background-color: #d0d0f6 !important;
-}
 
 .btn-roster {
     background: #d4b1f4;
@@ -33,9 +31,9 @@
     font-weight: bold !important;
 }
 
-.skeleton{
+.skeleton {
     min-width: 140px;
-    height:50px;
+    height: 50px;
 }
 
 .btn-roster-data {
@@ -68,5 +66,14 @@
     .roster td {
         padding: 0 !important;
         border: 1px solid var(--color-neutral-content) !important;
+    }
+
+    .roster .has_data .btn-roster-data {
+        background-color: #36297f;
+    }
+
+    .roster .has_data .btn-roster-data:focus,
+    .roster .has_data .btn-roster-data:hover {
+        background-color: #2e236c;
     }
 }
