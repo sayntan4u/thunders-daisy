@@ -514,9 +514,9 @@ function addField(fieldName = "") {
         generateSKBTable(settingsJson.SKB_table);
     }
     $("#table_header").append(`
-        <li draggable="true" id="` + fieldName.replaceAll(/\s/g, '') + `" ondragstart="dragstartHandlerSKB(event)" ondrop="dropHandlerSKB(event)" ondragover="dragoverHandlerSKB(event)" class="th">
+        <li draggable="true" id="` + fieldName.replaceAll(/\s/g, '') + `" ondragstart="dragstartHandlerSKB(event)" ondragover="dragoverHandlerSKB(event)" class="th">
                     <div class="flex items-center">                
-                                <span class="badge badge-sm badge-accent">` + fieldName + `</span>
+                                <span class="badge badge-sm badge-accent" ondrop="dropHandlerSKB(event)" ondragenter="dragenterHandler(event)" ondragleave="dragleaveHandler(event)">` + fieldName + `</span>
                                 <div class="edit_heading flex gap-2 hidden me-3">
                                     <input type="text" class="input input-primary" placeholder="Add Field Name">
                                 
@@ -777,7 +777,7 @@ $("#saveConfigSKB").click(function () {
 
 
 function dragstartHandlerSKB(ev) {
-    ev.dataTransfer.setData("text", $(ev.target).children("span").html());
+    ev.dataTransfer.setData("text", $(ev.target).children("div").children("span").html());
 }
 
 function dropHandlerSKB(ev) {
@@ -794,6 +794,16 @@ function dropHandlerSKB(ev) {
 
 function dragoverHandlerSKB(ev) {
     ev.preventDefault();
+}
+
+function dragenterHandler(ev){
+    $(ev.target).removeClass("badge-accent");
+    $(ev.target).addClass("badge-neutral");
+}
+
+function dragleaveHandler(ev){
+    $(ev.target).removeClass("badge-neutral");
+    $(ev.target).addClass("badge-accent");
 }
 
 //Sapphire Methods
@@ -833,9 +843,9 @@ function addFieldSapphire(fieldName = "") {
         generateSapphireTable(settingsJson.Sapphire_table);
     }
     $("#table_header_sapphire").append(`
-        <li draggable="true" id="` + fieldName.replaceAll(/\s/g, '') + `_Sapphire" ondragstart="dragstartHandlerSapphire(event)" ondrop="dropHandlerSapphire(event)" ondragover="dragoverHandlerSapphire(event)" class="th">
+        <li draggable="true" id="` + fieldName.replaceAll(/\s/g, '') + `_Sapphire" ondragstart="dragstartHandlerSapphire(event)" ondragover="dragoverHandlerSapphire(event)" class="th">
                     <div class="flex items-center">                
-                                <span class="badge badge-sm badge-accent">` + fieldName + `</span>
+                                <span class="badge badge-sm badge-accent" ondrop="dropHandlerSapphire(event)" ondragenter="dragenterHandler(event)" ondragleave="dragleaveHandler(event)">` + fieldName + `</span>
                                 <div class="edit_heading flex gap-2 hidden me-3">
                                     <input type="text" class="input input-primary" placeholder="Add Field Name">
                                 
@@ -1097,7 +1107,7 @@ $("#saveConfigSapphire").click(function () {
 });
 
 function dragstartHandlerSapphire(ev) {
-    ev.dataTransfer.setData("textSapphire", $(ev.target).children("span").html());
+    ev.dataTransfer.setData("textSapphire", $(ev.target).children("div").children("span").html());
 }
 
 function dropHandlerSapphire(ev) {
