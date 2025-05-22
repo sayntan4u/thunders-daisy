@@ -193,6 +193,7 @@ function loadData(wk, yr, groupSearch) {
     //set data to session storage
     setLoadedDataSession(wk, yr, groupSearch, response);
 
+    showAlert();
 
     $("#searchActivity").html('<i class="h-5 w-5" data-lucide="search"></i>');
     loadIcons();
@@ -247,6 +248,14 @@ function valueChanged(wk, yr, docName, triggeredFrom, group = "SKB") {
 
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/view/updateUser");
+    xhttp.onload = function () {
+      if (this.responseText == "success") {
+        showAlert("SKB updated :  <strong>" + docName + "</strong> - " + triggeredFrom);
+      } else {
+        showAlert(this.responseText);
+      }
+
+    };
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.send(JSON.stringify(data));
     sumData(wk, yr, group);
@@ -271,11 +280,30 @@ function valueChanged(wk, yr, docName, triggeredFrom, group = "SKB") {
 
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/view/updateUser");
+    xhttp.onload = function () {
+      if (this.responseText == "success") {
+        showAlert("Sapphire updated :  <strong>" + docName + "</strong> - " + triggeredFrom);
+      } else {
+        showAlert(this.responseText);
+      }
+
+    };
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.send(JSON.stringify(data));
     sumSapphireData(wk, yr, group);
   }
   updateDataSession(wk, yr, group, docName, triggeredFrom, value_input);
+}
+
+//=========================================
+
+function showAlert(content = "") {
+  if (content == "") {
+    content = "Data loaded!";
+  }
+  alert_content.innerHTML = content;
+  $(".alert").removeClass("hidden");
+  setTimeout(function () { $(".alert").addClass("hidden"); }, 3000);
 }
 
 //====Method for Generating Table Headers & Table Content===
@@ -554,6 +582,8 @@ function getAllDataSession() {
 
       if (data) {
         generateTabContent(week, year, group, JSON.parse(data));
+
+        showAlert();
 
         $("#searchActivity").html('<i class="h-5 w-5" data-lucide="search"></i>');
         loadIcons();
