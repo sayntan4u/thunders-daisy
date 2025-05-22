@@ -93,6 +93,9 @@ function logout() {
       sessionStorage.setItem(dataArr[i], '');
     }
   }
+  if(sessionStorage.getItem('teamData')){
+    sessionStorage.setItem('teamData', '');
+  }
 
   location.href = '/login/logout';
 }
