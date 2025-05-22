@@ -1,6 +1,6 @@
 // var selectedAvatarId = 17;
 
-if(localStorage.getItem("darkMode") == null){
+if (localStorage.getItem("darkMode") == null) {
   localStorage.setItem("darkMode", "false");
 }
 
@@ -48,48 +48,53 @@ function changeTheme() {
 }
 
 function getDateWeek(date) {
-    const currentDate = 
-        (typeof date === 'object') ? date : new Date();
-    const januaryFirst = 
-        new Date(currentDate.getFullYear(), 0, 1);
+  const currentDate =
+    (typeof date === 'object') ? date : new Date();
+  const januaryFirst =
+    new Date(currentDate.getFullYear(), 0, 1);
 
-    // const daysToNextMonday = 
-    //     (januaryFirst.getDay() === 1) ? 0 : 
-    //     (7 - januaryFirst.getDay()) % 7;
-    // const nextMonday = 
-    //     new Date(currentDate.getFullYear(), 0, 
-    //     januaryFirst.getDate() + daysToNextMonday);
+  // const daysToNextMonday = 
+  //     (januaryFirst.getDay() === 1) ? 0 : 
+  //     (7 - januaryFirst.getDay()) % 7;
+  // const nextMonday = 
+  //     new Date(currentDate.getFullYear(), 0, 
+  //     januaryFirst.getDate() + daysToNextMonday);
 
-    const daysToNextFriday = 
-        (januaryFirst.getDay() === 5) ? 0 : 
-        (7 - januaryFirst.getDay()) % 7;
-    const nextFriday =
-        new Date(currentDate.getFullYear(), 0, 
-        januaryFirst.getDate() + daysToNextFriday);
+  const daysToNextFriday =
+    (januaryFirst.getDay() === 5) ? 0 :
+      (7 - januaryFirst.getDay()) % 7;
+  const nextFriday =
+    new Date(currentDate.getFullYear(), 0,
+      januaryFirst.getDate() + daysToNextFriday);
 
-    return (currentDate < nextFriday) ? 52 : 
+  return (currentDate < nextFriday) ? 52 :
     (currentDate > nextFriday ? Math.ceil(
-    (currentDate - nextFriday) / (24 * 3600 * 1000) / 7) : 1);
+      (currentDate - nextFriday) / (24 * 3600 * 1000) / 7) : 1);
 }
 
 function setCurrWeek() {
-    const currentDate = new Date();
-    const weekNumber = getDateWeek(currentDate);
-    headerWeekNumber.innerHTML = "Week " + weekNumber;
+  const currentDate = new Date();
+  const weekNumber = getDateWeek(currentDate);
+  headerWeekNumber.innerHTML = "Week " + weekNumber;
 }
 
 function getCurrWeek() {
-    const currentDate = new Date();
-    const weekNumber = getDateWeek(currentDate);
-    return weekNumber;
+  const currentDate = new Date();
+  const weekNumber = getDateWeek(currentDate);
+  return weekNumber;
 }
 
-function logout(){
-  if (sessionStorage.getItem(`dataArray`)) {
-    sessionStorage.setItem(`dataArray`, '');
-    console.log("session destroyed");
+function logout() {
+  if (localStorage.getItem(`dataArray`)) {
+    const dataArrStr = localStorage.getItem('dataArray');
+    var dataArr = dataArrStr.split(",");
+    // console.log("data count :" + (dataArr.length - 1).toString());
+    for (i = 0; i < dataArr.length - 1; i++) {
+      sessionStorage.setItem(dataArr[i], '');
+    }
   }
-  location.href='/login/logout';
+
+  location.href = '/login/logout';
 }
 
 setCurrWeek();

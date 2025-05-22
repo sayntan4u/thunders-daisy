@@ -44,7 +44,6 @@ function getFields(table) {
 var settingsJson = {};
 var fields = [];
 var fieldsSapphire = [];
-var nodeCount = 0;
 
 function sumData(week, year, group) {
   for (let i = settingsJson.totalViewSKBColSpan; i < fields.length - 1; i++) {
@@ -145,8 +144,6 @@ function getTDClassSapphire(field) {
 }
 
 function getData() {
-  $("#tabs_skb").addClass("hidden");
-  $("#tabs_sapphire").addClass("hidden");
 
   var wk = document.getElementById("inputWeek").value;
   var yr = document.getElementById("inputYear").value;
@@ -162,12 +159,40 @@ function getData() {
     // alert(JSON.parse(this.responseText).length);
 
     const response = JSON.parse(this.responseText);
-    nodeCount = response.length;
 
     //genereate tab content
     generateTabContent(wk, yr, groupSearch, response);
     //set data to session storage
     setDataSession(wk, yr, groupSearch, response);
+
+    $("#searchActivity").html('<i class="h-5 w-5" data-lucide="search"></i>');
+    loadIcons();
+    $("#searchActivity").attr("disabled", false);
+  };
+  xhttp.open("POST", "/view/getData");
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+  // $('.alert').addClass("show");
+}
+
+function loadData(wk, yr, groupSearch) {
+
+  // console.log(groupSearch);
+
+  const data = { week: wk, year: yr, group: groupSearch };
+
+  // console.log(data);
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function () {
+    // alert(JSON.parse(this.responseText).length);
+
+    const response = JSON.parse(this.responseText);
+
+    //genereate tab content
+    generateTabContent(wk, yr, groupSearch, response);
+    //set data to session storage
+    setLoadedDataSession(wk, yr, groupSearch, response);
+
 
     $("#searchActivity").html('<i class="h-5 w-5" data-lucide="search"></i>');
     loadIcons();
@@ -486,8 +511,8 @@ function generateTabContent(week, year, group, jsonData) {
 //====================================
 
 function initDataSession() {
-  if (!sessionStorage.getItem(`dataArray`)) {
-    sessionStorage.setItem(`dataArray`, '');
+  if (!localStorage.getItem(`dataArray`)) {
+    localStorage.setItem(`dataArray`, '');
     console.log("session created");
   }
 }
@@ -497,10 +522,17 @@ function setDataSession(week, year, group, data) {
   const dataID = `data_${week}_${year}_${group}`;
   //store data
   sessionStorage.setItem(dataID, JSON.stringify(data));
-  var dataArr = sessionStorage.getItem('dataArray');
+  var dataArr = localStorage.getItem('dataArray');
   dataArr += dataID + ",";
   //store data Array
-  sessionStorage.setItem('dataArray', dataArr);
+  localStorage.setItem('dataArray', dataArr);
+}
+
+function setLoadedDataSession(week, year, group, data) {
+  // Put the object into storage
+  const dataID = `data_${week}_${year}_${group}`;
+  //store data
+  sessionStorage.setItem(dataID, JSON.stringify(data));
 }
 
 // function getSingleDataSession(week, year, group) {
@@ -508,18 +540,29 @@ function setDataSession(week, year, group, data) {
 // }
 
 function getAllDataSession() {
-  const dataArrStr = sessionStorage.getItem('dataArray');
+  const dataArrStr = localStorage.getItem('dataArray');
 
   if (dataArrStr.length > 0) {
     var dataArr = dataArrStr.split(",");
     console.log("data count :" + (dataArr.length - 1).toString());
+
     for (i = 0; i < dataArr.length - 1; i++) {
       const data = sessionStorage.getItem(dataArr[i]);
       const week = dataArr[i].split("_")[1];
       const year = dataArr[i].split("_")[2];
       const group = dataArr[i].split("_")[3];
-      generateTabContent(week, year, group, JSON.parse(data));
-      console.log(JSON.parse(data));
+
+      if (data) {
+        generateTabContent(week, year, group, JSON.parse(data));
+
+        $("#searchActivity").html('<i class="h-5 w-5" data-lucide="search"></i>');
+        loadIcons();
+        $("#searchActivity").attr("disabled", false);
+        // console.log(JSON.parse(data));
+      } else {
+        loadData(week, year, group);
+      }
+
     }
   }
 }
@@ -544,7 +587,7 @@ function updateDataSession(week, year, group, name, field, value) {
 
 function deleteDataSession(week, year, group) {
   const dataID = `data_${week}_${year}_${group}`;
-  const dataArrStr = sessionStorage.getItem('dataArray');
+  const dataArrStr = localStorage.getItem('dataArray');
 
   var dataArr = dataArrStr.split(",");
 
@@ -556,7 +599,7 @@ function deleteDataSession(week, year, group) {
       newStr += dataArr[i] + ","
     }
   }
-  sessionStorage.setItem(`dataArray`, newStr);
+  localStorage.setItem(`dataArray`, newStr);
 }
 
 
@@ -583,10 +626,6 @@ function loadSettings() {
 
     getAllDataSession();
 
-    $("#searchActivity").html('<i class="h-5 w-5" data-lucide="search"></i>');
-    loadIcons();
-    $("#searchActivity").attr("disabled", false);
-
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send();
@@ -596,6 +635,6 @@ initDataSession();
 loadSettings();
 loadWeekDropdown();
 
-// var retrievedObject = sessionStorage.getItem(`table_week20_SKB`);
+var retrievedObject = localStorage.getItem(`dataArray`);
 
-// console.log('retrievedObject: ', JSON.parse(retrievedObject));
+console.log('dataArray: ', retrievedObject);
