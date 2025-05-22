@@ -83,7 +83,7 @@
     }
 
     .bg-target, .bg-secondMeeting {
-        background-color: #161618;
+        background-color: #7b7d17;
         /* background-color: var(--color-warning-content); */
     }
 
@@ -92,7 +92,7 @@
     }
 
     .bg-done {
-        /* background-color: #f8fad7 !important; */
+        background-color: #3a3a2d !important;
         /* color: var(--color-neutral); */
     }
 
