@@ -74,36 +74,33 @@ function generateNamesTable(response, group = "SKB") {
 												<div class="flex items-center gap-3">
 													<div class="avatar">
 														<div class="mask mask-squircle h-12 w-12">
-															<img src="images/avatars/${
-                                response[i].avatarId == 0
-                                  ? "default.png"
-                                  : response[i].avatarId + ".avif"
-                              }" />
+															<img src="images/avatars/${response[i].avatarId == 0
+          ? "default.png"
+          : response[i].avatarId + ".avif"
+        }" />
 														</div>
 													</div>
 													<div>
 														<div class="font-bold">${response[i].name}</div>
 														<div class="text-xs opacity-50 items-center">
                                                             ${response[i].email}
-                                                           ${
-                                                             response[i]
-                                                               .email == ""
-                                                               ? ""
-                                                               : `<button class="btn btn-ghost btn-xs btn-square" onclick="copyToClipboard(this,'${response[i].email}')">
+                                                           ${response[i]
+          .email == ""
+          ? ""
+          : `<button class="btn btn-ghost btn-xs btn-square" onclick="copyToClipboard(this,'${response[i].email}')">
                                                                 <i class="size-4" data-lucide="copy"></i> 
                                                             </button>
                                                             <span class="badge badge-neutral badge-xs badge-primary hidden">copied</span>`
-                                                           } 
+        } 
                                                         </div>
 													</div>
 												</div>
 											</td>
 											<td>
-												${
-                          response[i].namelist == ""
-                            ? '<span class="badge badge-soft badge-error"><i data-lucide="link-2-off" class="size-4 me-1"></i> Not Connected</span>'
-                            : '<span class="badge badge-soft badge-success"><i data-lucide="link-2" class="size-4 me-1"></i>Connected</span>'
-                        }
+												${response[i].namelist == ""
+          ? '<span class="badge badge-soft badge-error"><i data-lucide="link-2-off" class="size-4 me-1"></i> Not Connected</span>'
+          : '<span class="badge badge-soft badge-success"><i data-lucide="link-2" class="size-4 me-1"></i>Connected</span>'
+        }
 											</td>
                                             <td class="text-center">
                                                 ${response[i].nlCount}
@@ -112,23 +109,18 @@ function generateNamesTable(response, group = "SKB") {
 												<span class="badge badge-soft badge-primary">${group}</span>
 											</td>
 											<th class="text-center">
-												<button class="btn btn-ghost btn-sm btn-square" onclick="thunderboltModal('${
-                          response[i].namelist
-                        }', '${response[i].name}')" ${
-        response[i].namelist == "" ? "disabled" : ""
-      }>
-													<i class="size-5 ${
-                            response[i].namelist == "" ? "" : "bolt"
-                          }" data-lucide="zap"></i>
+												<button class="btn btn-ghost btn-sm btn-square" onclick="thunderboltModal('${response[i].namelist
+        }', '${response[i].name}')" ${response[i].namelist == "" ? "disabled" : ""
+        }>
+													<i class="size-5 ${response[i].namelist == "" ? "" : "bolt"
+        }" data-lucide="zap"></i>
 												</button>
-												<button class="btn btn-ghost btn-sm btn-square" onclick="editUserModal('${
-                          response[i].name
-                        }','${response[i].namelist}')">
+												<button class="btn btn-ghost btn-sm btn-square" onclick="editUserModal('${response[i].name
+        }','${response[i].namelist}')">
 													<i class="size-5" data-lucide="square-pen"></i>
 												</button>
-												<button class="btn btn-ghost btn-sm btn-square" onclick="deleteUserModal('${
-                          response[i].name
-                        }', '${group}')">
+												<button class="btn btn-ghost btn-sm btn-square" onclick="deleteUserModal('${response[i].name
+        }', '${group}')">
 													<i class="size-5 text-error" data-lucide="trash"></i>
 												</button>
 											</th>
@@ -160,9 +152,8 @@ function generateNamesTable(response, group = "SKB") {
 												<span class="badge badge-soft badge-primary">${group}</span>
 											</td>
 											<th >
-												<button class="btn btn-ghost btn-sm btn-square" onclick="deleteUserModal('${
-                          response[i].name
-                        }', '${group}')">
+												<button class="btn btn-ghost btn-sm btn-square" onclick="deleteUserModal('${response[i].name
+        }', '${group}')">
 													<i class="size-5 text-error" data-lucide="trash"></i>
 												</button>
 											</th>
@@ -360,6 +351,7 @@ function loadNames() {
   xhttp.onload = function () {
     const response = JSON.parse(this.responseText);
     userJson = response;
+    setTeamDataSession(userJson);
     if (userJson.length > 0) {
       generateNamesTable(response);
     }
@@ -411,10 +403,10 @@ function addPerson() {
 
   showLoader(
     "Adding new member - <strong>" +
-      nm +
-      "</strong> to <strong>" +
-      grp +
-      "</strong>.. please wait !"
+    nm +
+    "</strong> to <strong>" +
+    grp +
+    "</strong>.. please wait !"
   );
 }
 
@@ -472,4 +464,39 @@ function deleteUser() {
   }, 6000);
 }
 
-loadNames();
+//Session data load
+
+function isTeamDataSession() {
+  if (sessionStorage.getItem(`teamData`)) {
+    // sessionStorage.setItem(`teamData`, '');
+    // console.log(sessionStorage.getItem('teamData'));
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function setTeamDataSession(jsonData) {
+  sessionStorage.setItem(`teamData`, JSON.stringify(jsonData));
+}
+
+function getTeamDataSession() {
+  const teamDataSession = sessionStorage.getItem('teamData');
+  return JSON.parse(teamDataSession);
+}
+
+function loadNamesSession() {
+  userJson = getTeamDataSession();
+  // setTeamDataSession(userJson);
+  if (userJson.length > 0) {
+    generateNamesTable(userJson);
+  }
+  hideLoader();
+}
+
+if (isTeamDataSession()) {
+  loadNamesSession();
+} else {
+  loadNames();
+}
+
