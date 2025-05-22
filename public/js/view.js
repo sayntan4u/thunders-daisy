@@ -656,6 +656,10 @@ function loadSettings() {
 
     getAllDataSession();
 
+    $("#searchActivity").html('<i class="h-5 w-5" data-lucide="search"></i>');
+    loadIcons();
+    $("#searchActivity").attr("disabled", false);
+
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send();
