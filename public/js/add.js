@@ -7,6 +7,16 @@ $("#saveMember").on("click", function () {
   addPerson();
 });
 
+function reloadData(){
+  $("#pagination").addClass("hidden");
+  $(".names").html("");
+  if($("#groupSelect").val()=="SKB"){
+    loadNames();
+  }else{
+    loadSapphire();
+  }
+}
+
 //==========================================
 // LOADER
 //==========================================
@@ -53,7 +63,7 @@ function changeGroup() {
 
 function parseLastLogin(lastLoginStr) {
   var parsedStr = "";
-  
+
   if (lastLoginStr != "") {
     const arr = lastLoginStr.split(" ");
     for (let i = 0; i < 4; i++) {
@@ -229,6 +239,7 @@ function addMemberModal() {
 function thunderboltModal(thunderbolID, name) {
   namelistTable.innerHTML = "";
   namelistModalTitle.innerHTML = name;
+  $("#paginationNL").addClass("hidden");
   resetFilter();
   getNLData(thunderbolID);
   thunderboltNLModal.showModal();
@@ -367,6 +378,7 @@ function checkValidNameFB(name, group) {
 }
 
 function loadNames() {
+  $("#reloadBtn").addClass("hidden");
   showLoader();
   currPage = 1;
   const xhttp = new XMLHttpRequest();
@@ -379,12 +391,14 @@ function loadNames() {
       generateNamesTable(response);
     }
     hideLoader();
+    $("#reloadBtn").removeClass("hidden");
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send();
 }
 
 function loadSapphire() {
+  $("#reloadBtn").addClass("hidden");
   showLoader();
   currPage = 1;
   const xhttp = new XMLHttpRequest();
@@ -396,6 +410,7 @@ function loadSapphire() {
       generateNamesTable(response, "Sapphire");
     }
     hideLoader();
+    $("#reloadBtn").removeClass("hidden");
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send();

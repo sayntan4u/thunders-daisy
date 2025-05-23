@@ -287,8 +287,13 @@ function filterValueChanged2(elem) {
 
 function resetFilter() {
   isFilter = false;
+  isFilter2 = false;
   clearSelectionUI();
+  clearSelectionUI2();
   $(".option").each(function () {
+    $(this).addClass("hidden");
+  });
+  $(".option2").each(function () {
     $(this).addClass("hidden");
   });
   $("#fliterDropDown").val("");
@@ -296,7 +301,6 @@ function resetFilter() {
   $("#addFilterBtn").addClass("hidden");
 
   $("#fliterDropDown2").val("");
-
   $("#addFilterBtn").html("<i class='size-4' data-lucide='list-filter-plus'></i>");
   $("#addFilterBtn").attr("disabled", false);
   loadIcons();

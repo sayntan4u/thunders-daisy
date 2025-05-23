@@ -45,7 +45,7 @@ router.post("/updateUser", requireAuth, async (req, res) => {
 
 
         // 
-        dbm.updateUser(name, week, year, fieldName, value, group);
+        await dbm.updateUser(name, week, year, fieldName, value, group);
 
         // const response = db.collection("users").doc(name).collection("2025").doc(week).set(userJson);
         res.send("success");

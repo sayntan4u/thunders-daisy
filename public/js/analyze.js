@@ -23,42 +23,42 @@ function getFields(table) {
 }
 
 function getTDClass(field) {
-    var ret = "done-data";
-    if (field.toLowerCase().includes("target")) {
-        ret = "bg-warning";
-    } else if (field.toLowerCase().includes("list")) {
-        ret = "bg-info";
-    } else if (field == "plans") {
-        ret = "bg-success";
-    } else if (field == "remarks") {
-        ret = "";
-    } else if (field.toLowerCase().includes("done")) {
-        ret = "done_data";
-    } else if (field.toLowerCase().includes("pending")) {
-        ret = "bg-plan";
-    }
+  var ret = "bg-done";
+  if (field.toLowerCase().includes("target")) {
+    ret = "bg-target";
+  } else if (field.toLowerCase().includes("list")) {
+    ret = "bg-list";
+  } else if (field == "plans") {
+    ret = "bg-plan";
+  } else if (field == "remarks") {
+    ret = "";
+  } else if (field.toLowerCase().includes("done")) {
+    ret = "bg-done";
+  } else if (field.toLowerCase().includes("pending")) {
+    ret = "bg-pending";
+  }
 
-    return ret
+  return ret;
 }
 
 function getTDClassSapphire(field) {
-    var ret = "done_data";
+  var ret = "bg-done";
 
-    if (field.toLowerCase().includes("meeting")) {
-        ret = "bg-warning";
-    } else if (field.toLowerCase().includes("uv")) {
-        ret = "bg-secondary-content";
-    } else if (field.toLowerCase().includes("node")) {
-        ret = "bg-info";
-    } else if (field == "plans") {
-        ret = "bg-success";
-    } else if (field == "remarks") {
-        ret = "";
-    } else if (field.toLowerCase().includes("pending")) {
-        ret = "bg-plan";
-    }
+  if (field.toLowerCase().includes("meeting")) {
+    ret = "bg-secondMeeting";
+  } else if (field.toLowerCase().includes("uv")) {
+    ret = "bg-uv";
+  } else if (field.toLowerCase().includes("node")) {
+    ret = "bg-node";
+  } else if (field == "plans") {
+    ret = "bg-plan";
+  } else if (field == "remarks") {
+    ret = "";
+  } else if (field.toLowerCase().includes("pending")) {
+    ret = "bg-pending";
+  }
 
-    return ret
+  return ret;
 }
 
 var settingsJson = {};

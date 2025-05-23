@@ -26,12 +26,22 @@
 					<div class="card card-border w-full bg-base-100 shadow-xl">
 						<div class="card-body">
 							<div class="flex w-full justify-between mb-2 items-center">
-								<div class="flex-none w-30">
-									<select id="groupSelect" class="select select-primary" onchange="changeGroup()">
-										<option>SKB</option>
-										<option>Sapphire</option>
-									</select>
+								<div class="flex">
+									<div class="flex-none">
+										<select id="groupSelect" class="select select-primary w-30"
+											onchange="changeGroup()">
+											<option>SKB</option>
+											<option>Sapphire</option>
+										</select>
+									</div>
+									<div class="flex-none">
+										<button id="reloadBtn" class="btn btn-square btn-soft btn-primary ml-3"
+											onclick="reloadData()">
+											<i class="size-5" data-lucide="rotate-cw"></i>
+										</button>
+									</div>
 								</div>
+
 								<div id="loader_main" class="flex-1 mx-5 hidden">
 									<div role="alert" class="alert alert-info alert-soft">
 										<span class="loading loading-spinner loading-md"></span>
@@ -188,14 +198,15 @@
 			</dialog>
 			<dialog id="thunderboltNLModal" class="modal">
 				<div class="modal-box w-11/12 max-w-7xl">
-					<h3 class="text-lg font-bold">Thunderbolt Namelist : <span id="namelistModalTitle" class="text-primary opacity-90"></span></h3>
+					<h3 class="text-lg font-bold">Thunderbolt Namelist : <span id="namelistModalTitle"
+							class="text-primary opacity-90"></span></h3>
 					<div class="container mx-auto mt-3">
 						<!-- Content goes here-->
 
 						<div class="control_card card card-border w-full bg-base-100 shadow-xl">
 							<div class="card-body relative flex flex-wrap overflow-x-hidden">
 								<div class="flex w-full justify-between">
-									<div class="flex items-center">
+									<div class="flex flex-1 items-center">
 										<div class="flex-none">
 											<label class="select select-sm w-44">
 												<span class="label"><i class="h-5 w-5"
@@ -263,24 +274,22 @@
 
 										<!--Close button goes here-->
 										<div class="flex-none ml-1">
-											
+
 											<button id="cancelFilterBtn"
 												class="btn btn-sm btn-error p-0 w-8 h-8 hidden">
 												<i class="h-5 w-5 " data-lucide="x"></i>
 											</button>
-											<button id="addFilterBtn"
-												class="btn btn-sm btn-info p-0 w-8 h-8 hidden">
+											<button id="addFilterBtn" class="btn btn-sm btn-info p-0 w-8 h-8 hidden">
 												<i class="h-5 w-5 " data-lucide="list-filter-plus"></i>
 											</button>
-											
+
 										</div>
 										<div class="option2 flex-none ml-1 hidden">
 											<label class="select select-sm w-44">
-											
+
 												<span class="label"><i class="h-5 w-5"
 														data-lucide="list-filter"></i></span>
-												<select id="fliterDropDown2" onchange="filterValueChanged2(this)"
-													>
+												<select id="fliterDropDown2" onchange="filterValueChanged2(this)">
 													<option></option>
 													<option>Social Media</option>
 													<option>Stage 1</option>
@@ -303,23 +312,23 @@
 											</label>
 										</div>
 										<div class="option2 flex-none ml-1 hidden">
-											<button id="cancelFilterBtn2"
-												class="btn btn-sm btn-error p-0 w-8 h-8">
+											<button id="cancelFilterBtn2" class="btn btn-sm btn-error p-0 w-8 h-8">
 												<i class="h-5 w-5 " data-lucide="x"></i>
 											</button>
 										</div>
 										<div class="flex-none ml-3">
-											<span id="loadingNL" class="loading loading-bars loading-md text-accent"></span>
+											<span id="loadingNL"
+												class="loading loading-bars loading-md text-accent"></span>
 
 										</div>
 
-									</div>
-									<div class="flex justify-self-end">
-										<!-- <button id="addProspectModalBtn" class="btn btn-sm btn-primary p-0 h-8 w-8"
-											onclick="addPersonModal.showModal()" disabled><i class="h-5 w-5"
-												data-lucide="plus"></i></button> -->
 
 									</div>
+									<!-- <div class="flex-none justify-self-end">
+										<button class="btn btn-sm btn-square btn-soft btn-primary">
+											<i class="size-5" data-lucide="rotate-cw"></i>
+										</button>
+									</div> -->
 								</div>
 
 
@@ -403,8 +412,8 @@
 										<div class="join">
 											<button class="join-item btn btn-sm btn-accent p-0 w-8 h-8"
 												onclick="goBackNL()"><i data-lucide="chevron-left"></i></button>
-											<button id="pageNumberNL" class="join-item btn btn-sm text-base-content px-5"
-												disabled>1</button>
+											<button id="pageNumberNL"
+												class="join-item btn btn-sm text-base-content px-5" disabled>1</button>
 											<button class="join-item btn btn-sm btn-accent p-0 w-8 h-8"
 												onclick="goForwardNL()"><i data-lucide="chevron-right"></i></button>
 										</div>
