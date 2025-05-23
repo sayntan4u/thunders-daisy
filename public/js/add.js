@@ -51,6 +51,22 @@ function changeGroup() {
   }
 }
 
+function parseLastLogin(lastLoginStr) {
+  var parsedStr = "";
+  
+  if (lastLoginStr != "") {
+    const arr = lastLoginStr.split(" ");
+    for (let i = 0; i < 4; i++) {
+      parsedStr += arr[i];
+      if (i != 3) {
+        parsedStr += " ";
+      }
+    }
+  }
+
+  return parsedStr;
+}
+
 function generateNamesTable(response, group = "SKB") {
   $(".names").html("");
   $("#pageNumber").html(currPage);
@@ -102,8 +118,12 @@ function generateNamesTable(response, group = "SKB") {
           : '<span class="badge badge-soft badge-success"><i data-lucide="link-2" class="size-4 me-1"></i>Connected</span>'
         }
 											</td>
+                      
                                             <td class="text-center">
                                                 ${response[i].nlCount}
+                                            </td>
+                                            <td class="text-center text-sm opacity-50">
+                                                ${parseLastLogin(response[i].lastLogin)}
                                             </td>
 											<td class="text-center">
 												<span class="badge badge-soft badge-primary">${group}</span>
@@ -143,7 +163,10 @@ function generateNamesTable(response, group = "SKB") {
 													</div>
 												</div>
 											</td>
-											<td class="opacity-60">
+                      <td class="">
+												
+											</td>
+											<td class="">
 												
 											</td>
                                             <td>

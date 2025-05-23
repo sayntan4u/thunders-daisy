@@ -189,7 +189,7 @@ function loadData(wk, yr, groupSearch) {
     const response = JSON.parse(this.responseText);
 
     //genereate tab content
-    generateTabContent(wk, yr, groupSearch, response);
+    loadTabContent(wk, yr, groupSearch, response);
     //set data to session storage
     setLoadedDataSession(wk, yr, groupSearch, response);
 
@@ -528,6 +528,197 @@ function generateTabContent(week, year, group, jsonData) {
   loadIcons();
 }
 
+function loadTabContent(week, year, group, jsonData) {
+
+  var tab_content = "";
+
+  if (group == "SKB") {
+    for (let i = 0; i < jsonData.length; i++) {
+      var rowTable = "<tr>";
+      for (let j = 0; j < fields.length; j++) {
+        if (j == 0) {
+          rowTable += `<th class="bb bl">${jsonData[i].sl}</th>`;
+        } else if (j == 1) {
+          rowTable +=
+            '<td class="bl br bb text-sm font-semibold">' + jsonData[i][fields[j]] + "</td>";
+        } else if (j == fields.length - 1) {
+          rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClass(
+            fields[j]
+          )} ${fields[j]} ${jsonData[i].name + "-" + fields[j]}" value="${jsonData[i][fields[j]]
+            }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fields[j]
+            }')"></td>`;
+        } else {
+          rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClass(
+            fields[j]
+          )} ${fields[j]}_week${week}_${year}_${group} ${jsonData[i].name + "-" + fields[j]
+            }" value="${jsonData[i][fields[j]] > 0 ? jsonData[i][fields[j]] : ""
+            }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fields[j]
+            }')"></td>`;
+        }
+      }
+      rowTable += "</tr>";
+      tab_content += rowTable;
+    }
+
+    var rowTable = `<tr><th colspan="${settingsJson.totalViewSKBColSpan}" class="bb bl text-center bg-neutral text-neutral-content py-2">Total</th>`;
+    for (let i = settingsJson.totalViewSKBColSpan; i < fields.length; i++) {
+      if (i == fields.length - 1) {
+        rowTable += `<th class="bl br bb text-center"></th>`;
+      } else {
+        rowTable += `<th class="bl br bb text-center ${getTDClass(
+          fields[i]
+        )} total${fields[i]}_week${week}_${year}_${group}"></th>`;
+      }
+    }
+    rowTable += "</tr>";
+    tab_content += rowTable;
+  } else {
+    for (let i = 0; i < jsonData.length; i++) {
+      var rowTable = "<tr>";
+      for (let j = 0; j < fieldsSapphire.length; j++) {
+        if (j == 0) {
+          rowTable += '<th class="bb bl">' + jsonData[i].sl + "</th>";
+        } else if (j == 1) {
+          rowTable +=
+            '<td class="bl br bb text-sm font-semibold">' +
+            jsonData[i][fieldsSapphire[j]] +
+            "</td>";
+        } else if (j == fieldsSapphire.length - 1) {
+          rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClassSapphire(
+            fieldsSapphire[j]
+          )} ${fieldsSapphire[j]}-Sapphire ${jsonData[i].name + "-" + fieldsSapphire[j]
+            }-Sapphire" value="${jsonData[i][fieldsSapphire[j]]
+            }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fieldsSapphire[j]
+            }', 'Sapphire')"></td>`;
+        } else {
+          rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClassSapphire(
+            fieldsSapphire[j]
+          )} ${fieldsSapphire[j]}-Sapphire_week${week}_${year}_${group} ${jsonData[i].name + "-" + fieldsSapphire[j]
+            }-Sapphire" value="${jsonData[i][fieldsSapphire[j]] > 0
+              ? jsonData[i][fieldsSapphire[j]]
+              : ""
+            }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fieldsSapphire[j]
+            }', 'Sapphire')"></td>`;
+        }
+      }
+      rowTable += "</tr>";
+      tab_content += rowTable;
+    }
+
+    var rowTable = `<tr><th colspan="${settingsJson.totalViewSapphireColSpan}" class="bb bl text-center bg-neutral text-neutral-content py-2">Total</th>`;
+    for (
+      let i = settingsJson.totalViewSapphireColSpan;
+      i < fieldsSapphire.length;
+      i++
+    ) {
+      if (i == fieldsSapphire.length - 1) {
+        rowTable += `<th class="bl br bb text-center"></th>`;
+      } else {
+        rowTable += `<th class="bl br bb text-center ${getTDClassSapphire(
+          fieldsSapphire[i]
+        )} total${fieldsSapphire[i]
+          }-Sapphire_week${week}_${year}_${group}"></th>`;
+      }
+    }
+    rowTable += "</tr>";
+    tab_content += rowTable;
+
+  }
+
+  // const tab = `
+  //                       <label class="tab text-start items-center">
+  //                           <input type="radio" name="my_tabs_4" checked />
+  //                           <i class="size-4 me-2" data-lucide="calendar" class="mr-2"></i>
+  //                           <span class="flex mr-7 items-center">
+  //                               Week 
+  //                               <span class="week ml-1">${week}</span>, 
+  //                               <span class="year">${year}</span> 
+  //                               <span class="badge badge-sm badge-primary ml-2">${group}</span>
+  //                           </span>
+  //                           <button class="btn btn-sm btn-square btn-ghost absolute right-1 top-1" onclick="removeTab(this)"><i class="size-5" data-lucide="x"></i></button>
+  //                       </label>
+  //                       <div class="tab-content bg-base-100 border-base-300 p-6">
+  // 						<div class="overflow-x-auto">
+  // 							<table id="table_week${week}_${group}" class="table table-xs table-zebra">
+  // 								<thead>
+  // 									${group == "SKB"
+  //     ? generateSKBTable(
+  //       settingsJson.initTableView.concat(
+  //         settingsJson.SKB_table,
+  //         settingsJson.endTable
+  //       )
+  //     )
+  //     : generateSapphireTable(
+  //       settingsJson.initTableView.concat(
+  //         settingsJson.Sapphire_table,
+  //         settingsJson.endTable
+  //       )
+  //     )
+  //   }
+  // 								</thead>
+  // 								<tbody>
+  //                                       ${tab_content}
+  // 								</tbody>
+  // 							</table>
+  // 						</div>
+  // 					</div>
+  //            `;
+  // $("#tabs").append(tab);
+
+  $(`#table_week${week}_${group}`).children("tbody").append(tab_content);
+  $(`#loader_week${week}_${group}`).addClass("hidden");
+  $(`#loader_week${week}_${group}`).siblings(".tab_icon").removeClass("hidden");
+
+  if (group == "SKB") {
+    sumData(week, year, group);
+  } else {
+    sumSapphireData(week, year, group);
+  }
+  loadIcons();
+}
+
+function loadHeader(week, year, group) {
+  const tab = `
+            <label class="tab text-start items-center">
+              <input type="radio" name="my_tabs_4" checked />
+              <i class="tab_icon size-4 me-2 hidden" data-lucide="calendar" class="mr-2"></i>
+              <div id="loader_week${week}_${group}" class="loading loading-spinner loading-xs me-2"></div>
+              <span class="flex mr-7 items-center">
+                                Week 
+                                <span class="week ml-1">${week}</span>, 
+                                <span class="year">${year}</span> 
+                                <span class="badge badge-sm badge-primary ml-2">${group}</span>
+              </span>
+              <button class="btn btn-sm btn-square btn-ghost absolute right-1 top-1" onclick="removeTab(this)"><i class="size-5" data-lucide="x"></i></button>
+            </label>
+            <div class="tab-content bg-base-100 border-base-300 p-6">
+							<div class="overflow-x-auto">
+								<table id="table_week${week}_${group}" class="table table-xs table-zebra">
+									<thead>
+										${group == "SKB"
+      ? generateSKBTable(
+        settingsJson.initTableView.concat(
+          settingsJson.SKB_table,
+          settingsJson.endTable
+        )
+      )
+      : generateSapphireTable(
+        settingsJson.initTableView.concat(
+          settingsJson.Sapphire_table,
+          settingsJson.endTable
+        )
+      )
+    }
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+             `;
+  $("#tabs").append(tab);
+}
+
 //=====================END======================
 
 //====================================
@@ -581,7 +772,8 @@ function getAllDataSession() {
       const group = dataArr[i].split("_")[3];
 
       if (data) {
-        generateTabContent(week, year, group, JSON.parse(data));
+        loadHeader(week, year, group);
+        loadTabContent(week, year, group, JSON.parse(data));
 
         showAlert();
 
@@ -590,6 +782,7 @@ function getAllDataSession() {
         $("#searchActivity").attr("disabled", false);
         // console.log(JSON.parse(data));
       } else {
+        loadHeader(week, year, group);
         loadData(week, year, group);
       }
 

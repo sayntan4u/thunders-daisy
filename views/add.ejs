@@ -53,6 +53,7 @@
 											<th>Name</th>
 											<th>Thunderbolt ID</th>
 											<th class="text-center">Namelist</th>
+											<th class="text-center">Last Login</th>
 											<th class="text-center">Group</th>
 											<th class="text-center"></th>
 										</tr>
@@ -259,10 +260,51 @@
 												</select>
 											</label>
 										</div>
+
 										<!--Close button goes here-->
 										<div class="flex-none ml-1">
+											
 											<button id="cancelFilterBtn"
 												class="btn btn-sm btn-error p-0 w-8 h-8 hidden">
+												<i class="h-5 w-5 " data-lucide="x"></i>
+											</button>
+											<button id="addFilterBtn"
+												class="btn btn-sm btn-info p-0 w-8 h-8 hidden">
+												<i class="h-5 w-5 " data-lucide="list-filter-plus"></i>
+											</button>
+											
+										</div>
+										<div class="option2 flex-none ml-1 hidden">
+											<label class="select select-sm w-44">
+											
+												<span class="label"><i class="h-5 w-5"
+														data-lucide="list-filter"></i></span>
+												<select id="fliterDropDown2" onchange="filterValueChanged2(this)"
+													>
+													<option></option>
+													<option>Social Media</option>
+													<option>Stage 1</option>
+													<option>Stage 2</option>
+													<option>Info</option>
+													<option>Reinfo</option>
+													<option>Meetup</option>
+													<option>Invi</option>
+													<option>Plan</option>
+												</select>
+											</label>
+										</div>
+										<div class="option2 flex-none ml-1 hidden">
+											<label id="sortDonePending2" class="select select-sm">
+												<select onchange="searchByDonePending2(this)">
+													<option></option>
+													<option>Done</option>
+													<option>Pending</option>
+												</select>
+											</label>
+										</div>
+										<div class="option2 flex-none ml-1 hidden">
+											<button id="cancelFilterBtn2"
+												class="btn btn-sm btn-error p-0 w-8 h-8">
 												<i class="h-5 w-5 " data-lucide="x"></i>
 											</button>
 										</div>
