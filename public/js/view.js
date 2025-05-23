@@ -231,7 +231,7 @@ function valueChanged(wk, yr, docName, triggeredFrom, group = "SKB") {
   // var yr = document.getElementById("inputYear").value;
 
   if (group == "SKB") {
-    var value_input = $("." + docName + "-" + triggeredFrom).val();
+    var value_input = $("." + docName + "-" + triggeredFrom + `_week${wk}_${yr}_SKB`).val();
 
     if (value_input == "" && triggeredFrom != "remarks") {
       value_input = 0;
@@ -262,7 +262,7 @@ function valueChanged(wk, yr, docName, triggeredFrom, group = "SKB") {
     updateTotalToSapphire(wk, yr);
   } else {
     var value_input = $(
-      "." + docName + "-" + triggeredFrom + "-Sapphire"
+      "." + docName + "-" + triggeredFrom + `_week${wk}_${yr}_Sapphire`
     ).val();
 
     if (value_input == "" && triggeredFrom != "remarks") {
@@ -400,13 +400,13 @@ function generateTabContent(week, year, group, jsonData) {
         } else if (j == fields.length - 1) {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClass(
             fields[j]
-          )} ${fields[j]} ${jsonData[i].name + "-" + fields[j]}" value="${jsonData[i][fields[j]]
+          )} ${fields[j]} ${jsonData[i].name + "-" + fields[j] + `_week${week}_${year}_${group}`}" value="${jsonData[i][fields[j]]
             }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fields[j]
             }')"></td>`;
         } else {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClass(
             fields[j]
-          )} ${fields[j]}_week${week}_${year}_${group} ${jsonData[i].name + "-" + fields[j]
+          )} ${fields[j]}_week${week}_${year}_${group} ${jsonData[i].name + "-" + fields[j] + `_week${week}_${year}_${group}`
             }" value="${jsonData[i][fields[j]] > 0 ? jsonData[i][fields[j]] : ""
             }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fields[j]
             }')"></td>`;
@@ -442,15 +442,15 @@ function generateTabContent(week, year, group, jsonData) {
         } else if (j == fieldsSapphire.length - 1) {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClassSapphire(
             fieldsSapphire[j]
-          )} ${fieldsSapphire[j]}-Sapphire ${jsonData[i].name + "-" + fieldsSapphire[j]
-            }-Sapphire" value="${jsonData[i][fieldsSapphire[j]]
+          )} ${fieldsSapphire[j]}-Sapphire ${jsonData[i].name + "-" + fieldsSapphire[j] + `_week${week}_${year}_${group}`
+            }" value="${jsonData[i][fieldsSapphire[j]]
             }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fieldsSapphire[j]
             }', 'Sapphire')"></td>`;
         } else {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClassSapphire(
             fieldsSapphire[j]
-          )} ${fieldsSapphire[j]}-Sapphire_week${week}_${year}_${group} ${jsonData[i].name + "-" + fieldsSapphire[j]
-            }-Sapphire" value="${jsonData[i][fieldsSapphire[j]] > 0
+          )} ${fieldsSapphire[j]}-Sapphire_week${week}_${year}_${group} ${jsonData[i].name + "-" + fieldsSapphire[j] + `_week${week}_${year}_${group}`
+            }" value="${jsonData[i][fieldsSapphire[j]] > 0
               ? jsonData[i][fieldsSapphire[j]]
               : ""
             }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fieldsSapphire[j]
@@ -544,13 +544,13 @@ function loadTabContent(week, year, group, jsonData) {
         } else if (j == fields.length - 1) {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClass(
             fields[j]
-          )} ${fields[j]} ${jsonData[i].name + "-" + fields[j]}" value="${jsonData[i][fields[j]]
+          )} ${fields[j]} ${jsonData[i].name + "-" + fields[j] + `_week${week}_${year}_${group}`}" value="${jsonData[i][fields[j]]
             }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fields[j]
             }')"></td>`;
         } else {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClass(
             fields[j]
-          )} ${fields[j]}_week${week}_${year}_${group} ${jsonData[i].name + "-" + fields[j]
+          )} ${fields[j]}_week${week}_${year}_${group} ${jsonData[i].name + "-" + fields[j] + `_week${week}_${year}_${group}`
             }" value="${jsonData[i][fields[j]] > 0 ? jsonData[i][fields[j]] : ""
             }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fields[j]
             }')"></td>`;
@@ -586,15 +586,15 @@ function loadTabContent(week, year, group, jsonData) {
         } else if (j == fieldsSapphire.length - 1) {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClassSapphire(
             fieldsSapphire[j]
-          )} ${fieldsSapphire[j]}-Sapphire ${jsonData[i].name + "-" + fieldsSapphire[j]
-            }-Sapphire" value="${jsonData[i][fieldsSapphire[j]]
+          )} ${fieldsSapphire[j]}-Sapphire ${jsonData[i].name + "-" + fieldsSapphire[j] + `_week${week}_${year}_${group}`
+            }" value="${jsonData[i][fieldsSapphire[j]]
             }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fieldsSapphire[j]
             }', 'Sapphire')"></td>`;
         } else {
           rowTable += `<td class="bl br bb text-center px-1"><input type="text" class="input input-sm ${getTDClassSapphire(
             fieldsSapphire[j]
-          )} ${fieldsSapphire[j]}-Sapphire_week${week}_${year}_${group} ${jsonData[i].name + "-" + fieldsSapphire[j]
-            }-Sapphire" value="${jsonData[i][fieldsSapphire[j]] > 0
+          )} ${fieldsSapphire[j]}-Sapphire_week${week}_${year}_${group} ${jsonData[i].name + "-" + fieldsSapphire[j] + `_week${week}_${year}_${group}`
+            }" value="${jsonData[i][fieldsSapphire[j]] > 0
               ? jsonData[i][fieldsSapphire[j]]
               : ""
             }" onchange="valueChanged('${week}','${year}','${jsonData[i].name}', '${fieldsSapphire[j]
