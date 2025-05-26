@@ -862,6 +862,3 @@ initDataSession();
 loadSettings();
 loadWeekDropdown();
 
-var retrievedObject = localStorage.getItem(`dataArray`);
-
-console.log('dataArray: ', retrievedObject);
