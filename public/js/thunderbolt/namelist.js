@@ -361,13 +361,31 @@ $("#cancelFilterBtn2").click(function () {
 
 });
 
+Array.prototype.toMissionmaxout = function(){
+  var mmNL = [];
+
+  for(let i=0; i<this.length ; i++){
+    mmNL.push({
+      'S.No.' : i + 1,
+      Name : this[i].name,
+      Country : "India",
+      City : this[i].city,
+      Phone : "1234567890",
+      Profession : "Job",
+      Relation : this[i].zone
+    });
+  }
+
+  return mmNL;
+}
+
 
 function exportJsonToExcel() {
   // Create a new workbook
   const workbook = XLSX.utils.book_new();
 
   // Convert JSON data to a worksheet
-  const worksheet = XLSX.utils.json_to_sheet(namelist);
+  const worksheet = XLSX.utils.json_to_sheet(namelist.toMissionmaxout());
 
   // Append the worksheet to the workbook
   XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
