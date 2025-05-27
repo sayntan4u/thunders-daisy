@@ -55,6 +55,9 @@ class Prospect {
 }
 
 var namelist = [];
+var kiv = [];
+
+var curr_uid = null;
 var searchedNL = [];
 var searchedNL2 = [];
 var isFilter = false;
@@ -361,18 +364,18 @@ $("#cancelFilterBtn2").click(function () {
 
 });
 
-Array.prototype.toMissionmaxout = function(){
+Array.prototype.toMissionmaxout = function () {
   var mmNL = [];
 
-  for(let i=0; i<this.length ; i++){
+  for (let i = 0; i < this.length; i++) {
     mmNL.push({
-      'S.No.' : i + 1,
-      Name : this[i].name,
-      Country : "India",
-      City : this[i].city,
-      Phone : "1234567890",
-      Profession : "Job",
-      Relation : this[i].zone
+      'S.No.': i + 1,
+      Name: this[i].name,
+      Country: "India",
+      City: this[i].city,
+      Phone: "1234567890",
+      Profession: "Job",
+      Relation: this[i].zone
     });
   }
 
@@ -381,17 +384,30 @@ Array.prototype.toMissionmaxout = function(){
 
 
 function exportJsonToExcel() {
-  // Create a new workbook
-  const workbook = XLSX.utils.book_new();
 
-  // Convert JSON data to a worksheet
-  const worksheet = XLSX.utils.json_to_sheet(namelist.toMissionmaxout());
+  $("#downloadBtn").attr("disabled", true);
+  $("#downloadBtn").html('<span class="loading loading-spinner loading-sm"></span>');
 
-  // Append the worksheet to the workbook
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+  getKIVData(function () {
+    $("#downloadBtn").attr("disabled", false);
+    $("#downloadBtn").html('<i class="size-5" data-lucide="download"></i>');
+    loadIcons();
 
-  // Export the workbook as an Excel file
-  XLSX.writeFile(workbook, namelistModalTitle.innerHTML + ".xlsx");
+    const totalNl = namelist.concat(kiv);
+    // Create a new workbook
+    const workbook = XLSX.utils.book_new();
+
+    // Convert JSON data to a worksheet
+    const worksheet = XLSX.utils.json_to_sheet(totalNl.toMissionmaxout());
+
+    // Append the worksheet to the workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    // Export the workbook as an Excel file
+    XLSX.writeFile(workbook, namelistModalTitle.innerHTML + ".xlsx");
+  });
+
+
 }
 
 
@@ -744,6 +760,8 @@ function showAlert(content, type = "success") {
 }
 
 function getNLData(uid) {
+  curr_uid = uid;
+  $("#downloadBtn").attr("disabled", true);
   $("#loadingNL").removeClass("hidden");
   const data = { uid: uid };
   const xhttp = new XMLHttpRequest();
@@ -752,8 +770,22 @@ function getNLData(uid) {
     const response = JSON.parse(this.responseText);
     namelist = response;
     generateNL(namelist);
+    $("#downloadBtn").attr("disabled", false);
     $("#fliterDropDown").attr("disabled", false);
     $("#loadingNL").addClass("hidden");
+  };
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(data));
+}
+
+function getKIVData(callback) {
+  const data = { uid: curr_uid };
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "/add/getKIVData");
+  xhttp.onload = function () {
+    const response = JSON.parse(this.responseText);
+    kiv = response;
+    callback();
   };
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(data));

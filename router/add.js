@@ -69,4 +69,10 @@ router.post("/getNLData", requireAuth, async (req, res) => {
   res.send(nl);
 });
 
+router.post("/getKIVData", requireAuth, async (req, res) => {
+  const uid = req.body.uid;
+  const nl = await thunderboltm.getData(uid, 'kiv');
+  res.send(nl);
+});
+
 module.exports = router;
