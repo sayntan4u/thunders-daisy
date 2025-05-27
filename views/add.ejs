@@ -324,11 +324,11 @@
 
 
 									</div>
-									<!-- <div class="flex-none justify-self-end">
-										<button class="btn btn-sm btn-square btn-soft btn-primary">
-											<i class="size-5" data-lucide="rotate-cw"></i>
+									<div class="flex-none justify-self-end">
+										<button class="btn btn-sm btn-square btn-soft btn-primary" onclick="exportJsonToExcel()">
+											<i class="size-5" data-lucide="download"></i>
 										</button>
-									</div> -->
+									</div>
 								</div>
 
 
@@ -451,6 +451,7 @@
 			</dialog>
 
 			<%- include('components/scripts.ejs'); -%>
+				<script src="/js/xlsx.full.min.js"></script>
 				<script src="/js/add.js"></script>
 				<script src="/js/thunderbolt/namelist.js"></script>
 

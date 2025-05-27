@@ -249,7 +249,7 @@ function filterValueChanged(elem) {
       return this.defaultSelected;
     });
     $("#sortDonePending").parent().removeClass("hidden");
-    
+
   }
   $("#addFilterBtn").addClass("hidden");
 }
@@ -360,6 +360,22 @@ $("#cancelFilterBtn2").click(function () {
   loadIcons();
 
 });
+
+
+function exportJsonToExcel() {
+  // Create a new workbook
+  const workbook = XLSX.utils.book_new();
+
+  // Convert JSON data to a worksheet
+  const worksheet = XLSX.utils.json_to_sheet(namelist);
+
+  // Append the worksheet to the workbook
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+  // Export the workbook as an Excel file
+  XLSX.writeFile(workbook, namelistModalTitle.innerHTML + ".xlsx");
+}
+
 
 //Search methods
 
@@ -525,7 +541,7 @@ function searchByDonePending2(elem) {
   searchedNL2 = [];
 
   if (donePending != "") {
-    
+
     if ($("#fliterDropDown2").val() == "Social Media") {
       for (let i = 0; i < searchedNL.length; i++) {
         if (searchedNL[i].socialMedia == getTF(donePending)) {
