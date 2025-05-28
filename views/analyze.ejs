@@ -180,6 +180,24 @@
 
 								</tbody>
 							</table>
+							<div class="flex mt-5 w-full gap-10">
+								<div class="flex-1">
+									<canvas id="nodeCountChart"></canvas>
+								</div>
+								<div class="flex-1">
+									<canvas id="planChart"></canvas>
+								</div>
+							</div>
+							<div class="flex mt-3 gap-10">
+								<div class="flex-1">
+									<canvas id="activitiesChart"></canvas>
+								</div>
+								<div class="flex-1">
+									<canvas id="secondMeetingChart"></canvas>
+								</div>
+								
+							</div>
+							
 						</div>
 					</div>
 
@@ -189,7 +207,9 @@
 
 			<%- include('components/scripts.ejs'); -%>
 				<script src="/js/html2canvas-pro.min.js"></script>
+				<script src="/js/chart.min.js"></script>
 				<script src="/js/analyze.js"></script>
+				<script src="/js/chart/chart.js"></script>
 
 </body>
 

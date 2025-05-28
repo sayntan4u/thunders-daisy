@@ -23,47 +23,49 @@ function getFields(table) {
 }
 
 function getTDClass(field) {
-  var ret = "bg-done";
-  if (field.toLowerCase().includes("target")) {
-    ret = "bg-target";
-  } else if (field.toLowerCase().includes("list")) {
-    ret = "bg-list";
-  } else if (field == "plans") {
-    ret = "bg-plan";
-  } else if (field == "remarks") {
-    ret = "";
-  } else if (field.toLowerCase().includes("done")) {
-    ret = "bg-done";
-  } else if (field.toLowerCase().includes("pending")) {
-    ret = "bg-pending";
-  }
+    var ret = "bg-done";
+    if (field.toLowerCase().includes("target")) {
+        ret = "bg-target";
+    } else if (field.toLowerCase().includes("list")) {
+        ret = "bg-list";
+    } else if (field == "plans") {
+        ret = "bg-plan";
+    } else if (field == "remarks") {
+        ret = "";
+    } else if (field.toLowerCase().includes("done")) {
+        ret = "bg-done";
+    } else if (field.toLowerCase().includes("pending")) {
+        ret = "bg-pending";
+    }
 
-  return ret;
+    return ret;
 }
 
 function getTDClassSapphire(field) {
-  var ret = "bg-done";
+    var ret = "bg-done";
 
-  if (field.toLowerCase().includes("meeting")) {
-    ret = "bg-secondMeeting";
-  } else if (field.toLowerCase().includes("uv")) {
-    ret = "bg-uv";
-  } else if (field.toLowerCase().includes("node")) {
-    ret = "bg-node";
-  } else if (field == "plans") {
-    ret = "bg-plan";
-  } else if (field == "remarks") {
-    ret = "";
-  } else if (field.toLowerCase().includes("pending")) {
-    ret = "bg-pending";
-  }
+    if (field.toLowerCase().includes("meeting")) {
+        ret = "bg-secondMeeting";
+    } else if (field.toLowerCase().includes("uv")) {
+        ret = "bg-uv";
+    } else if (field.toLowerCase().includes("node")) {
+        ret = "bg-node";
+    } else if (field == "plans") {
+        ret = "bg-plan";
+    } else if (field == "remarks") {
+        ret = "";
+    } else if (field.toLowerCase().includes("pending")) {
+        ret = "bg-pending";
+    }
 
-  return ret;
+    return ret;
 }
 
 var settingsJson = {};
 var fields = [];
 var fieldsSapphire = [];
+
+var sapphireDataJson = [];
 
 function sumData() {
     for (let i = settingsJson.totalAnalyzeSKBColSpan; i < fields.length; i++) {
@@ -191,6 +193,9 @@ function getData() {
 
             $("#dataTable").removeClass("hidden");
         } else {
+            sapphireDataJson = response;
+            // console.log(sapphireDataJson);
+            getChartData(sapphireDataJson);
 
             $(".sapphireData").html("");
 
@@ -433,3 +438,4 @@ loadWeekDropdown();
 
 generateWeekTwo(1);
 generateNameDropDown();
+
