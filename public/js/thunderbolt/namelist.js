@@ -312,6 +312,7 @@ function resetFilter() {
 $("#cancelFilterBtn").click(function () {
   isFilter = false;
   clearSelectionUI();
+  clearSelectionUI2();
   $(".option").each(function () {
     $(this).addClass("hidden");
   });
