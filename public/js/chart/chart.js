@@ -204,6 +204,7 @@ function generateNodeCountChart(sapphireDataJson) {
         data: data,
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
             }
         },
@@ -236,6 +237,7 @@ function generatePlanChart(sapphireDataJson) {
         data: data,
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
             }
         },
@@ -268,6 +270,7 @@ function generate2ndMeetingChart(sapphireDataJson) {
         data: data,
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
             }
         },
@@ -318,6 +321,7 @@ function generateActivitiesChart(sapphireDataJson) {
         data: data,
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
             }
         },
@@ -377,6 +381,7 @@ function generateSKBActivitiesChart(skbDataJson) {
         data: data,
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
             }
         },
@@ -409,6 +414,7 @@ function generateSKBPlanChart(skbDataJson) {
         data: data,
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
             }
         },
