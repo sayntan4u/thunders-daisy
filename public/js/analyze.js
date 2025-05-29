@@ -65,8 +65,6 @@ var settingsJson = {};
 var fields = [];
 var fieldsSapphire = [];
 
-var sapphireDataJson = [];
-
 function sumData() {
     for (let i = settingsJson.totalAnalyzeSKBColSpan; i < fields.length; i++) {
         var total = 0;
@@ -162,6 +160,8 @@ function getData() {
         const response = JSON.parse(this.responseText);
 
         if (group == "SKB") {
+            console.log(response);
+            getChartDataSKB(response);
             $(".skbData").html("");
 
             for (let i = 0; i < response.length; i++) {
@@ -193,9 +193,7 @@ function getData() {
 
             $("#dataTable").removeClass("hidden");
         } else {
-            sapphireDataJson = response;
-            // console.log(sapphireDataJson);
-            getChartData(sapphireDataJson);
+            getChartData(response);
 
             $(".sapphireData").html("");
 

@@ -79,12 +79,11 @@ const ctxNodeCount = document.getElementById('nodeCountChart');
 const ctxPlan = document.getElementById('planChart');
 const ctxActivities = document.getElementById('activitiesChart');
 const ctx2ndMeeting = document.getElementById('secondMeetingChart');
+const ctxSKBActivities = document.getElementById('skbChartActivities');
+const ctxSKBPlans = document.getElementById('skbChartPlans');
 
-const DATA_COUNT = 5;
-const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
 
-var labels = months({ count: 5 });
-
+//Sapphire
 Array.prototype.getWeeks = function () {
     var weeks = [];
     for (let i = 0; i < this.length; i++) {
@@ -148,8 +147,39 @@ Array.prototype.getInvis = function () {
     return ret;
 }
 
-var chartNode, chartPlan, chartActivities, chart2ndMeeting;
+//skb
 
+Array.prototype.getNetworkingDone = function () {
+    var ret = [];
+    for (let i = 0; i < this.length; i++) {
+        ret.push(this[i].networkingDone);
+    }
+    // console.log(ret);
+    return ret;
+}
+
+Array.prototype.getInfosDone = function () {
+    var ret = [];
+    for (let i = 0; i < this.length; i++) {
+        ret.push(parseInt(this[i].infosDone) + parseInt(this[i].reinfosDone));
+    }
+    // console.log(ret);
+    return ret;
+}
+
+Array.prototype.getInvisDone = function () {
+    var ret = [];
+    for (let i = 0; i < this.length; i++) {
+        ret.push(this[i].invisDone);
+    }
+    // console.log(ret);
+    return ret;
+}
+
+
+var chartNode, chartPlan, chartActivities, chart2ndMeeting, chartSKBActivities,chartSKBplans;
+
+//Sapphire
 function generateNodeCountChart(sapphireDataJson) {
     if (chartNode) {
         chartNode.destroy();
@@ -303,4 +333,94 @@ function getChartData(sapphireDataJson) {
     generate2ndMeetingChart(sapphireDataJson);
     generateActivitiesChart(sapphireDataJson);
 }
+
+//SKB
+function generateSKBActivitiesChart(skbDataJson) {
+    if (chartSKBActivities) {
+        chartSKBActivities.destroy();
+    }
+    data = {
+        labels: skbDataJson.getWeeks(),
+        datasets: [
+            {
+                label: 'Networking',
+                data: skbDataJson.getNetworkingDone(),
+                borderColor: CHART_COLORS.blue,
+                backgroundColor: CHART_COLORS.blue,
+                borderWidth: 2,
+                borderRadius: 10,
+                borderSkipped: false,
+            },
+            {
+                label: 'Info',
+                data: skbDataJson.getInfosDone(),
+                borderColor: CHART_COLORS.red,
+                backgroundColor: CHART_COLORS.red,
+                borderWidth: 2,
+                borderRadius: 10,
+                borderSkipped: false,
+            },
+            {
+                label: 'Invi',
+                data: skbDataJson.getInvisDone(),
+                borderColor: CHART_COLORS.green,
+                backgroundColor: CHART_COLORS.green,
+                borderWidth: 2,
+                borderRadius: 10,
+                borderSkipped: false,
+            }
+        ]
+    };
+
+    config = {
+        type: 'line',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+            }
+        },
+    };
+
+    chartSKBActivities = new Chart(ctxSKBActivities, config);
+}
+
+function generateSKBPlanChart(skbDataJson) {
+    if (chartSKBplans) {
+        chartSKBplans.destroy();
+    }
+    var data = {
+        labels: skbDataJson.getWeeks(),
+        datasets: [
+            {
+                label: 'Plans',
+                data: skbDataJson.getPlans(),
+                borderColor: CHART_COLORS.orange,
+                backgroundColor: CHART_COLORS.orange,
+                borderWidth: 2,
+                borderRadius: 10,
+                borderSkipped: false,
+            }
+        ]
+    };
+
+    var config = {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+            }
+        },
+    };
+
+    chartSKBplans = new Chart(ctxSKBPlans, config);
+}
+
+function getChartDataSKB(skbDataJson){
+    generateSKBActivitiesChart(skbDataJson);
+    generateSKBPlanChart(skbDataJson);
+}
+
+
 

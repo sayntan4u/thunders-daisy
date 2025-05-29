@@ -72,7 +72,7 @@
 						</div>
 					</div>
 
-					<div id="dataTable" class="card card-border bg-base-100 shadow-md mt-5 hidden">
+					<div id="dataTable" class="card card-border bg-base-100 shadow-md mt-5">
 						<div class="card-body">
 							<div class="flex items-center w-full justify-between">
 								<div class="flex-none">
@@ -112,33 +112,45 @@
 								</tbody>
 							</table>
 							<div class="card card-body">
-								<ul class="list-unstyled">
-									<li><span class="lead"><b><u>Per week data :</u></b></span>
-										<ul>
-											<li>Networking : <span id="networkingPerWeek"></span></li>
-											<li>Info : <span id="infoPerWeek"></span></li>
-											<li>Reinfo : <span id="reinfoPerWeek"></span></li>
-											<li>Invi : <span id="inviPerWeek"></span></li>
-											<li>Plan : <span id="planPerWeek"></span></li>
+								<div class="flex gap-10">
+									<div class="flex-1">
+										<ul class="list-unstyled">
+											<li><span class="lead"><b><u>Per week data :</u></b></span>
+												<ul>
+													<li>Networking : <span id="networkingPerWeek"></span></li>
+													<li>Info : <span id="infoPerWeek"></span></li>
+													<li>Reinfo : <span id="reinfoPerWeek"></span></li>
+													<li>Invi : <span id="inviPerWeek"></span></li>
+													<li>Plan : <span id="planPerWeek"></span></li>
+												</ul>
+											</li>
+											<li><span class="lead"><b><u>Other ratios :</u></b></span>
+												<ul>
+													<!-- <li><span id="networkingToInfo"></span> Networking for 1 Info. </li> -->
+													<li><span id="networkingToPlan"></span> Networking for 1 Plan. </li>
+													<li><span id="infoToPlan"></span> Info for 1 Plan.</li>
+													<li><span id="inviToPlan"></span> Invi or 1 Plan. </li>
+												</ul>
+											</li>
+											<li><span class="lead"><b><u>Loss :</u></b></span>
+												<ul>
+													<li>Networking to Info : <span id="networkingToInfo"></span></li>
+													<li>Info to Reinfo : <span id="infoToReinfo"></span></li>
+													<li>Reinfo to Invi : <span id="reinfoToInvi"></span></li>
+												</ul>
+											</li>
 										</ul>
-									</li>
-									<li><span class="lead"><b><u>Other ratios :</u></b></span>
-										<ul>
-											<!-- <li><span id="networkingToInfo"></span> Networking for 1 Info. </li> -->
-											<li><span id="networkingToPlan"></span> Networking for 1 Plan. </li>
-											<li><span id="infoToPlan"></span> Info for 1 Plan.</li>
-											<li><span id="inviToPlan"></span> Invi or 1 Plan. </li>
-										</ul>
-									</li>
-									<li><span class="lead"><b><u>Loss :</u></b></span>
-										<ul>
-											<li>Networking to Info : <span id="networkingToInfo"></span></li>
-											<li>Info to Reinfo : <span id="infoToReinfo"></span></li>
-											<li>Reinfo to Invi : <span id="reinfoToInvi"></span></li>
-										</ul>
-									</li>
-								</ul>
-
+									</div>
+									<div class="flex-1">
+										<div>
+											<canvas id="skbChartActivities"></canvas>
+										</div>
+										<div>
+											<canvas id="skbChartPlans"></canvas>
+										</div>
+									</div>
+									
+								</div>
 							</div>
 						</div>
 					</div>
@@ -195,9 +207,9 @@
 								<div class="flex-1">
 									<canvas id="secondMeetingChart"></canvas>
 								</div>
-								
+
 							</div>
-							
+
 						</div>
 					</div>
 
