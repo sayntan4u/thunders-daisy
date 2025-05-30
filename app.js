@@ -61,8 +61,8 @@ const analyzeRoute = require('./router/analyze');
 app.use('/analyze', analyzeRoute);
 
 //Closings Page
-const closingRoute = require('./router/closing');
-app.use('/closings', closingRoute);
+const closingRoute = require('./router/network');
+app.use('/network', closingRoute);
 
 //Utilities page 
 const utilitiesRoute = require('./router/util');

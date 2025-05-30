@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Network - Thunders
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%- include('components/styles.ejs'); -%>
+		<link rel="stylesheet" type="text/css" href="css/network.css">
+
+</head>
+
+<body>
+
+	<%- include('components/header.ejs'); -%>
+		<%- include('components/sidebar.ejs'); -%>
+
+			<div class="wrapper flex mt-18 ml-25 mr-5">
+
+
+				<div class="container flex-1 mx-auto">
+					<!-- Content goes here-->
+					<div class="flex gap-2">
+						<div class="flex-1">
+							<button id="backBtn" class="btn btn-sm btn-square btn-soft btn-primary" disabled>
+								<i class="size-5" data-lucide="arrow-left"></i>
+							</button>
+							<div class="tree">
+							</div>
+						</div>
+						<div class="absolute right-5 top-20">
+							<div class="card card-border bg-base-200 shadow-sm w-100 glass">
+								<div class="card-body">
+									<h2 class="card-title">Card Title</h2>
+									<p>
+										A card component has a figure, a body part, and inside body there are title and
+										actions parts
+									</p>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<!-- Content ends here-->
+				</div>
+			</div>
+
+			<%- include('components/scripts.ejs'); -%>
+				<script src="/js/network.js"></script>
+
+</body>
+
+</html>
