@@ -44,8 +44,6 @@
 									</div>
 								</div>
 							</div>
-
-
 							<div class="stats shadow mt-3 w-full h-40">
 								<div class="stat">
 									<div class="stat-figure  opacity-60">
@@ -83,6 +81,19 @@
 
 
 							</div>
+							<div class="chartData flex gap-10 h-50 hidden">
+								<div class="flex-1">
+									<canvas id="nodeData"></canvas>
+								</div>
+								<div class="flex-1">
+									<canvas id="planData"></canvas>
+								</div>
+							</div>
+							<div class="chartData flex h-50 hidden">
+								<div class="flex-1">
+									<canvas id="chequeData"></canvas>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -94,6 +105,7 @@
 			</div>
 
 			<%- include('components/scripts.ejs'); -%>
+				<script src="/js/chart.min.js"></script>
 				<script src="/js/dashboard.js"></script>
 
 </body>

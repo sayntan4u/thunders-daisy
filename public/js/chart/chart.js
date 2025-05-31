@@ -1,35 +1,5 @@
 
 
-const MONTHS = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-];
-
-function months(config) {
-    var cfg = config || {};
-    var count = cfg.count || 12;
-    var section = cfg.section;
-    var values = [];
-    var i, value;
-
-    for (i = 0; i < count; ++i) {
-        value = MONTHS[Math.ceil(i) % 12];
-        values.push(value.substring(0, section));
-    }
-
-    return values;
-}
-
 const COLORS = [
     '#4dc9f6',
     '#f67019',
@@ -44,11 +14,6 @@ const COLORS = [
 
 function color(index) {
     return COLORS[index % COLORS.length];
-}
-
-function transparentize(value, opacity) {
-    var alpha = opacity === undefined ? 0.5 : 1 - opacity;
-    return colorLib(value).alpha(alpha).rgbString();
 }
 
 const CHART_COLORS = {
