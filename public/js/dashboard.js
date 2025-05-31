@@ -259,7 +259,7 @@ function getChartData(){
       // console.log('Dashboard data received:', data);
       // Call the updateDashboard function to update the UI
       chartData = data;
-      console.log(data);
+      // console.log(data);
       updateChartDataUI(data.reverse());
     },
     error: function (xhr, status, error) {

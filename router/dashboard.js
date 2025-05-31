@@ -29,7 +29,7 @@ router.post("/getChartData", requireAuth, async function (req, res) {
   const d = new Date();
   let year = d.getFullYear();
   const datas = await dbm.getDashboardChartData(week, year);
-  console.log("Dashboard data:", datas);
+  // console.log("Dashboard data:", datas);
   res.json(datas);
 });
 
