@@ -68,8 +68,9 @@ function updateTotalToSapphire(week, year) {
     if (i != settingsJson.connections.length - 1) {
       data += ", ";
     }
+
     $(`.${settingsJson.connections[i].endNode}-Sapphire_week${week}_${year}_Sapphire`).each(function () {
-      if ($(this).hasClass(`Sayantan-${settingsJson.connections[i].endNode}-Sapphire`)) {
+      if ($(this).hasClass(`Sayantan-${settingsJson.connections[i].endNode}_week${week}_${year}_Sapphire`)) {
         $(this).val(val);
       }
     });
