@@ -97,7 +97,7 @@ function getTreeNodeData(nodeData, level = null) {
     if (level == null) {
         tree += `<li>
                 <a class="nodeName" href="#">${nodeData.node} <button onclick="hello()">x</button></a>
-                <button class="ml-1 btn btn-xs btn-error btn-square btn-soft" onclick="deleteNode('${nodeData.node}')">
+                <button class="ml-1 btn btn-xs btn-error btn-square btn-soft" onclick="deleteModal('${nodeData.node}')">
                     <i class="size-4" data-lucide="x"></i>
                 </button>`;
         if (nodeData.left == null & nodeData.right == null) {
@@ -125,7 +125,7 @@ function getTreeNodeData(nodeData, level = null) {
         if (level > 0) {
             tree += `<li>
                 <a class="nodeName" href="#">${nodeData.node}</a>
-                <button class="ml-1 btn btn-xs btn-error btn-square btn-soft" onclick="deleteNode('${nodeData.node}')">
+                <button class="ml-1 btn btn-xs btn-error btn-square btn-soft" onclick="deleteModal('${nodeData.node}')">
                     <i class="size-4" data-lucide="x"></i>
                 </button>`;
             if (nodeData.left == null & nodeData.right == null) {
@@ -171,6 +171,7 @@ function loadNetwork() {
             $("#placements").append(`<option>${placements[i]}</option>`);
         }
     }
+    showAlert();
 }
 
 function zoomNetwork(searchNode, nodeData) {
@@ -373,8 +374,23 @@ $("#addBtn").click(function () {
     loadNetwork();
 });
 
-function deleteNode(nodeName) {
-    // console.log(nodeName);
+function showAlert(content = null){
+    if(content == null){
+        alertContent.innerHTML = "Network loaded!";
+    }else{
+        alertContent.innerHTML = content;
+    }
+    $(".alert").removeClass("hidden");
+    setTimeout(function () { $(".alert").addClass("hidden"); }, 3000);
+}
+
+function deleteModal(nodeName){
+    deleteModalName.innerHTML = nodeName;
+    modalDel.showModal();
+}
+
+function deleteNode() {
+    const nodeName = deleteModalName.innerHTML;
     deleteFromNetwork(nodeName, network);
     loadNetwork();
 }

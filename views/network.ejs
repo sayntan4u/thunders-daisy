@@ -32,14 +32,14 @@
 							</div>
 						</div>
 						<div class="absolute right-5 top-20">
-							<div class="flex gap-5">
+							<div class="flex gap-5 mb-3">
 								<div id="addNodeModal" class="flex-1 hidden">
 									<div class="flex gap-3">
 										<div class="flex-none">
 											<label class="input input-sm">
 												Name
-												<input id="inputName" type="text" class="grow" placeholder="enter name.."
-													onchange="" />
+												<input id="inputName" type="text" class="grow"
+													placeholder="enter name.." onchange="" />
 											</label>
 										</div>
 										<div class="flex-none">
@@ -86,6 +86,16 @@
 
 									</div>
 								</div>
+
+
+							</div>
+							<div role="alert" class="alert alert-soft alert-success w-69 justify-self-end hidden">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current"
+									fill="none" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+										d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								<span id="alertContent"></span>
 							</div>
 
 						</div>
@@ -97,6 +107,25 @@
 					<!-- Content ends here-->
 				</div>
 			</div>
+
+			<dialog id="modalDel" class="modal">
+				<div class="modal-box">
+					<h3 class="text-lg font-bold">Delete node?</h3>
+					<p class="py-4">Are you sure you want to delete <strong><span id="deleteModalName"></span></strong>?</p>
+					<div class="modal-action">
+						<form method="dialog">
+							<!-- if there is a button in form, it will close the modal -->
+							<button class="btn btn-soft">Close</button>
+							<button class="btn btn-soft btn-error" onclick="deleteNode()">Delete</button>
+						</form>
+					</div>
+				</div>
+				<form method="dialog" class="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
+
+
 
 			<%- include('components/scripts.ejs'); -%>
 				<script src="/js/network.js"></script>
