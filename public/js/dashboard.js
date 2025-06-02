@@ -87,7 +87,7 @@ Array.prototype.getUVs = function () {
 Array.prototype.getCheques = function () {
     var plans = [];
     for (let i = 0; i < this.length; i++) {
-        plans.push(parseInt(this[i].uv/3));
+        plans.push(parseInt(this[i].uv / 3));
     }
     // console.log(nodeCounts);
     return plans;
@@ -201,25 +201,25 @@ function generateChequesChart(chartData) {
 //============================
 
 function updateDashboardUI(data) {
-  // Update the dashboard with the received data
-  // Example: Update a div with the data
-  dashNetworking.innerHTML = data.networking;
-  dashInfos.innerHTML = data.infos;
-  dashInvis.innerHTML = data.invis;
-  dashPlans.innerHTML = data.plans;
-  if (data.plans < 10) {
-    $("#dashPlans").addClass("text-error");
-  } else {
-    $("#dashPlans").addClass("text-success");
-  }
-  dashCount.innerHTML = data.count;
+    // Update the dashboard with the received data
+    // Example: Update a div with the data
+    dashNetworking.innerHTML = data.networking;
+    dashInfos.innerHTML = data.infos;
+    dashInvis.innerHTML = data.invis;
+    dashPlans.innerHTML = data.plans;
+    if (data.plans < 10) {
+        $("#dashPlans").addClass("text-error");
+    } else {
+        $("#dashPlans").addClass("text-success");
+    }
+    dashCount.innerHTML = data.count;
 }
 
-function updateChartDataUI(chartData){
-  $(".chartData").removeClass("hidden");
-  generateNodeCountChart(chartData);
-  generatePlanChart(chartData);
-  generateChequesChart(chartData);
+function updateChartDataUI(chartData) {
+    $(".chartData").removeClass("hidden");
+    generateNodeCountChart(chartData);
+    generatePlanChart(chartData);
+    generateChequesChart(chartData);
 }
 
 //============================
@@ -227,45 +227,74 @@ function updateChartDataUI(chartData){
 //============================
 
 function getDashboardData() {
-  $.ajax({
-    url: "/dashboard/getData",
-    type: "POST",
-    dataType: "json",
-    data: {
-      week: getCurrWeek(),
-    },
-    success: function (data) {
-      // Update the dashboard with the received data
-      // console.log('Dashboard data received:', data);
-      // Call the updateDashboard function to update the UI
-      updateDashboardUI(data);
-    },
-    error: function (xhr, status, error) {
-      console.error("Error fetching dashboard data:", error);
-    },
-  });
+    var currWeek = getCurrWeek();
+    if (sessionStorage.getItem("dashData-" + currWeek)) {
+        var data = JSON.parse(sessionStorage.getItem("dashData-" + currWeek));
+        updateDashboardUI(data);
+        $.ajax({
+            url: "/dashboard/getData",
+            type: "POST",
+            dataType: "json",
+            data: {
+                week: getCurrWeek(),
+            },
+            success: function (data) {
+                sessionStorage.setItem("dashData-" + currWeek, JSON.stringify(data));
+                updateDashboardUI(data);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching dashboard data:", error);
+            },
+        });
+    } else {
+        $.ajax({
+            url: "/dashboard/getData",
+            type: "POST",
+            dataType: "json",
+            data: {
+                week: getCurrWeek(),
+            },
+            success: function (data) {
+                sessionStorage.setItem("dashData-" + currWeek, JSON.stringify(data));
+                updateDashboardUI(data);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching dashboard data:", error);
+            },
+        });
+    }
+
+
+
+
 }
 
-function getChartData(){
-  $.ajax({
-    url: "/dashboard/getChartData",
-    type: "POST",
-    dataType: "json",
-    data: {
-      week: getCurrWeek(),
-    },
-    success: function (data) {
-      // Update the dashboard with the received data
-      // console.log('Dashboard data received:', data);
-      // Call the updateDashboard function to update the UI
-      chartData = data;
-      // console.log(data);
-      updateChartDataUI(data.reverse());
-    },
-    error: function (xhr, status, error) {
-      console.error("Error fetching dashboard data:", error);
-    },
-  });
+function getChartData() {
+    var currWeek = getCurrWeek();
+    if (sessionStorage.getItem("chartData-" + currWeek)) {
+        var data = JSON.parse(sessionStorage.getItem("chartData-" + currWeek));
+        chartData = data;
+        updateChartDataUI(data.reverse());
+    } else {
+        $.ajax({
+            url: "/dashboard/getChartData",
+            type: "POST",
+            dataType: "json",
+            data: {
+                week: getCurrWeek(),
+            },
+            success: function (data) {
+                chartData = data;
+                sessionStorage.setItem("chartData-" + getCurrWeek(), JSON.stringify(data));
+                // console.log(data);
+                updateChartDataUI(data.reverse());
+            },
+            error: function (xhr, status, error) {
+                console.error("Error fetching dashboard data:", error);
+            },
+        });
+    }
+
 }
 
 //============================
