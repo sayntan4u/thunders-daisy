@@ -31,9 +31,13 @@
     text-align: center; */
 }
 
-.remarks,
-.remarks-Sapphire {
+.remarks{
     min-width: 200px !important;
+    text-align: left !important;
+}
+
+.remarks-Sapphire {
+    min-width: 300px !important;
     text-align: left !important;
 }
 
