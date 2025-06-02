@@ -24,23 +24,70 @@
 					<!-- Content goes here-->
 					<div class="flex gap-2">
 						<div class="flex-1">
-							<button id="backBtn" class="btn btn-sm btn-square btn-soft btn-primary" disabled>
+
+							<button id="backBtn" class="btn btn-sm btn-square btn-soft btn-primary me-3" disabled>
 								<i class="size-5" data-lucide="arrow-left"></i>
 							</button>
 							<div class="tree">
 							</div>
 						</div>
 						<div class="absolute right-5 top-20">
-							<div class="card card-border bg-base-200 shadow-sm w-100 glass">
-								<div class="card-body">
-									<h2 class="card-title">Card Title</h2>
-									<p>
-										A card component has a figure, a body part, and inside body there are title and
-										actions parts
-									</p>
-									
+							<div class="flex gap-5">
+								<div id="addNodeModal" class="flex-1 hidden">
+									<div class="flex gap-3">
+										<div class="flex-none">
+											<label class="input input-sm">
+												Name
+												<input id="inputName" type="text" class="grow" placeholder="enter name.."
+													onchange="" />
+											</label>
+										</div>
+										<div class="flex-none">
+											<select id="placements" class="select select-sm w-30">
+												<option>-select-</option>
+											</select>
+										</div>
+										<div class="flex-none">
+											<button id="addBtn" class="btn btn-sm btn-square btn-success">
+												<i class="size-5" data-lucide="check"></i>
+											</button>
+											<button id="cancelBtn" class="btn btn-sm btn-square btn-soft btn-error">
+												<i class="size-5" data-lucide="x"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+
+								<button id="addBtnModalBtn" class="btn btn-sm btn-soft btn-square btn-primary">
+									<i class="size-5" data-lucide="plus"></i>
+								</button>
+
+
+								<div class="card card-border bg-base-200 shadow-sm w-69 glass">
+									<div class="card-body">
+
+										<!-- <label class="input input-primary w-full">
+											Search
+											<input type="text" class="grow" placeholder="enter name.."
+												onchange="searchNode(this)" />
+										</label> -->
+										<!-- <p class="">
+											Name : <span id="nodeName">Harshitha</span>
+										</p> -->
+										<p>
+											System Count : <span id="nodeCount"></span>
+										</p>
+										<p>
+											Left : <span id="leftCount"></span>
+										</p>
+										<p>
+											Right : <span id="rightCount"></span>
+										</p>
+
+									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
 
