@@ -1,94 +1,96 @@
 
 
-var network = {
-    node: "Harshitha",
-    left: {
-        node: "Charan",
-        left: {
-            node: "Mounika",
-            left: {
-                node: "Susanthi",
-                left: {
-                    node: "Pavani",
-                    left: {
-                        node: "Gangotri",
-                        left: {
-                            node: "Aayushi",
-                            left: null,
-                            right: null
-                        },
-                        right: null
-                    },
-                    right: {
-                        node: "Alekhya",
-                        left: null,
-                        right: {
-                            node: "Supreeth",
-                            left: null,
-                            right: null
-                        }
-                    }
-                },
-                right: null
-            },
-            right: {
-                node: "Anju",
-                left: null,
-                right: {
-                    node: "Leena",
-                    left: null,
-                    right: null
-                }
-            }
-        },
-        right: {
-            node: "Srividya",
-            left: null,
-            right: {
-                node: "Gopinadh",
-                left: null,
-                right: {
-                    node: "Nagarjuna",
-                    left: null,
-                    right: null
-                }
-            }
-        }
-    },
-    right: {
-        node: "Bhaskar",
-        left: {
-            node: "Gomanth",
-            left: {
-                node: "Pavan",
-                left: null,
-                right: null
-            },
-            right: {
-                node: "Yashwanth",
-                left: null,
-                right: null
-            }
-        },
-        right: {
-            node: "Sowmya",
-            left: {
-                node: "Chandini",
-                left: null,
-                right: null
-            },
-            right: {
-                node: "Likitha",
-                left: null,
-                right: {
-                    node: "Sravika",
-                    left: null,
-                    right: null
-                }
-            }
-        }
-    }
-}
+// var network = {
+//     node: "Harshitha",
+//     left: {
+//         node: "Charan",
+//         left: {
+//             node: "Mounika",
+//             left: {
+//                 node: "Susanthi",
+//                 left: {
+//                     node: "Pavani",
+//                     left: {
+//                         node: "Gangotri",
+//                         left: {
+//                             node: "Aayushi",
+//                             left: null,
+//                             right: null
+//                         },
+//                         right: null
+//                     },
+//                     right: {
+//                         node: "Alekhya",
+//                         left: null,
+//                         right: {
+//                             node: "Supreeth",
+//                             left: null,
+//                             right: null
+//                         }
+//                     }
+//                 },
+//                 right: null
+//             },
+//             right: {
+//                 node: "Anju",
+//                 left: null,
+//                 right: {
+//                     node: "Leena",
+//                     left: null,
+//                     right: null
+//                 }
+//             }
+//         },
+//         right: {
+//             node: "Srividya",
+//             left: null,
+//             right: {
+//                 node: "Gopinadh",
+//                 left: null,
+//                 right: {
+//                     node: "Nagarjuna",
+//                     left: null,
+//                     right: null
+//                 }
+//             }
+//         }
+//     },
+//     right: {
+//         node: "Bhaskar",
+//         left: {
+//             node: "Gomanth",
+//             left: {
+//                 node: "Pavan",
+//                 left: null,
+//                 right: null
+//             },
+//             right: {
+//                 node: "Yashwanth",
+//                 left: null,
+//                 right: null
+//             }
+//         },
+//         right: {
+//             node: "Sowmya",
+//             left: {
+//                 node: "Chandini",
+//                 left: null,
+//                 right: null
+//             },
+//             right: {
+//                 node: "Likitha",
+//                 left: null,
+//                 right: {
+//                     node: "Sravika",
+//                     left: null,
+//                     right: null
+//                 }
+//             }
+//         }
+//     }
+// }
+
+var network;
 
 var nodeList = [];
 
@@ -97,7 +99,7 @@ function getTreeNodeData(nodeData, level = null) {
     if (level == null) {
         tree += `<li>
                 <a class="nodeName" href="#">${nodeData.node} <button onclick="hello()">x</button></a>
-                <button class="ml-1 btn btn-xs btn-error btn-square btn-soft" onclick="deleteModal('${nodeData.node}')">
+                <button class="btn btn-xs btn-error btn-square btn-soft" onclick="deleteModal('${nodeData.node}')">
                     <i class="size-4" data-lucide="x"></i>
                 </button>`;
         if (nodeData.left == null & nodeData.right == null) {
@@ -125,7 +127,7 @@ function getTreeNodeData(nodeData, level = null) {
         if (level > 0) {
             tree += `<li>
                 <a class="nodeName" href="#">${nodeData.node}</a>
-                <button class="ml-1 btn btn-xs btn-error btn-square btn-soft" onclick="deleteModal('${nodeData.node}')">
+                <button class="btn btn-xs btn-error btn-square btn-soft" onclick="deleteModal('${nodeData.node}')">
                     <i class="size-4" data-lucide="x"></i>
                 </button>`;
             if (nodeData.left == null & nodeData.right == null) {
@@ -157,21 +159,72 @@ function getTreeNodeData(nodeData, level = null) {
     return tree;
 }
 
-function loadNetwork() {
-    nodeList = [];
-    nodeList.push(network);
-    $(".tree").html("");
-    var tree = getTreeNodeData(network, 5);
-    $(".tree").append("<ul>" + tree + "</ul>");
-    setCount(nodeList.slice(-1)[0]);
-    loadIcons();
-    const placements = getPlacements(network).split(",");
-    for (let i = 0; i < placements.length; i++) {
-        if (placements[i] != "") {
-            $("#placements").append(`<option>${placements[i]}</option>`);
+function loadNetwork(nodeData = null) {
+    if (nodeData == null) {
+        if (sessionStorage.getItem("network")) {
+            network = JSON.parse(sessionStorage.getItem("network"));
+            nodeList = [];
+            nodeList.push(network);
+            $(".tree").html("");
+            var tree = getTreeNodeData(network, 5);
+            $(".tree").append("<ul>" + tree + "</ul>");
+            setCount(nodeList.slice(-1)[0]);
+            loadIcons();
+            const placements = getPlacements(network).split(",");
+            for (let i = 0; i < placements.length; i++) {
+                if (placements[i] != "") {
+                    $("#placements").append(`<option>${placements[i]}</option>`);
+                }
+            }
+            showAlert();
+
+
+        } else {
+            $.ajax({
+                url: '/network/getNetwork',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    sessionStorage.setItem("network", JSON.stringify(data));
+                    network = data;
+                    nodeList = [];
+                    nodeList.push(network);
+                    $(".tree").html("");
+                    var tree = getTreeNodeData(network, 5);
+                    $(".tree").append("<ul>" + tree + "</ul>");
+                    setCount(nodeList.slice(-1)[0]);
+                    loadIcons();
+                    const placements = getPlacements(network).split(",");
+                    for (let i = 0; i < placements.length; i++) {
+                        if (placements[i] != "") {
+                            $("#placements").append(`<option>${placements[i]}</option>`);
+                        }
+                    }
+                    showAlert();
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error loading roster:', error);
+                }
+            });
         }
+
+    } else {
+        nodeList = [];
+        nodeList.push(nodeData);
+        $(".tree").html("");
+        var tree = getTreeNodeData(nodeData, 5);
+        $(".tree").append("<ul>" + tree + "</ul>");
+        setCount(nodeList.slice(-1)[0]);
+        loadIcons();
+        const placements = getPlacements(nodeData).split(",");
+        for (let i = 0; i < placements.length; i++) {
+            if (placements[i] != "") {
+                $("#placements").append(`<option>${placements[i]}</option>`);
+            }
+        }
+        showAlert();
     }
-    showAlert();
 }
 
 function zoomNetwork(searchNode, nodeData) {
@@ -365,26 +418,38 @@ $("#addBtn").click(function () {
 
     if (name != "" && placement != "-select-") {
         addToNetwork(name, pos[0], pos[1], network);
+        $.ajax({
+            url: '/network/saveNetwork',
+            type: 'POST',
+            data: { network: JSON.stringify(network) },
+            dataType: 'json',
+            success: function (data) {
+                // loadNetwork(network);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error loading roster:', error);
+            }
+        });
     }
 
     $("#inputName").val("");
     $("#placements").val("-select-");
     $("#addBtnModalBtn").removeClass("hidden");
     $("#addNodeModal").addClass("hidden");
-    loadNetwork();
+    loadNetwork(network);
 });
 
-function showAlert(content = null){
-    if(content == null){
+function showAlert(content = null) {
+    if (content == null) {
         alertContent.innerHTML = "Network loaded!";
-    }else{
+    } else {
         alertContent.innerHTML = content;
     }
     $(".alert").removeClass("hidden");
     setTimeout(function () { $(".alert").addClass("hidden"); }, 3000);
 }
 
-function deleteModal(nodeName){
+function deleteModal(nodeName) {
     deleteModalName.innerHTML = nodeName;
     modalDel.showModal();
 }
@@ -392,7 +457,19 @@ function deleteModal(nodeName){
 function deleteNode() {
     const nodeName = deleteModalName.innerHTML;
     deleteFromNetwork(nodeName, network);
-    loadNetwork();
+    $.ajax({
+        url: '/network/saveNetwork',
+        type: 'POST',
+        data: { network: JSON.stringify(network) },
+        dataType: 'json',
+        success: function (data) {
+
+        },
+        error: function (xhr, status, error) {
+            console.error('Error loading roster:', error);
+        }
+    });
+    loadNetwork(network);
 }
 
 
@@ -400,3 +477,5 @@ function deleteNode() {
 loadNetwork();
 
 // console.log(getPlacements(network).split(","));
+
+console.log(JSON.stringify(network));

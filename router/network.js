@@ -15,6 +15,19 @@ router.get('/', requireAuth, function (req, res) {
     res.render('network', { title : 'Network' });
 });
 
+router.post('/getNetwork', requireAuth, async function (req, res) {
+    const data = await dbm.getNetwork();
+    res.send(data);
+});
+
+router.post('/saveNetwork', requireAuth, async function (req, res) {
+    const network = req.body.network;
+    const data = await dbm.saveNetwork(network);
+    res.send(data);
+});
+
+
+
 
 
 module.exports = router;
