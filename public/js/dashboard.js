@@ -301,6 +301,26 @@ function getChartData() {
 // Loading methods
 //============================
 
+
+//default chart Data
+
+var week = getCurrWeek();
+var datas = [];
+for (let wkCount = 1; wkCount <= 10; wkCount++) {
+    var uv = 0;
+    var plans = 0;
+    var count = 0;
+
+    datas.push({
+        week: week - wkCount,
+        uv: uv,
+        plans: plans,
+        count: count,
+    })
+}
+
+updateChartDataUI(datas.reverse());
+
 getDashboardData();
 getChartData();
 // dashCurrWeek.innerHTML = "Week " + getCurrWeek();

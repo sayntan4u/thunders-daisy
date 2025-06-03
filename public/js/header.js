@@ -133,6 +133,18 @@ function logout() {
     sessionStorage.setItem('teamData', '');
   }
 
+  if (sessionStorage.getItem('rosterData')) {
+    sessionStorage.setItem('rosterData', '');
+  }
+
+  if (sessionStorage.getItem('chartData-' + getCurrWeek())) {
+    sessionStorage.setItem('chartData-' + getCurrWeek(), '');
+  }
+
+  if (sessionStorage.getItem('dashData-' + getCurrWeek())) {
+    sessionStorage.setItem('dashData-' + getCurrWeek(), '');
+  }
+
   location.href = '/login/logout';
 }
 
