@@ -160,6 +160,8 @@ function getTreeNodeData(nodeData, level = null) {
 }
 
 function loadNetwork(nodeData = null) {
+    $("#placements").html("<option>-select-</option>");
+
     if (nodeData == null) {
         if (sessionStorage.getItem("network")) {
             network = JSON.parse(sessionStorage.getItem("network"));
@@ -436,6 +438,7 @@ $("#addBtn").click(function () {
     $("#placements").val("-select-");
     $("#addBtnModalBtn").removeClass("hidden");
     $("#addNodeModal").addClass("hidden");
+    sessionStorage.setItem("network", JSON.stringify(network));
     loadNetwork(network);
 });
 
@@ -469,6 +472,8 @@ function deleteNode() {
             console.error('Error loading roster:', error);
         }
     });
+    sessionStorage.setItem("network", JSON.stringify(network));
+    console.log(network);
     loadNetwork(network);
 }
 
@@ -478,4 +483,4 @@ loadNetwork();
 
 // console.log(getPlacements(network).split(","));
 
-console.log(JSON.stringify(network));
+// console.log(JSON.stringify(network));
