@@ -1,26 +1,31 @@
 var rosterData = [];
 
 function loadRoster() {
-    $.ajax({
-        url: '/roster/getRoster',
-        type: 'POST',
-        dataType: 'json',
-        success: function (data) {
-            rosterData = data;
-            // console.log(rosterData);
-            //Agenda page plan roster container updation
-            if ($(".planRoster_agenda").length != 0) {
-                generatePlanRosterUI(data);
-                $(".slots_plan").removeClass("hide");
-                $(".loading_roster_agenda").addClass("hide");
+    if (sessionStorage.getItem("rosterData")) {
+        var data = JSON.parse(sessionStorage.getItem("rosterData"));
+        rosterData = data;
+        //Agenda page plan roster container updation
+        generateRosterTable(data);
+        $(".loading_roster").addClass("hide");
+
+    } else {
+        $.ajax({
+            url: '/roster/getRoster',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                sessionStorage.setItem("rosterData", JSON.stringify(data));
+                rosterData = data;
+                //Agenda page plan roster container updation
+                generateRosterTable(data);
+                $(".loading_roster").addClass("hide");
+            },
+            error: function (xhr, status, error) {
+                console.error('Error loading roster:', error);
             }
-            generateRosterTable(data);
-            $(".loading_roster").addClass("hide");
-        },
-        error: function (xhr, status, error) {
-            console.error('Error loading roster:', error);
-        }
-    });
+        });
+    }
+
 }
 
 function updateRoster(day, time, irName) {
@@ -39,9 +44,7 @@ function updateLocalRosterData(day, time, irName) {
             break;
         }
     }
-    if ($(".planRoster_agenda").length != 0) {
-        generatePlanRosterUI(rosterData);
-    }
+    sessionStorage.setItem("rosterData", JSON.stringify(rosterData));
 }
 
 function clearRoster() {
@@ -120,12 +123,12 @@ function generateRosterTable(data) {
                             </div>
                             <div class="drop mb-3">
                                 <select class="select" onchange='changePlanStatus(this,"${item.day}","${time}")'>
-                                    <option ${(getPlanStatus(item.data[time]) == "-select-" ) ? "selected" : ""}>-select-</option>
-                                    <option ${(getPlanStatus(item.data[time]) == "Confirmed" ) ? "selected" : ""}>Confirmed</option>
-                                    <option ${(getPlanStatus(item.data[time]) == "Reconfirmed" ) ? "selected" : ""}>Reconfirmed</option>
-                                    <option ${(getPlanStatus(item.data[time]) == "Done" ) ? "selected" : ""}>Done</option>
-                                    <option ${(getPlanStatus(item.data[time]) == "Rescheduled" ) ? "selected" : ""}>Rescheduled</option>
-                                    <option ${(getPlanStatus(item.data[time]) == "Cancelled" ) ? "selected" : ""}>Cancelled</option>
+                                    <option ${(getPlanStatus(item.data[time]) == "-select-") ? "selected" : ""}>-select-</option>
+                                    <option ${(getPlanStatus(item.data[time]) == "Confirmed") ? "selected" : ""}>Confirmed</option>
+                                    <option ${(getPlanStatus(item.data[time]) == "Reconfirmed") ? "selected" : ""}>Reconfirmed</option>
+                                    <option ${(getPlanStatus(item.data[time]) == "Done") ? "selected" : ""}>Done</option>
+                                    <option ${(getPlanStatus(item.data[time]) == "Rescheduled") ? "selected" : ""}>Rescheduled</option>
+                                    <option ${(getPlanStatus(item.data[time]) == "Cancelled") ? "selected" : ""}>Cancelled</option>
                                 </select>
                             </div>
                             <div class="d-grid">
@@ -140,17 +143,17 @@ function generateRosterTable(data) {
     });
 }
 
-function getIRNameRoster(str){
+function getIRNameRoster(str) {
     const myArray = str.split("/");
     return myArray[0];
 }
 
-function getPlanStatus(str){
+function getPlanStatus(str) {
     const myArray = str.split("/");
     return myArray[1];
 }
 
-function generatePlanStatus(val){
+function generatePlanStatus(val) {
     var pill = "";
 
     if (val == "Confirmed") {
@@ -197,34 +200,34 @@ $(document).on("click", ".btn-roster-data", function () {
     $(this).siblings("div").children(".txt").children("input").focus();
 });
 
-function clearRosterData(elem, day, time){
+function clearRosterData(elem, day, time) {
     const value = "/-select-";
     updateRoster(day, time, value);
     updateLocalRosterData(day, time, value);
     $(elem).parent().siblings(".txt").children("input").val("");
-    $(elem).parent().siblings(".drop").children("select").prop('selectedIndex',0);
+    $(elem).parent().siblings(".drop").children("select").prop('selectedIndex', 0);
     //change btn
 
     $(elem).parent().parent().siblings(".btn-roster-data").children(".irName").html("");
     $(elem).parent().parent()
-    .siblings(".btn-roster-data").children(".plan_status")
-    .removeClass("badge-success")
-    .removeClass("badge-secondary")
-    .removeClass("badge-primary")
-    .removeClass("badge-error")
-    .html("");
+        .siblings(".btn-roster-data").children(".plan_status")
+        .removeClass("badge-success")
+        .removeClass("badge-secondary")
+        .removeClass("badge-primary")
+        .removeClass("badge-error")
+        .html("");
 
     //change cell
     $(elem).parent().parent().parent().removeClass("has_data");
 
-    
+
 }
 
 function rosterUpdate(elem, day, time) {
     const val = $(elem).val()
     $(elem).parent().parent().siblings("button").children(".irName").html(val);
 
-    valueChangedRoster(elem,day,time);
+    valueChangedRoster(elem, day, time);
 }
 
 function rosterChanged(elem) {
@@ -245,7 +248,7 @@ function changePlanStatus(elem, day, time) {
     } else if (val == "Reconfirmed") {
         $(elem).parent().parent().siblings("button").children(".plan_status").html("RC");
         $(elem).parent().parent().siblings("button").children(".plan_status")
-           .removeClass("badge-error")
+            .removeClass("badge-error")
             .removeClass("badge-secondary")
             .removeClass("badge-primary")
             .addClass("badge-success");
@@ -285,7 +288,7 @@ function changePlanStatus(elem, day, time) {
     updateLocalRosterData(day, time, value);
 }
 
-function defaultRosterLoader(){
+function defaultRosterLoader() {
     const weekArray = getWeekArray();
     const timeArray = ['11AM', '1PM', '3PM', '5PM', '7PM'];
 
