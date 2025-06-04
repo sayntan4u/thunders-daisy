@@ -1,13 +1,16 @@
 var rosterData = [];
 
+const d = new Date();
+const today = d.getDay();
+const dayArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 function loadRoster() {
-    if (sessionStorage.getItem("rosterData")) {
+    if (sessionStorage.getItem("rosterData") && sessionStorage.getItem("today") == dayArray[today]) {
         var data = JSON.parse(sessionStorage.getItem("rosterData"));
         rosterData = data;
         //Agenda page plan roster container updation
         generateRosterTable(data);
         $(".loading_roster").addClass("hide");
-
     } else {
         $.ajax({
             url: '/roster/getRoster',
@@ -15,6 +18,7 @@ function loadRoster() {
             dataType: 'json',
             success: function (data) {
                 sessionStorage.setItem("rosterData", JSON.stringify(data));
+                sessionStorage.setItem("today", dayArray[today]);
                 rosterData = data;
                 //Agenda page plan roster container updation
                 generateRosterTable(data);
