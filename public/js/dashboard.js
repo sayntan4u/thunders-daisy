@@ -271,8 +271,9 @@ function getDashboardData() {
 
 function getChartData() {
     var currWeek = getCurrWeek();
-    if (sessionStorage.getItem("chartData-" + currWeek)) {
-        var data = JSON.parse(sessionStorage.getItem("chartData-" + currWeek));
+
+    if (localStorage.getItem("currWeek") == currWeek) {
+        var data = JSON.parse(localStorage.getItem("chartData"));
         chartData = data;
         updateChartDataUI(data.reverse());
     } else {
@@ -285,7 +286,8 @@ function getChartData() {
             },
             success: function (data) {
                 chartData = data;
-                sessionStorage.setItem("chartData-" + getCurrWeek(), JSON.stringify(data));
+                localStorage.setItem("currWeek", currWeek);
+                localStorage.setItem("chartData", JSON.stringify(data));
                 // console.log(data);
                 updateChartDataUI(data.reverse());
             },
@@ -294,6 +296,30 @@ function getChartData() {
             },
         });
     }
+
+    // if (sessionStorage.getItem("chartData-" + currWeek)) {
+    //     var data = JSON.parse(sessionStorage.getItem("chartData-" + currWeek));
+    //     chartData = data;
+    //     updateChartDataUI(data.reverse());
+    // } else {
+    //     $.ajax({
+    //         url: "/dashboard/getChartData",
+    //         type: "POST",
+    //         dataType: "json",
+    //         data: {
+    //             week: getCurrWeek(),
+    //         },
+    //         success: function (data) {
+    //             chartData = data;
+    //             sessionStorage.setItem("chartData-" + getCurrWeek(), JSON.stringify(data));
+    //             // console.log(data);
+    //             updateChartDataUI(data.reverse());
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error("Error fetching dashboard data:", error);
+    //         },
+    //     });
+    // }
 
 }
 
