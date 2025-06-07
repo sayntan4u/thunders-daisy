@@ -104,10 +104,10 @@ function generateNodeCountChart(chartData) {
         labels: chartData.getWeeks(),
         datasets: [
             {
-                label: 'Node Count',
+                label: 'Team Count',
                 data: chartData.getNodeCounts(),
-                borderColor: CHART_COLORS.blue,
-                backgroundColor: CHART_COLORS.blue,
+                borderColor: CHART_COLORS.green,
+                backgroundColor: CHART_COLORS.green,
                 borderWidth: 2,
                 borderRadius: 10,
                 borderSkipped: false,
