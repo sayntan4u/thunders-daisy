@@ -3,6 +3,7 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
   packagerConfig: {
+    executableName: "thunders",
     icon: './icon/icon',
     asar: true,
   },
@@ -17,20 +18,21 @@ module.exports = {
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
-       config: {
+      config: {
         icon: './icon/icon.icns'
       },
     },
     {
       name: '@electron-forge/maker-deb',
+      executableName: "thunders",
       config: {
-        icon: './icon/icon.png'
-      },
-    },
-    {
-      name: '@electron-forge/maker-rpm',
-      config: {},
-    },
+        options: {
+          icon: './icon/icon.png',
+          name: 'Thunders',
+          productName: 'Thunders'
+        }
+      }
+    }
   ],
   plugins: [
     {
