@@ -1,13 +1,11 @@
 {
   "name": "thunders",
   "productName": "Thunders",
-  "version": "1.0.0",
-  "main": "main.js",
+  "version": "2.0.0",
+  "main": "app.js",
   "scripts": {
-    "start": "electron-forge start",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sayantan",
   "license": "ISC",
@@ -15,7 +13,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
-    "electron-squirrel-startup": "^1.0.1",
     "docxtemplater": "^3.60.2",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
@@ -28,15 +25,6 @@
     "pizzip": "^3.1.8"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^7.8.1",
-    "@electron-forge/maker-deb": "^7.8.1",
-    "@electron-forge/maker-rpm": "^7.8.1",
-    "@electron-forge/maker-squirrel": "^7.8.1",
-    "@electron-forge/maker-zip": "^7.8.1",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.8.1",
-    "@electron-forge/plugin-fuses": "^7.8.1",
-    "@electron/fuses": "^1.8.0",
-    "electron": "^36.0.1",
     "nodemon": "^3.1.10"
   }
 }
