@@ -206,11 +206,11 @@ function filterValueChanged(elem) {
 
   $("#fliterDropDown2").val("");
 
-  $("#addFilterBtn").html("<i class='size-4' data-lucide='list-filter-plus'></i>");
+  $("#addFilterBtn").html(
+    "<i class='size-4' data-lucide='list-filter-plus'></i>"
+  );
   $("#addFilterBtn").attr("disabled", false);
   loadIcons();
-
-
 
   if ($(elem).val() != "") {
     isFilter = true;
@@ -252,7 +252,6 @@ function filterValueChanged(elem) {
       return this.defaultSelected;
     });
     $("#sortDonePending").parent().removeClass("hidden");
-
   }
   $("#addFilterBtn").addClass("hidden");
 }
@@ -284,7 +283,6 @@ function filterValueChanged2(elem) {
       // return defaultSelected property of the option
       return this.defaultSelected;
     });
-
   }
 }
 
@@ -304,7 +302,9 @@ function resetFilter() {
   $("#addFilterBtn").addClass("hidden");
 
   $("#fliterDropDown2").val("");
-  $("#addFilterBtn").html("<i class='size-4' data-lucide='list-filter-plus'></i>");
+  $("#addFilterBtn").html(
+    "<i class='size-4' data-lucide='list-filter-plus'></i>"
+  );
   $("#addFilterBtn").attr("disabled", false);
   loadIcons();
 }
@@ -328,7 +328,9 @@ $("#cancelFilterBtn").click(function () {
 
   $("#fliterDropDown2").val("");
 
-  $("#addFilterBtn").html("<i class='size-4' data-lucide='list-filter-plus'></i>");
+  $("#addFilterBtn").html(
+    "<i class='size-4' data-lucide='list-filter-plus'></i>"
+  );
   $("#addFilterBtn").attr("disabled", false);
   loadIcons();
 });
@@ -352,17 +354,21 @@ $("#cancelFilterBtn2").click(function () {
 
   if (searchedNL.length > 0) {
     generateNL(searchedNL);
-  }
-  else {
+  } else {
     generateNL(namelist);
   }
 
   $("#fliterDropDown2").val("");
+  $("#sortDonePending2 option").prop("selected", function () {
+    // return defaultSelected property of the option
+    return this.defaultSelected;
+  });
 
-  $("#addFilterBtn").html("<i class='size-4' data-lucide='list-filter-plus'></i>");
+  $("#addFilterBtn").html(
+    "<i class='size-4' data-lucide='list-filter-plus'></i>"
+  );
   $("#addFilterBtn").attr("disabled", false);
   loadIcons();
-
 });
 
 Array.prototype.toMissionmaxout = function () {
@@ -370,24 +376,24 @@ Array.prototype.toMissionmaxout = function () {
 
   for (let i = 0; i < this.length; i++) {
     mmNL.push({
-      'S.No.': i + 1,
+      "S.No.": i + 1,
       Name: this[i].name,
       Country: "India",
       City: this[i].city,
       Phone: "1234567890",
       Profession: "Job",
-      Relation: this[i].zone
+      Relation: this[i].zone,
     });
   }
 
   return mmNL;
-}
-
+};
 
 function exportJsonToExcel() {
-
   $("#downloadBtn").attr("disabled", true);
-  $("#downloadBtn").html('<span class="loading loading-spinner loading-sm"></span>');
+  $("#downloadBtn").html(
+    '<span class="loading loading-spinner loading-sm"></span>'
+  );
 
   getKIVData(function () {
     $("#downloadBtn").attr("disabled", false);
@@ -407,10 +413,7 @@ function exportJsonToExcel() {
     // Export the workbook as an Excel file
     XLSX.writeFile(workbook, namelistModalTitle.innerHTML + ".xlsx");
   });
-
-
 }
-
 
 //Search methods
 
@@ -576,7 +579,6 @@ function searchByDonePending2(elem) {
   searchedNL2 = [];
 
   if (donePending != "") {
-
     if ($("#fliterDropDown2").val() == "Social Media") {
       for (let i = 0; i < searchedNL.length; i++) {
         if (searchedNL[i].socialMedia == getTF(donePending)) {
@@ -651,57 +653,66 @@ function generateRowNamelistUI(sl, prospect) {
 							<td class="weekAdded">${prospect.week}</td>
 							<td class="zone">${prospect.zone}</td>
 							<td class="city">${prospect.city}</td>
-							<td class="chatting bl"> ${prospect.chatting == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    } </td>
-							<td class="br socialMedia"> ${prospect.socialMedia == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    } </td>
-              <td class="bl stage1">${prospect.stage1 == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    } </td>
+							<td class="chatting bl"> ${
+                prospect.chatting == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              } </td>
+							<td class="br socialMedia"> ${
+                prospect.socialMedia == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              } </td>
+              <td class="bl stage1">${
+                prospect.stage1 == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              } </td>
               <td class="br weekStage1 stage1">${prospect.stage1Week}</td>
-              <td class="bl stage2">${prospect.stage2 == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    } </td>
+              <td class="bl stage2">${
+                prospect.stage2 == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              } </td>
               <td class="br weekStage2 stage2">${prospect.stage2Week}</td>
 
-							<td class="bl info"> ${prospect.info == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    } </td>
+							<td class="bl info"> ${
+                prospect.info == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              } </td>
 							<td class="weekInfo info">${prospect.infoWeek}</td>
 							<td class="br info">
 								${prospect.infoResponse}
 							</td>
-							<td class="bl reinfo"> ${prospect.reinfo == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    }</td>
+							<td class="bl reinfo"> ${
+                prospect.reinfo == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              }</td>
 							<td class="weekReinfo reinfo">${prospect.reinfoWeek}</td>
 							<td class="br reinfo">
 								${prospect.reinfoResponse}
 							</td>
-							<td class="meetup">${prospect.meetup == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    } </td>
-							<td class="bl invi"> ${prospect.invi == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    }</td>
+							<td class="meetup">${
+                prospect.meetup == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              } </td>
+							<td class="bl invi"> ${
+                prospect.invi == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              }</td>
 							<td class="weekInvite invi">${prospect.inviWeek}</td>
 							<td class="br invi">
 								${prospect.inviResponse}
 							</td>
-							<td class="bl plan"> ${prospect.plan == true
-      ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
-      : ""
-    } </td>
+							<td class="bl plan"> ${
+                prospect.plan == true
+                  ? '<i class="size-5 mx-auto" data-lucide="check"></i>'
+                  : ""
+              } </td>
 							<td class="weekPlan plan">${prospect.planWeek}</td>
 							<td class="br plan">
 								${prospect.planStatus}
@@ -731,7 +742,9 @@ function goBackNL() {
   if (parseInt(pageNumberNL.innerHTML) > 1) {
     pageNumberNL.innerHTML = parseInt(pageNumberNL.innerHTML) - 1;
   }
-  if (isFilter) {
+  if (isFilter2) {
+    generateNL(searchedNL2);
+  } else if (isFilter) {
     generateNL(searchedNL);
   } else {
     generateNL(namelist);
@@ -742,7 +755,9 @@ function goForwardNL() {
   if (parseInt(pageNumberNL.innerHTML) < namelist.length / 10) {
     pageNumberNL.innerHTML = parseInt(pageNumberNL.innerHTML) + 1;
   }
-  if (isFilter) {
+  if (isFilter2) {
+    generateNL(searchedNL2);
+  } else if (isFilter) {
     generateNL(searchedNL);
   } else {
     generateNL(namelist);
