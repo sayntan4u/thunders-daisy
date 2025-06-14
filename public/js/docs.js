@@ -40,6 +40,10 @@ $(document).on("click", ".file", function (e) {
 
   $(".fr-element").empty();
   $(".fr-element").html(docList.find((doc) => doc.id == id).content);
+  console.log($(".fr-wrapper").first().hasClass("fr-element"));
+  if (!$(".fr-wrapper").first().hasClass("fr-element")) {
+    $(".fr-wrapper").first().addClass("hidden");
+  }
   $("#editor").removeClass("hidden");
 });
 
@@ -103,9 +107,7 @@ function addDoc() {
     type: "POST",
     dataType: "json",
     data: { doc: newDoc },
-    success: function (data) {
-      
-    },
+    success: function (data) {},
   });
 
   $("#files").children("tbody").empty();
@@ -142,7 +144,7 @@ updateFileName = () => {
       dataType: "json",
       data: { doc: doc },
       success: function (data) {
-          showAlert();
+        showAlert();
       },
     });
     // showAlert();
@@ -164,7 +166,7 @@ updateContent = () => {
       dataType: "json",
       data: { doc: doc },
       success: function (data) {
-          showAlert();
+        showAlert();
       },
     });
   } else {
@@ -183,9 +185,7 @@ function deleteDoc() {
     type: "POST",
     dataType: "json",
     data: { id: id },
-    success: function (data) {
-      
-    },
+    success: function (data) {},
   });
 }
 
