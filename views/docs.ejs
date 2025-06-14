@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>
+		Documents - Thunders
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<%- include('components/styles.ejs'); -%>
+
+		<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
+			type="text/css" />
+		<link rel="stylesheet" type="text/css" href="css/docs.css">
+
+</head>
+
+<body>
+
+	<%- include('components/header.ejs'); -%>
+		<%- include('components/sidebar.ejs'); -%>
+
+			<div class="wrapper flex mt-18 ml-25 mr-5 pb-15">
+
+
+				<div class="container flex-1 mx-auto">
+					<!-- Content goes here-->
+					<div id="files-view" class="card card-border bg-base-100 shadow-sm">
+						<div class="card-body">
+							<div class="flex items-center justify-between mb-3">
+								<span></span>
+								<button class="btn btn-primary" onclick="addDoc()">
+									<i class="size-4" data-lucide="file-plus-2"></i>Add Document
+								</button>
+							</div>
+
+							<div class="overflow-x-auto">
+								<table id="files" class="table">
+									<thead>
+										<tr>
+											<th>Document name</th>
+											<th></th>
+											<th>Created on</th>
+											<th>Last edited</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+								<p id="noDocFound" class="hidden mt-2">
+									No documents found !
+								</p>
+							</div>
+						</div>
+					</div>
+					<div id="editor" class="hidden">
+						<div class="flex items-center gap-1 mb-3 items-center">
+							<button class="btn btn-sm btn-square btn-ghost btn-primary mr-1" onclick="goBack()">
+								<i class="size-5" data-lucide="chevron-left"></i>
+							</button>
+							<i class="size-5 opacity-70" data-lucide="file-text"></i>
+							<input id="fileName" type="text" class="input flex-1" placeholder="untitled document"
+								value="" onchange="updateFileName()" />
+							<span id="fileId" class="hidden"></span>
+							<div id="documentSaveAlert" role="alert" class="alert alert-success alert-soft hidden">
+								<svg xmlns="http://www.w3.org/2000/svg" class="size-5 shrink-0 stroke-current"
+									fill="none" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+										d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								<span class="font-bold">Document saved!</span>
+							</div>
+							<button class="btn btn-sm btn-square btn-soft btn-primary mr-1 ml-5"
+								onclick="updateContent()">
+								<i class="size-5" data-lucide="save"></i>
+							</button>
+						</div>
+						<div id="froala-editor"> </div>
+					</div>
+					<!-- Content ends here-->
+				</div>
+			</div>
+			<dialog id="deleteModal" class="modal">
+				<div class="modal-box">
+					<h3 class="text-lg font-bold">Delete document?</h3>
+					<p class="py-4">
+						Are you sure you want to delete
+						<strong>
+							<span id="deleteModalFileName"></span>
+						</strong>
+						<span class="hidden" id="deleteModalDocumentID"></span>
+						?
+					</p>
+					<div class="modal-action">
+						<form method="dialog">
+							<!-- if there is a button, it will close the modal -->
+							<button class="btn">Cancel</button>
+							<button class="btn btn-error" onclick="deleteDoc()">Delete</button>
+						</form>
+					</div>
+				</div>
+				<form method="dialog" class="modal-backdrop">
+					<button>close</button>
+				</form>
+			</dialog>
+
+			<%- include('components/scripts.ejs'); -%>
+				<script src="/js/docs.js"></script>
+				<script type="text/javascript"
+					src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+				<script>
+					var editor = new FroalaEditor("div#froala-editor", {
+						height: 600,
+						quickInsertTags: [''],
+						tabSpaces: 4
+					});
+				</script>
+
+</body>
+
+</html>

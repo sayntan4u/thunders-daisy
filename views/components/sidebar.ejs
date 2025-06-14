@@ -30,6 +30,11 @@
                 <i class="h-5 w-5" data-lucide="blocks"></i>
             </a>
         </li>
+        <li class="mb-2 mask mask-squircle <%= (title == 'Documents')? 'active' :'' %>">
+            <a class="tooltip tooltip-right" data-tip="Utilities" href="/docs">
+                <i class="h-5 w-5" data-lucide=<%= (title == 'Documents')? 'folder-open' :'folder' %>></i>
+            </a>
+        </li>
         <li class="mb-2 mask mask-squircle <%= (title == 'Settings')? 'active' :'' %>">
             <a class="tooltip tooltip-right" data-tip="Settings" href="/settings">
                 <i class="h-5 w-5" data-lucide="settings"></i>

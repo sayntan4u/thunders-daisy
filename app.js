@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 
@@ -9,6 +10,8 @@ const port = process.env.PORT || 12000;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); 
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(session({
   secret: 'Sapphire2025',
   resave: false,
@@ -67,6 +70,10 @@ app.use('/network', closingRoute);
 //Utilities page 
 const utilitiesRoute = require('./router/util');
 app.use('/util', utilitiesRoute);
+
+//Documents page 
+const docRoute = require('./router/docs');
+app.use('/docs', docRoute);
 
 //Team page 
 const addRoute = require('./router/add');
