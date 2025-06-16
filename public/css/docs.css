@@ -1,4 +1,4 @@
-#fr-logo{
+/* #fr-logo{
     display: none;
 }
 
@@ -12,6 +12,10 @@
 
 .fr-counter{
     visibility: hidden;
+} */
+
+#gorilla-editor{
+    background-color: transparent;
 }
 
 .input{

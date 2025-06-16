@@ -38,8 +38,8 @@ $(document).on("click", ".file", function (e) {
   $("#fileName").val(fileName);
   $("#fileId").html(id);
 
-  $(".fr-element").empty();
-  $(".fr-element").html(docList.find((doc) => doc.id == id).content);
+  $(".go-editor").empty();
+  $(".go-editor").html(docList.find((doc) => doc.id == id).content);
   $("#editor").removeClass("hidden");
 });
 
@@ -153,7 +153,7 @@ updateFileName = () => {
 
 updateContent = () => {
   const id = $("#fileId").html().trim();
-  const content = $(".fr-element").html().trim();
+  const content = $(".go-editor").html().trim();
   const doc = docList.find((doc) => doc.id == id);
   if (doc) {
     doc.content = content;
