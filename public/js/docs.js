@@ -38,8 +38,8 @@ $(document).on("click", ".file", function (e) {
   $("#fileName").val(fileName);
   $("#fileId").html(id);
 
-  $(".fr-element").empty();
-  $(".fr-element").html(docList.find((doc) => doc.id == id).content);
+  $(".go-editor").empty();
+  $(".go-editor").html(docList.find((doc) => doc.id == id).content);
   $("#editor").removeClass("hidden");
 });
 
@@ -103,7 +103,9 @@ function addDoc() {
     type: "POST",
     dataType: "json",
     data: { doc: newDoc },
-    success: function (data) {},
+    success: function (data) {
+      
+    },
   });
 
   $("#files").children("tbody").empty();
@@ -140,7 +142,7 @@ updateFileName = () => {
       dataType: "json",
       data: { doc: doc },
       success: function (data) {
-        showAlert();
+          showAlert();
       },
     });
     // showAlert();
@@ -151,7 +153,7 @@ updateFileName = () => {
 
 updateContent = () => {
   const id = $("#fileId").html().trim();
-  const content = $(".fr-element").html().trim();
+  const content = $(".go-editor").html().trim();
   const doc = docList.find((doc) => doc.id == id);
   if (doc) {
     doc.content = content;
@@ -162,7 +164,7 @@ updateContent = () => {
       dataType: "json",
       data: { doc: doc },
       success: function (data) {
-        showAlert();
+          showAlert();
       },
     });
   } else {
@@ -181,7 +183,9 @@ function deleteDoc() {
     type: "POST",
     dataType: "json",
     data: { id: id },
-    success: function (data) {},
+    success: function (data) {
+      
+    },
   });
 }
 

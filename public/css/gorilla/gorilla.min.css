@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Poppins:wght@300;400;500;600;700&family=Roboto&display=swap');
+
+/* Gorilla Editor Styles */
+.poppins {
+  font-family: "Poppins" !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto {
+  font-family: "Roboto" !important;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.arial {
+  font-family: Arial !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poiret{
+  font-family: "Poiret One" !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+/* body {
+  padding: 10px;
+} */
+
+.go-toolbar {
+  z-index: 1000;
+  min-height: 40px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-sizing: border-box;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  /* margin-bottom: 3px; */
+}
+
+/* .go-toolbar-counter {
+  background-color: transparent;
+  width: 50px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  height: 27px;
+  margin-top: 3px;
+} */
+
+.go-toolbar-counter {
+  background-color: transparent;
+  
+}
+
+.go-toolbar-vr {
+  border-left: 1px solid #dee2e6;
+  height: 23px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.go-toolbar-dropdown-align {
+  width: 50px !important;
+}
+
+.go-toolbar-dropdown {
+  background-color: transparent;
+  width: 90px;
+  padding-left: 5px;
+  padding-right: 10px;
+  display: inline-block;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+    font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.go-toolbar-dropdown:hover {
+  background-color: #e9ecef;
+}
+
+.go-toolbar-button {
+  display: inline-block;
+  padding: 6px;
+  margin: 2px;
+  color: #414141;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.go-toolbar-button:disabled, .go-toolbar-dropdown-button:disabled {
+  color: #ccc !important;
+  background-color: transparent !important;
+}
+
+.go-toolbar-button:not(.active):hover {
+  background-color: #e9ecef;
+}
+
+.go-toolbar-dropdown-button {
+  display: inline-block;
+  padding: 6px;
+  margin: 2px;
+  color: #414141;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.go-toolbar-dropdown-button:not(.active):hover  {
+  background-color: #e9ecef;
+}
+
+
+.go-toolbar-icon {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2px;
+  /* stroke: #262626; */
+}
+
+.go-editor {
+  outline: none;
+  border: 1px solid #eee;
+  padding: 20px;
+  border-radius: 0px 0px 10px 10px;
+  color: #414141;
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* .go-editor:focus {
+  border-color: #464646;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+} */
+
+.go-editor p {
+  margin: 0;
+  padding: 0;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 128px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 99999;;
+  border-radius: 5px;
+}
+
+.colorPicker-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 170px;
+  /* min-height: 150px; */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 99999;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
+.go-heading-dropdown{
+  min-width: 110px;
+}
+
+/* overlay */
+.overlay {
+    position: fixed;
+    display: none;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 99998;
+    background-color: #fff;
+    opacity: 0.1;
+}
+
+.show {
+  display: block !important;
+} 
+
+.active {
+  background-color: #414141;
+  color: #f8f9fa !important;
+}
+
+.active-view-only {
+  background-color: #cdcdff;
+  /* color: #f8f9fa !important; */
+}
+
+.active-view-only:hover {
+  background-color: #e7e7ff !important;
+  /* color: #414141 !important; */
+}
+
+.dropdown-content .active {
+  background-color: #e9ecef;
+  color: #414141 !important;
+}
+
+.bold{
+  font-weight: bold !important;
+}
+
+.italic{
+  font-style: italic !important;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+/* Colorpicker */
+.colorPicker-content .color-block{
+  min-width: 25px;
+  min-height: 25px;
+  /* margin: 2px; */
+  /* border-radius: 7px; */
+  border: 2px solid transparent;
+  outline: none;
+  cursor: pointer;
+  /* background-color: #ff4d4d; */
+}
+
+.colorPicker-content .color-block:hover{
+  border: 2px solid #262626;
+}
+
+.active-color-block{
+   border: 2px solid #262626;
+}

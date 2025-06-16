@@ -9,8 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<%- include('components/styles.ejs'); -%>
 
-		<link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
-			type="text/css" />
+		<link href="css/gorilla/gorilla.min.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="css/docs.css">
 
 </head>
@@ -76,7 +75,7 @@
 								<i class="size-5" data-lucide="save"></i>
 							</button>
 						</div>
-						<div id="froala-editor"> </div>
+						<div id="gorilla-editor" data-theme="light"></div>
 					</div>
 					<!-- Content ends here-->
 				</div>
@@ -107,13 +106,16 @@
 
 			<%- include('components/scripts.ejs'); -%>
 				<script src="/js/docs.js"></script>
-				<script type="text/javascript"
-					src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+				<script type="text/javascript" src="js/gorilla/gorilla.min.js"></script>
 				<script>
-					var editor = new FroalaEditor("div#froala-editor", {
+					// var editor = new FroalaEditor("div#froala-editor", {
+					// 	height: 600,
+					// 	quickInsertTags: [''],
+					// 	tabSpaces: 4
+					// });
+					var editor = new GorillaEditor("gorilla-editor", {
+						// Configuration options
 						height: 600,
-						quickInsertTags: [''],
-						tabSpaces: 4
 					});
 				</script>
 
