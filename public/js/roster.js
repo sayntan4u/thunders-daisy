@@ -229,7 +229,7 @@ function generatePlanStatus(val) {
 
 function clearRosterTable() {
   const weekArray = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
-  const timeArray = ["11AM", "1PM", "3PM", "5PM", "7PM"];
+  const timeArray = ["9AM","11AM", "1PM", "3PM", "5PM", "7PM", "9PM"];
 
   weekArray.forEach(function (day) {
     timeArray.forEach(function (time) {
