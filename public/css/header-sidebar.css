@@ -3,6 +3,10 @@
   src: url('../fonts/poppins/Poppins-Regular.ttf'); 
 }
 
+.mask{
+  display : flex !important;
+}
+
 /* body{
     font-family: Poppins-Regular;
 } */
